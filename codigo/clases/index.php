@@ -109,13 +109,27 @@ and open the template in the editor.
         </table>
         <hr style="color: #0056b2;" />
         <?php
-            //echo 'INSETAR OFERTA FUNCIONA CODIGO COMENTADO';
-            $oferta=new Oferta("4", "4", "manue93@gmail.com","Limpio Coche", "18:00:00", "19:00:00", 0);
-            //echo $c->createUsuario($usuario);
+            echo 'INSETAR OFERTA FUNCIONA CODIGO COMENTADO';
+            $oferta=new Oferta("4", "4", "alioth865@yahoo.com","Limpio Coche", "18:00:00", "19:00:00", 0);
+            //echo $c->crearOferta($oferta);
         
         
         
         ?>
+        <hr style="color: #0056b2;" />
+        <?php
+          echo 'INSETAR DEMANDA FUNCIONA CODIGO COMENTADO';
+            $demanda=new Demanda("4", "3","alioth865@yahoo.com", "3");
+            //echo $c->crearDemanda($demanda);
         
+        ?>
+        
+        <hr style="color: #0056b2;" />
+        <?php
+          echo 'INSETAR DEMANDA SATISFECHA FUNCIONA CODIGO COMENTADO';
+            $historial=new Historial("alioth865@yahoo.com", "3","8", "muy buena","2014-07-12");
+            echo $c->crearDemandaSatisfecha($historial);
+        
+        ?>
     </body>
 </html>
