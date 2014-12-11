@@ -129,23 +129,74 @@ class GestorBaseDatos {
     
    public function crearOferta($o){
        $this->conect();
-       $categoria= $o->getCategoria();
+       $categoria= $o->getIdCategoria();
        $email=$o->getEmail();
        $nombreoferta=$o->getNombreOferta();
        $horarioinicio=$o->getHorarioInicio();
        $horariofin=$o->getHorarioFin();
        $descripcion = $o->getDescripcion();
+       $idoferta= $o->getIdOferta();
        
         
        $sql= "INSERT INTO `Oferta` (`idoferta`, `idcategoria`, `email`,
             `nombreoferta`, `horarioinicio`, `horariofin`, `descripcionoferta`)
-            VALUES (NULL, '$categoria', '$email', '$nombreoferta', '$horarioinicio', '$horariofin',
+            VALUES ('$idoferta', '$categoria', '$email', '$nombreoferta', '$horarioinicio', '$horariofin',
             '$descripcion')";
-         print $sql;
-         $result = mysql_query($sql);
+        print $sql;
+        $result = mysql_query($sql);
         if (!$result)
             return mysql_error();
         else
             return true;  
    }
+   
+   public function crearDemanda($d){
+       $this->conect();
+       $email=$d->getEmailSolicitante();
+       $oferta=$d->getIdOferta();
+       $iddemanda=$d->getIdDemanda();
+       $idofertasintercambio=$d->getOfertaSolicitante();
+       
+        $sql=  "INSERT INTO `bancodetiempo`.`Demanda` (`iddemanda`, `email`, `idofertasintercambio`, 
+            `idoferta`) VALUES ('$iddemanda', '$email', '$idofertasintercambio', '$oferta')";
+
+        print $sql;
+        $result = mysql_query($sql);
+        if (!$result)
+            return mysql_error();
+        else
+            return true;  
+   }
+   
+   public function eliminarOferta($idoferta){
+        $this->conect();
+        $sql="DELETE FROM `Oferta` WHERE `idoferta` ='$idoferta'";
+        print($sql);
+        $result = mysql_query($sql);
+        if (!$result)
+            return mysql_error();
+        else
+            return true;
+    }
+    
+   public function crearDemandaSatisfecha($ds) {
+        $this->conect();
+        $email=$ds->getEmail();
+        $idoferta=$ds->getIdOferta();
+        $valoracion=$ds->getValoracion();
+        $descripciondevaloracion=$ds->getDescripcionDeValoracion();
+        $fecha=$ds->getFecha();
+        
+         $sql= "  INSERT INTO `DemandaSatisfecha` (`valoracion`, `descripcionvaloracion`, 
+                 `fecha`, `email`, `idoferta`)
+                 VALUES ('$email', '$idoferta', '$valoracion', '$descripciondevaloracion', '$fecha')";
+       
+         print $sql;
+        $result = mysql_query($sql);
+        if (!$result)
+            return mysql_error();
+        else
+            return true;  
+   }
+    
 }
