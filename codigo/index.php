@@ -82,7 +82,7 @@ gin</a></article>
 							<br/>
 							<br/>
 
-							<form action="panel_administrador.php" method="POST" style ="margin: .5em .5em .1em .5em">
+							<form action="login_controlador.php" method="POST" style ="margin: .5em .5em .1em .5em">
                         	
                             E-mail:<input type="text" name="user">
                             <br>
@@ -97,7 +97,7 @@ gin</a></article>
                            		</P>
                            </div>
                        		<div id="estilbtn">
-				<input type="submit" name="login" value="Aceptar">
+				           <input type="submit" name="login" value="Aceptar">
                             	<input type="button" name="registro" value="Regístrate" onClick="window.location.href='registro.php'">
                        		</div>
                     	</form>
