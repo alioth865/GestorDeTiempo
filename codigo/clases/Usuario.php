@@ -6,17 +6,17 @@ class Usuario {
     private $tipousuario;
     private $nombre;
     private $telefono;
-    private $contraseÃ±a;
+    private $contraseña;
     private $horasdemandadas;
     private $horasofertadas;
     private $valoracion;
 
-    public function __construct($email, $tipousuario, $nombre, $telefono, $contraseÃ±a, $horasdemandadas, $horasofertadas, $valoracion) {
+    public function __construct($email, $tipousuario, $nombre, $telefono, $contraseña, $horasdemandadas, $horasofertadas, $valoracion) {
         $this->email = $email;
         $this->tipousuario = $tipousuario;
         $this->nombre = $nombre;
         $this->telefono = $telefono;
-        $this->contraseÃ±a = $contraseÃ±a;
+        $this->contraseña = $contraseña;
         $this->horasdemandadas = $horasdemandadas;
         $this->horasofertadas = $horasofertadas;
         $this->valoracion = $valoracion;
@@ -38,8 +38,8 @@ class Usuario {
         $this->telefono = $telefono;
     }
 
-    public function setContraseÃ±a($contraseÃ±a) {
-        $this->contraseÃ±a = $contraseÃ±a;
+    public function setContraseña($contraseña) {
+        $this->contraseña = $contraseña;
     }
 
     public function setHorasDemandadas($horasdemandadas) {
@@ -70,8 +70,8 @@ class Usuario {
         return $this->telefono;
     }
 
-    public function getContraseÃ±a() {
-        return $this->contraseÃ±a;
+    public function getContraseña() {
+        return $this->contraseña;
     }
 
     public function getHorasDemandadas() {

@@ -39,7 +39,7 @@ and open the template in the editor.
         <hr style="color: #0056b2;" />
         <?php
         echo 'LISTAR OFERTA POR EMAIL';
-        $ofertas=$c->listarOferta("alioth865@yahoo.com")
+        $ofertas = $c->listarOferta("alioth865@yahoo.com")
         ?>
         <table width="745"  border=1>
             <tr>
@@ -51,9 +51,9 @@ and open the template in the editor.
                 <th>Horario fin</th>
                 <th>Descripcion Oferta</th>
             </tr>
-        <?php
-        foreach ($ofertas as $temp) {
-            ?>  
+            <?php
+            foreach ($ofertas as $temp) {
+                ?>  
                 <tr>
                     <td><?php echo $temp["idcategoria"] ?></td>   
                     <td><?php echo $temp["idoferta"] ?></td>   
@@ -69,17 +69,14 @@ and open the template in the editor.
         </table>
         <hr style="color: #0056b2;" />
         <?php
-            echo 'INSETAR USUARIO FUNCIONA CODIGO COMENTADO';
-            $usuario=new Usuario("mairupis@google.es", "2", "Maira", "983369631", "maira", 0, 0, 0);
-            //echo $c->createUsuario($usuario);
-        
-        
-        
+        echo 'INSETAR USUARIO FUNCIONA CODIGO COMENTADO';
+        $usuario = new Usuario("mairupis@google.es", "2", "Maira", "983369631", "maira", 0, 0, 0);
+        //echo $c->createUsuario($usuario);
         ?>
         <hr style="color: #0056b2;" />
         <?php
         echo 'LISTAR OFERTA POR CATEGORIA';
-        $ofertas=$c->buscarOferta(1);
+        $ofertas = $c->buscarOferta(1);
         ?>
         <table width="745"  border=1>
             <tr>
@@ -91,9 +88,9 @@ and open the template in the editor.
                 <th>Horario fin</th>
                 <th>Descripcion Oferta</th>
             </tr>
-        <?php
-        foreach ($ofertas as $temp) {
-            ?>  
+            <?php
+            foreach ($ofertas as $temp) {
+                ?>  
                 <tr>
                     <td><?php echo $temp["idcategoria"] ?></td>   
                     <td><?php echo $temp["idoferta"] ?></td>   
@@ -109,27 +106,71 @@ and open the template in the editor.
         </table>
         <hr style="color: #0056b2;" />
         <?php
-            echo 'INSETAR OFERTA FUNCIONA CODIGO COMENTADO';
-            $oferta=new Oferta("4", "4", "alioth865@yahoo.com","Limpio Coche", "18:00:00", "19:00:00", 0);
-            //echo $c->crearOferta($oferta);
-        
-        
-        
+        echo 'INSETAR OFERTA FUNCIONA CODIGO COMENTADO';
+        $oferta = new Oferta("4", "4", "alioth865@yahoo.com", "Limpio Coche", "18:00:00", "19:00:00", "Esta oferta es la polla", 0);
+        //echo $c->crearOferta($oferta);
         ?>
         <hr style="color: #0056b2;" />
         <?php
-          echo 'INSETAR DEMANDA FUNCIONA CODIGO COMENTADO';
-            $demanda=new Demanda("4", "3","alioth865@yahoo.com", "3");
-            //echo $c->crearDemanda($demanda);
-        
+        echo 'INSETAR DEMANDA FUNCIONA CODIGO COMENTADO';
+        $demanda = new Demanda("4", "3", "alioth865@yahoo.com", "3");
+        //echo $c->crearDemanda($demanda);
         ?>
-        
+
         <hr style="color: #0056b2;" />
         <?php
-          echo 'INSETAR DEMANDA SATISFECHA FUNCIONA CODIGO COMENTADO';
-            $historial=new Historial("alioth865@yahoo.com", "3","8", "muy buena","2014-07-12");
-            echo $c->crearDemandaSatisfecha($historial);
-        
+        echo 'INSETAR DEMANDA SATISFECHA FUNCIONA CODIGO COMENTADO';
+        $historial = new Historial("alioth865@yahoo.com", "3", "8", "muy buena", "2014-07-12");
+        //echo $c->crearDemandaSatisfecha($historial);
         ?>
+        <hr style="color: #0056b2;" />
+        <?php
+        echo 'Listar Historial';
+        $historial = $c->buscarHistorial("alioth865@yahoo.com");
+        ?>
+        <table width="745"  border=1>
+            <tr>
+                <th >valoracion</th>
+                <th >descripcionvaloracion</th>  
+                <th>email</th>
+                <th>fecha</th>
+                <th>idoferta</th>
+            </tr>
+            <?php
+            foreach ($historial as $temp) {
+                ?>  
+                <tr>
+                    <td><?php echo $temp["valoracion"] ?></td>   
+                    <td><?php echo $temp["descripcionvaloracion"] ?></td>   
+                    <td><?php echo $temp["email"] ?></td>   
+                    <td><?php echo $temp["fecha"] ?></td>   
+                    <td><?php echo $temp["idoferta"] ?></td>   
+                </tr>
+                <?php
+            }
+            ?>
+        </table>
+        <hr style="color: #0056b2;" />
+        <?php
+        echo "VALORACION FUNCIONANDO";
+        //print $c->valoracion(3, 10, "El tio es la hostia", "alioth865@yahoo.com");
+        ?>
+        <hr style="color: #0056b2;" />
+        <?php
+        echo "VER PERFIL <br>";
+        $usuario = $c->verPerfil("alioth865@yahoo.com");
+        echo "nombre " . $usuario->getNombre() . "<br>";
+        echo "email " . $usuario->getEmail() . "<br>";
+        echo "Horas D " . $usuario->getHorasDemandadas(). "<br>";
+        echo "Horas O " . $usuario->getHorasOfertadas() . "<br>";
+        echo "Contraseña " . $usuario->getContraseña() . "<br>";
+        echo "Telefono " . $usuario->getTelefono() . "<br>";
+        echo "Tipousuario " . $usuario->getTipoUsuario() . "<br>";
+        echo "Valorcion " . $usuario->getValoracion() . "<br>";
+        ?>
+        <hr style="color: #0056b2;" />
+
+
+
     </body>
 </html>

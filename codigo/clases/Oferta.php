@@ -9,8 +9,9 @@ class Oferta {
     private $horarioinicio;
     private $horariofin;
     private $descripcion;
+    private $valoracion;
 
-    public function __construct($idoferta, $idcategoria, $email, $nombreoferta, $horarioinicio, $horariofin, $descripcion) {
+    public function __construct($idoferta, $idcategoria, $email, $nombreoferta, $horarioinicio, $horariofin, $descripcion, $valoracion) {
         $this->idoferta = $idoferta;
         $this->idcategoria = $idcategoria;
         $this->email = $email;
@@ -18,6 +19,7 @@ class Oferta {
         $this->horarioinicio = $horarioinicio;
         $this->horariofin = $horariofin;
         $this->descripcion = $descripcion;
+        $this->valoracion = $valoracion;
     }
 
     public function setIdOferta($idoferta) {
@@ -75,5 +77,14 @@ class Oferta {
     public function getDescripcion() {
         return $this->descripcion;
     }
+    
+    public function setValoracion($valoracion) {
+        $this->valoracion=$valoracion;
+    }
+
+    public function getValoracion() {
+        return $this->valoracion;
+    }
+    
 
 }
