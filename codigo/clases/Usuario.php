@@ -86,4 +86,7 @@ class Usuario {
         return $this->valoracion;
     }
 
+    public function __toString() {
+        return $this->nombre." ".$this->contraseña;
+    }
 }

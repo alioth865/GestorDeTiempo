@@ -1,6 +1,6 @@
 <?php
 
-include_once ("./Includephp.php");
+include_once ("Includephp.php");
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -76,7 +76,7 @@ class GestorBaseDatos {
     function actualizarCategoria($idcategoria, $nuevonombre) {
         $this->conect();
         $sql = "UPDATE `Categoria` SET `nombrecategoria` = '$nuevonombre' WHERE `idcategoria` ='$idcategoria'";
-        echo $sql;
+        //echo $sql;
         return mysql_query($sql);
     }
 
@@ -178,21 +178,31 @@ class GestorBaseDatos {
 
     public function crearDemandaSatisfecha($ds) {
         $this->conect();
-        $email = $ds->getEmail();
+        $emaildemandate = $ds->getEmail();
         $idoferta = $ds->getIdOferta();
         $valoracion = $ds->getValoracion();
         $descripciondevaloracion = $ds->getDescripcionDeValoracion();
         $fecha = $ds->getFecha();
 
         $sql = "  INSERT INTO `DemandaSatisfecha` (`valoracion`, `descripcionvaloracion`, `fecha`, `email`, `idoferta`)
-                                            VALUES ('$valoracion','$descripciondevaloracion','$fecha','$email', '$idoferta')";
+                                            VALUES ('$valoracion','$descripciondevaloracion','$fecha','$emaildemandate', '$idoferta')";
 
-        //print $sql;
         $result = mysql_query($sql);
         if (!$result)
             return mysql_error();
-        else
+        else {
+            //ACTUALIZANDO LAS HORAS INTERCAMBIADAS POR EL USUARIO
+            $sql = "SELECT `email` FROM Oferta WHERE `idoferta`=$idoferta";
+            $result = mysql_query($sql);
+            $emailofertante;
+            while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+                //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
+                $emailofertante = $linea["email"];
+            }
+            $sqlofertante = "UPDATE Usuario SET `horasofertas`=";
+
             return true;
+        }
     }
 
     public function buscarHistorial($email) {
@@ -255,16 +265,92 @@ class GestorBaseDatos {
         }
         return FALSE;
     }
-    
-    public function verPerfil($email){
+
+    public function verPerfil($email) {
         $this->conect();
-        $sql="SELECT * FROM Usuario WHERE `email`='$email'";
+        $sql = "SELECT * FROM Usuario WHERE `email`='$email'";
         //print $sql;
-        $result =  mysql_query($sql);
+        $result = mysql_query($sql);
         while ($temp = mysql_fetch_array($result, MYSQL_ASSOC)) {
             return new Usuario($temp["email"], $temp["codtipusu"], $temp["nombre"], $temp["telefono"], $temp["contraseña"], $temp["horasdemandadas"], $temp["horasofertadas"], $temp["valoracion"]);
         }
     }
-    
+
+    public function verEstadisticasHorasIntercambiadas($email) {
+        $usuario = $this->verPerfil($email);
+        return array($usuario->getHorasDemandadas(), $usuario->getHorasOfertadas());
+    }
+
+    public function seleccionarOferta($idoferta) {
+        $this->conect();
+        $sql = "SELECT * FROM Oferta WHERE `idoferta`='$idoferta'";
+        $result = mysql_query($sql);
+        while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+            return new Oferta($row["idoferta"], $row["idcategoria"], $row["email"], $row["nombreoferta"], $row["horarioinicio"], $row["horariofin"], $row["descripcionoferta"], $row["valoracion"]);
+        }
+    }
+
+    public function verEstadisticasValoracion($email) {
+        $usuario = $this->verPerfil($email);
+        return $usuario->getValoracion();
+    }
+
+    public function updateOfertaSeleccionada($idoferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idcategoria) {
+        $this->conect();
+        $sql = "UPDATE `Oferta` SET `nombreoferta`='$nombre', `horarioinicio`='$horarioinicio', `horariofin`='$horariofin', `descripcionoferta`='$descripcion', `idcategoria`='$idcategoria' WHERE `idoferta` ='$idoferta'";
+        //echo $sql;
+        return mysql_query($sql);
+    }
+
+    public function modificarPerfil($email, $contraseña, $telefono, $nombre) {
+        $this->conect();
+        $sql = "UPDATE `Usuario` SET `contraseña`='$contraseña', `telefono`='$telefono', `nombre`='$nombre' WHERE `email`='$email'";
+        //echo $sql;
+        return mysql_query($sql);
+    }
+
+    function loguear($mail, $pass) {
+        $this->conect();
+        //Esta funcion retornara 
+        //-1 si la contraseña es incorrecta
+        //-2 si no existe el correo, 
+        //1 si es un administrador 
+        //2 si es un usuario normal
+        $sql = "SELECT * FROM Usuario WHERE email='$mail'";
+        $result = mysql_query($sql);
+        if (!$result) {
+            //No existe el usuario, si result es falso es que el correo no existe
+            return -2;
+        } else {
+            $array = mysql_fetch_array($result, MYSQL_ASSOC);
+            if ($pass == $array["contraseña"])
+                return $array["codtipusu"];
+            else
+                return -1;
+        }
+    }
+
+    public function listarUsuarios() {
+        //Lista todos los usuarios
+        $this->conect();
+        //Esta funcion devuelve un array asociativo de todos los usuarios
+        $sql = "SELECT * FROM `Usuario`";
+        //print($sql);
+        $result = mysql_query($sql);
+
+        while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+             $u= new Usuario($linea["email"], 
+                    $linea["codtipusu"], 
+                    $linea["nombre"], 
+                    $linea["telefono"], 
+                    $linea["contraseña"], 
+                    $linea["horasdemandadas"], 
+                    $linea["horasofertadas"], 
+                    $linea["valoracion"]);
+             $toRet[$linea["email"]]=$u;
+        }
+        
+        return $toRet;
+    }
 
 }

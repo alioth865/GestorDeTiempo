@@ -1,8 +1,6 @@
 <?php
 
-include_once("clases/controlador.php");
-include_once("clases/usuario.php");
-
+include_once("clases/Includephp.php");
 //Almacena las variables del formulario del que ha venido.
 $username = $_REQUEST["user"];
 $password = $_REQUEST["pwd"];
@@ -17,18 +15,19 @@ if (strlen($username) <= 0 || strlen($password) <= 0) {
 $login = Controlador::loguear($username, $password);
 
 //Una vez se tiene un tipo de usuario en la variable $login, se decide que hacer según dicho contenido.
-if ($login == 0 || $login == 1) {
+if ($login == 1 || $login == 2) {
     //crear sesión de usuario y redirigir al espacio de usuario
     session_start();
     //El correo ya lo tenemos del formulario de login, de modo que lo almacenamos ya
     $_SESSION["email"] = $_REQUEST["user"];
 
+	
     //recoge todos los usuarios y coge informacion del actual.
     $u_list = Controlador::listarUsuarios();
     
     //Recorre la lista de todos los usuarios hasta encontrar el actual, para acceder luego a su información.
     foreach ($u_list as $u_act) {
-        if ($u_act->email == $_SESSION["email"]) {
+        if ($u_act->getEmail() == $_SESSION["email"]) {
             $ses_us = $u_act;
             break;
         }
@@ -37,16 +36,16 @@ if ($login == 0 || $login == 1) {
     //Si al recorrer la lista de usuarios se encontro el objetivo (deberia ocurrir...)
     if (isset($ses_us)) {
         //Se establecen las variables de sesión.
-        $_SESSION["tipousuario "] = $ses_us->tipousuario ;
-        $_SESSION["nombre "] = $ses_us->nombre ;
-        $_SESSION["telefono "] = $ses_us->telefono ;
-        $_SESSION["horasdemandadas "] = $ses_us->horasdemandadas ;
-        $objUsu = new Usuario($ses_us->email, $ses_us->tipousuario , $ses_us->nombre , $ses_us->telefono , $ses_us->contrasena , $ses_us->horasdemandadas, $ses_us->horasofertadas, $ses_us->valoracion));
+        $_SESSION["tipousuario "] = $ses_us->getTipoUsuario() ;
+        $_SESSION["nombre "] = $ses_us->getNombre() ;
+        $_SESSION["telefono "] = $ses_us->getTelefono() ;
+        $_SESSION["horasdemandadas "] = $ses_us->getHorasDemandadas() ;
+        $objUsu = new Usuario($ses_us->getEmail(), $ses_us->getTipoUsuario() , $ses_us->getNombre() , $ses_us->getTelefono() , $ses_us->getContrase�a() , $ses_us->getHorasDemandadas(), $ses_us->getHorasOfertadas(), $ses_us->getValoracion());
         $_SESSION["objUsu"] = $objUsu;
         $_SESSION["lastAction"] = "nada";
         
         //Dependiendo del tipo de usuario, llevarlo a un lugar u otro
-        if ($login == 0) {
+        if ($login == 1) {
             header("Location: panel_administrador.php");
         } else {
             header("Location: panel_usuario.php");

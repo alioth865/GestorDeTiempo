@@ -121,7 +121,7 @@ and open the template in the editor.
         <?php
         echo 'INSETAR DEMANDA SATISFECHA FUNCIONA CODIGO COMENTADO';
         $historial = new Historial("alioth865@yahoo.com", "3", "8", "muy buena", "2014-07-12");
-        //echo $c->crearDemandaSatisfecha($historial);
+        echo $c->crearDemandaSatisfecha($historial);
         ?>
         <hr style="color: #0056b2;" />
         <?php
@@ -161,7 +161,7 @@ and open the template in the editor.
         $usuario = $c->verPerfil("alioth865@yahoo.com");
         echo "nombre " . $usuario->getNombre() . "<br>";
         echo "email " . $usuario->getEmail() . "<br>";
-        echo "Horas D " . $usuario->getHorasDemandadas(). "<br>";
+        echo "Horas D " . $usuario->getHorasDemandadas() . "<br>";
         echo "Horas O " . $usuario->getHorasOfertadas() . "<br>";
         echo "Contraseña " . $usuario->getContraseña() . "<br>";
         echo "Telefono " . $usuario->getTelefono() . "<br>";
@@ -169,8 +169,40 @@ and open the template in the editor.
         echo "Valorcion " . $usuario->getValoracion() . "<br>";
         ?>
         <hr style="color: #0056b2;" />
-
-
+        <?php
+        echo "VER HORAS OFERTADAS Y DEMANDADAS <br>";
+        $array = $c->verEstadisticasHorasIntercambiadas("alioth865@yahoo.com");
+        echo "Horas D " . $array[0] . "<br>";
+        echo "Horas O " . $array[1] . "<br>";
+        ?>
+        <hr style="color: #0056b2;" />
+        <?php
+        echo "SELECCIONAR OFERTA <br>";
+        $oferta = $c->seleccionarOferta(1);
+        echo "idoferta " . $oferta->getIdOferta() . "<br>";
+        echo "idcategoria " . $oferta->getIdCategoria() . "<br>";
+        echo "email " . $oferta->getEmail() . "<br>";
+        echo "nombre oferta " . $oferta->getnombreoferta() . "<br>";
+        echo "Hora I " . $oferta->getHorarioInicio() . "<br>";
+        echo "Hora F " . $oferta->getHorarioFin() . "<br>";
+        echo "Descripcion " . $oferta->getDescripcion() . "<br>";
+        echo "Valoracion " . $oferta->getValoracion() . "<br>";
+        ?>
+        <hr style="color: #0056b2;" />
+        <?php
+        echo "VER ESTADISTICA DE VALORACION <br>";
+        echo "VALORACION: " . $c->verEstadisticasValoracion("alioth865@yahoo.com") . "<br>";
+        ?>
+        <hr style="color: #0056b2;" />
+        <?php
+        echo "Actualizar Oferta <br>";
+        $c->updateOfertaSeleccionada(89, "A", "A", "A", "A", "A");
+        ?>
+        <hr style="color: #0056b2;" />
+        <?php
+        echo "Modificar Perfil <br>";
+        $c->modificarPerfil("alioth865@yahoo.com", "aliothsin865", "699699699", "JUAN PITO");
+        ?>
 
     </body>
 </html>
