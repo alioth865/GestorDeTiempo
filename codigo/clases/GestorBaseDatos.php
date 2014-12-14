@@ -199,8 +199,19 @@ class GestorBaseDatos {
                 //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
                 $emailofertante = $linea["email"];
             }
-            $sqlofertante = "UPDATE Usuario SET `horasofertas`=";
-
+            $sqlofertante = "UPDATE Usuario SET 
+                `horasofertadas` =  (SELECT ADDTIME(`horasofertadas`,(SELECT TIMEDIFF(`horariofin`,`horarioinicio`))) 
+                FROM Oferta WHERE `idoferta`='$idoferta')
+                WHERE `Usuario`.`email`= '$emailofertante'";
+            
+            $sqldemandante= "UPDATE Usuario SET 
+                `horasdemandadas` =  (SELECT ADDTIME(`horasdemandadas`,(SELECT TIMEDIFF(`horariofin`,`horarioinicio`))) 
+                FROM Oferta WHERE `idoferta`='$idoferta')
+                WHERE `Usuario`.`email`= '$emaildemandate'";
+           mysql_query($sqlofertante); 
+           mysql_query($sqldemandante);
+           // print "<br>".$sqlofertante."<br>";
+           // print $sqldemandante."<br>";
             return true;
         }
     }
@@ -216,7 +227,7 @@ class GestorBaseDatos {
         return $toRet;
     }
 
-    public function valoracion($idoferta, $valor, $descripcion, $email) {
+    public function valoracion($idoferta, $valor, $descripcion, $email, $iddemandasatisfecha) {
         $this->conect();
         //En esta funcion se hace lo siguiente:
         //Se valora una oferta
@@ -225,12 +236,12 @@ class GestorBaseDatos {
         //Valoracion de la oferta
         $sql = "UPDATE `DemandaSatisfecha` SET `valoracion`='$valor',"
                 . "`descripcionvaloracion`='$descripcion' "
-                . "WHERE `email`='$email' and `idoferta`='$idoferta'";
+                . "WHERE `email`='$email' and `idoferta`='$idoferta' and `iddemandasatisfecha`='$iddemandasatisfecha'";
         //print $sql;
         mysql_query($sql);
         //Y se actualiza la valoracion de esa oferta en la tabla oferta
         $sql = "SELECT AVG(  `valoracion` ) AS promedio FROM  `DemandaSatisfecha` 
-        WHERE  `email`='$email' and `idoferta`='$idoferta'";
+        WHERE  `email`='$email' and `idoferta`='$idoferta' and `iddemandasatisfecha`='$iddemandasatisfecha'";
         //print $sql;
         $result = mysql_query($sql);
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {

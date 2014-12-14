@@ -120,7 +120,7 @@ and open the template in the editor.
         <hr style="color: #0056b2;" />
         <?php
         echo 'INSETAR DEMANDA SATISFECHA FUNCIONA CODIGO COMENTADO';
-        $historial = new Historial("alioth865@yahoo.com", "3", "8", "muy buena", "2014-07-12");
+        $historial = new Historial("alioth865@yahoo.com", "3", "8", "muy buena", "2014-07-12",1);
         echo $c->crearDemandaSatisfecha($historial);
         ?>
         <hr style="color: #0056b2;" />

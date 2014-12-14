@@ -7,13 +7,15 @@ class Historial {
     private $valoracion;
     private $descripciondevaloracion;
     private $fecha;
+    private $iddemandasatisfecha;
 
-    public function __construct($email, $idoferta, $valoracion, $descripciondevaloracion, $fecha) {
+    public function __construct($email, $idoferta, $valoracion, $descripciondevaloracion, $fecha, $iddemandasatisfecha) {
         $this->email = $email;
         $this->idoferta = $idoferta;
         $this->valoracion = $valoracion;
         $this->descripciondevaloracion = $descripciondevaloracion;
         $this->fecha = $fecha;
+        $this->iddemandasatisfecha = $iddemandasatisfecha;
     }
 
     public function setEmail($email) {
@@ -56,4 +58,11 @@ class Historial {
         return $this->fecha;
     }
 
+    public function getIdDemandaSatisfecha() {
+        return $this->iddemandasatisfecha;
+    }
+    
+    public function setIdDemandaSatisfecha($iddemandasatisfecha){
+        $this->iddemandasatisfecha=$iddemandasatisfecha;
+    }
 }
