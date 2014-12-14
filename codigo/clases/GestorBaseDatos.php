@@ -364,4 +364,16 @@ class GestorBaseDatos {
         return $toRet;
     }
 
+    public function listarDemandas($email) {
+        $this->conect();
+        $sql= "SELECT  `iddemanda`, `Demanda`.`email`, `idofertasintercambio`,`Demanda`.`idoferta` "
+                . "FROM  `Demanda`,`Oferta` WHERE `Oferta`. `email` =  '$email' "
+                . "AND `Demanda`.`idoferta`=`Oferta`.`idoferta`";
+        $result=  mysql_query($sql);
+        while($linea = mysql_fetch_array($result, MYSQL_ASSOC)){
+              $toRet[$linea["iddemanda"]] = $linea;
+        }
+        return $toRet;
+    }
+
 }
