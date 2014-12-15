@@ -203,15 +203,15 @@ class GestorBaseDatos {
                 `horasofertadas` =  (SELECT ADDTIME(`horasofertadas`,(SELECT TIMEDIFF(`horariofin`,`horarioinicio`))) 
                 FROM Oferta WHERE `idoferta`='$idoferta')
                 WHERE `Usuario`.`email`= '$emailofertante'";
-            
-            $sqldemandante= "UPDATE Usuario SET 
+
+            $sqldemandante = "UPDATE Usuario SET 
                 `horasdemandadas` =  (SELECT ADDTIME(`horasdemandadas`,(SELECT TIMEDIFF(`horariofin`,`horarioinicio`))) 
                 FROM Oferta WHERE `idoferta`='$idoferta')
                 WHERE `Usuario`.`email`= '$emaildemandate'";
-           mysql_query($sqlofertante); 
-           mysql_query($sqldemandante);
-           // print "<br>".$sqlofertante."<br>";
-           // print $sqldemandante."<br>";
+            mysql_query($sqlofertante);
+            mysql_query($sqldemandante);
+            // print "<br>".$sqlofertante."<br>";
+            // print $sqldemandante."<br>";
             return true;
         }
     }
@@ -350,28 +350,50 @@ class GestorBaseDatos {
         $result = mysql_query($sql);
 
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
-             $u= new Usuario($linea["email"], 
-                    $linea["codtipusu"], 
-                    $linea["nombre"], 
-                    $linea["telefono"], 
-                    $linea["contraseña"], 
-                    $linea["horasdemandadas"], 
-                    $linea["horasofertadas"], 
-                    $linea["valoracion"]);
-             $toRet[$linea["email"]]=$u;
+            $u = new Usuario($linea["email"], $linea["codtipusu"], $linea["nombre"], $linea["telefono"], $linea["contraseña"], $linea["horasdemandadas"], $linea["horasofertadas"], $linea["valoracion"]);
+            $toRet[$linea["email"]] = $u;
         }
-        
+
         return $toRet;
     }
 
     public function listarDemandas($email) {
         $this->conect();
-        $sql= "SELECT  `iddemanda`, `Demanda`.`email`, `idofertasintercambio`,`Demanda`.`idoferta` "
+        $sql = "SELECT  `iddemanda`, `Demanda`.`email`, `idofertasintercambio`,`Demanda`.`idoferta` "
                 . "FROM  `Demanda`,`Oferta` WHERE `Oferta`. `email` =  '$email' "
                 . "AND `Demanda`.`idoferta`=`Oferta`.`idoferta`";
-        $result=  mysql_query($sql);
-        while($linea = mysql_fetch_array($result, MYSQL_ASSOC)){
-              $toRet[$linea["iddemanda"]] = $linea;
+        $result = mysql_query($sql);
+        while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+            $toRet[$linea["iddemanda"]] = $linea;
+        }
+        return $toRet;
+    }
+
+    public function nuevaNotificacion($email, $idnotificacion, $iddemanda, $respuesta) {
+        $sql = "INSERT INTO `Notificacion`(`email`, `idnotificacion`, `iddemanda`, `respuesta`) "
+                . "VALUES ('$email','$idnotificacion','$iddemanda','$respuesta')";
+        $result = mysql_query($sql);
+        if (!$result)
+            return mysql_error();
+        else
+            return true;
+    }
+
+    public function eliminarNotificacion($idnotificacion) {
+        $sql="DELETE FROM `Notificacion` WHERE `idnotificacion`='$idnotificacion'";
+        $result = mysql_query($sql);
+        if (!$result)
+            return mysql_error();
+        else
+            return true;
+        
+    }
+    
+    public function listarNotificacion($email) {
+        $sql="SELECT * FROM Notificacion WHERE `email`='$email'";
+        $result = mysql_query($sql);
+        while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+            $toRet[$linea["idnotificacion"]] = $linea;
         }
         return $toRet;
     }
