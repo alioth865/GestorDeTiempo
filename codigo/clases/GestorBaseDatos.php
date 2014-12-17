@@ -380,17 +380,16 @@ class GestorBaseDatos {
     }
 
     public function eliminarNotificacion($idnotificacion) {
-        $sql="DELETE FROM `Notificacion` WHERE `idnotificacion`='$idnotificacion'";
+        $sql = "DELETE FROM `Notificacion` WHERE `idnotificacion`='$idnotificacion'";
         $result = mysql_query($sql);
         if (!$result)
             return mysql_error();
         else
             return true;
-        
     }
-    
+
     public function listarNotificacion($email) {
-        $sql="SELECT * FROM Notificacion WHERE `email`='$email'";
+        $sql = "SELECT * FROM Notificacion WHERE `email`='$email'";
         $result = mysql_query($sql);
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             $toRet[$linea["idnotificacion"]] = $linea;
