@@ -125,12 +125,35 @@ class Controlador {
     }
 
     public function eliminarOferta($idoferta) {
-        $bd = new GestorBaseDatos();  
-        return $bd->eliminarOferta($idoferta); 
+        $bd = new GestorBaseDatos();
+        return $bd->eliminarOferta($idoferta);
     }
+
+    public function listarOfertaPopulares($email) {
+        $bd = new GestorBaseDatos();
+        return $bd->ofertasPopulares($email);
+    }
+
+    public function listarMisOfertas($email) {
+        $bd = new GestorBaseDatos();
+        return $bd->listarOferta($email);
+    }
+
     
-    
-    
-    
+    //CRISTINA
+    public function listarCategoria() {
+        $bd = new GestorBaseDatos();
+        return $bd->listarCategoria();
+    }
+
+    public function modificarCategoriaEspecificada($idcategoria, $nuevonombre) {
+        $bd = new GestorBaseDatos();
+        return $bd->actualizarCategoria($idcategoria, $nombre);
+    }
+
+    public function verEstadisticasHorasIntercambiadas($email) {
+        $bd = new GestorBaseDatos();
+        return $bd->verEstadisticasHorasIntercambiadas($email);
+    }
 
 }
