@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
-
+<?php
+        include_once("./clases/Includephp.php");
+	?>
 <head>
 	<meta charset="utf-8"/>
 	<title>Perfil | Gestor de tiempo</title>
@@ -118,35 +120,64 @@
 					<div style="display: block;" id="tab1" class="tab_content">
 					<table class="tablesorter" cellspacing="0"> 
 					<tbody> 
-						<tr>
+						<tr><?php							
+						$usuario = Controlador::verPerfil("rvolobriga@gmail.com");
+						$usuario->getNombre() ;
+						?>
 							<td>Nombre</td>
-							<td><input type="text" name="nombre"></td>
+							<td><input type="text" name="nombre"value=<?php
+						echo  $usuario->getNombre() ;
+						?>></td>
+							
 						</tr>
+						
 						<tr>
 							<td>Telefono</td>
-							<td><input type="text" name="horario"></td>
+							<td><input type="text" name="horario"value=<?php
+						echo  $usuario->getTelefono() ;
+						?>></td>
+							
 						</tr>
+						
 						<tr>
 							<td>Correo</td>
-							<td><input type="text" name="nombre"></td>
+							<td><input type="text" name="nombre"value=<?php
+						 echo  $usuario->getEmail() ;
+						?>></td>
+							
 						</tr>
+						
 						<tr>
 							<td>Horas Ofertadas</td>
-							<td><input type="text" name="nombre"></td>
+							<td><input type="text" name="nombre"value=<?php
+						echo  $usuario->getHorasOfertadas() ;
+						?>></td>
+							
 						</tr>
+						
 						<tr>
 							<td>Horas demandadas</td>
-							<td><input type="text" name="nombre"></td>
+							<td><input type="text" name="nombre"value=<?php
+						echo  $usuario->getHorasDemandadas() ;
+						?>></td>
+							
 						</tr>
+						
 						<tr>
 							<td>Valoraciones</td>
-							<td><input type="text" name="nombre"></td>
+							<td><input type="text" name="nombre"value=<?php
+						 echo  $usuario->getValoracion() ;
+						?>></td>
+							
 						</tr>
+						
 						<tr>
 							<td>
 							<input type="submit" value="Modificar" onclick="window.location.href='modificar_perfil.php'">
+							
 							</td>
 						</tr>
+						 
 			
 					</tbody> 
 					</table>
