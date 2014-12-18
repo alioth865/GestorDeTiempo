@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en">
 <?php
+		
         include_once("./clases/Includephp.php");
+		session_start();
 	?>
 <head>
 	<meta charset="utf-8"/>
@@ -121,8 +123,8 @@
 					<table class="tablesorter" cellspacing="0"> 
 					<tbody> 
 						<tr><?php							
-						$usuario = Controlador::verPerfil("rvolobriga@gmail.com");
-						$usuario->getNombre() ;
+						$usuario = Controlador::verPerfil($_SESSION["objUsu"]->getEmail());
+						
 						?>
 							<td>Nombre</td>
 							<td><input type="text" name="nombre"value=<?php
