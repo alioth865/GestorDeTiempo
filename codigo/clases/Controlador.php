@@ -52,7 +52,7 @@ class Controlador {
         $os = updateModificarOfertaSeleccionada($dOferta, $nombre, $horario, $descripción, $idCategoría);
         return os;
     }
-    
+
     //CREO QUE ESTA FUNCION NO HACE FALTA
     public function IntroducirDatos($email, $contraseña) {
 
@@ -81,5 +81,56 @@ class Controlador {
         $bd = new GestorBaseDatos();
         return $bd->eliminarCategoriaEspecifica($idcategoria);
     }
+
+    //ALBERTO
+
+    public function verPerfil($email) {
+        $bd = new GestorBaseDatos();
+        return $bd->verPerfil($email);
+    }
+
+    public function verEstadisticaValoracion($email) {
+        $bd = new GestorBaseDatos();
+        return $bd->verEstadisticasValoracion($email);
+    }
+
+    public function valoracion($email) {
+        $bd = new GestorBaseDatos();
+        return $bd->buscarHistorial($email);
+    }
+
+    public function cubrirValoracion($idoferta, $valor, $descripcion, $email, $iddemandasatisfecha) {
+        $bd = new GestorBaseDatos();
+        return $bd->valoracion($idoferta, $valor, $descripcion, $email, $iddemandasatisfecha);
+    }
+
+    //VICTOR
+
+    function SeleccionarOferta($idoferta) {
+        $c = new GestorBaseDatos();
+        $os = $c->seleccionarOferta($idOferta);
+        return $os;
+    }
+
+    function SeleccionarOfertaPropia($email) {
+        $c = new GestorBaseDatos();
+        $os = $c->listarOferta($email);
+        return $os;
+    }
+
+    public function crearOferta($nombreoferta, $horarioinicio, $horariofin, $descripcion, $idcategoria, $email) {
+        $bd = new GestorBaseDatos();
+        $o = new Oferta("NULL", $idcategoria, $email, $nombreoferta, $horarioinicio, $horariofin, $descripcion, 0);
+        return $bd->crearOferta($o);
+    }
+
+    public function eliminarOferta($idoferta) {
+        $bd = new GestorBaseDatos();  
+        return $bd->eliminarOferta($idoferta); 
+    }
+    
+    
+    
+    
 
 }

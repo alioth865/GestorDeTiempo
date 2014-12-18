@@ -6,3 +6,4 @@ include_once 'Historial.php';
 include_once 'Oferta.php';
 include_once 'Usuario.php';
 include_once 'Controlador.php';
+include_once 'Nottificacion.php';
