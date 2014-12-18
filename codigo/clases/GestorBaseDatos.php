@@ -397,4 +397,16 @@ class GestorBaseDatos {
         return $toRet;
     }
 
+    public function ofertasPopulares($email) {
+        //esta funcion devolvera las 10 ofertas mas populares sin incluir las ofertas del usuario.
+
+        $sql = "SELECT * FROM Oferta WHERE email!= '$email' ORDER BY valoracion DESC LIMIT 10";
+        $result = mysql_query($sql);
+         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+            $toRet[$linea["idoferta"]] = $linea;
+        }
+        return $toRet;
+    }
+    
+
 }
