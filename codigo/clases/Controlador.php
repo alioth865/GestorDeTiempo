@@ -7,6 +7,11 @@ class Controlador {
         $c = new GestorBaseDatos();
         return $c->loguear($correo, $contrasena);
     }
+    
+    function eliminarUsuario($email){
+        $c=new GestorBaseDatos();
+        return $c->eliminarUsuario($email);
+    }
 
     function listarUsuarios() {
         $c = new GestorBaseDatos();

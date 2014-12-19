@@ -387,6 +387,15 @@ class GestorBaseDatos {
         else
             return true;
     }
+    
+    public function eliminarUsuario($email) {
+        $sql = "DELETE FROM `Usuario` WHERE `email`='$email'";
+        $result = mysql_query($sql);
+        if (!$result)
+            return mysql_error();
+        else
+            return true;
+    }
 
     public function listarNotificacion($email) {
         $sql = "SELECT * FROM Notificacion WHERE `email`='$email'";
