@@ -142,7 +142,7 @@ and open the template in the editor.
                 <tr>
                     <td><?php echo $temp["valoracion"] ?></td>   
                     <td><?php echo $temp["descripcionvaloracion"] ?></td>   
-                    <td><?php echo $temp["email"] ?></td>   
+    º                <td><?php echo $temp["email"] ?></td>   
                     <td><?php echo $temp["fecha"] ?></td>   
                     <td><?php echo $temp["idoferta"] ?></td>   
                 </tr>

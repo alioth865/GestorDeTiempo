@@ -30,7 +30,7 @@ class Controlador {
     public function ListarCategoria() {
         $c = new GestorBaseDatos();
         $lc = $c->ListarCategoria();
-        return lc;
+        return $lc;
     }
 
     public function ModificarPerfil($email, $contraseña, $telefono, $nombre) {
@@ -141,10 +141,10 @@ class Controlador {
 
     
     //CRISTINA
-    public function listarCategoria() {
+   /* public function listarCategoria(){
         $bd = new GestorBaseDatos();
         return $bd->listarCategoria();
-    }
+    }*/
 
     public function modificarCategoriaEspecificada($idcategoria, $nuevonombre) {
         $bd = new GestorBaseDatos();
