@@ -31,25 +31,28 @@ INSERT INTO `Categoria` (`idcategoria`, `nombrecategoria`) VALUES
 (4, 'Baile'),
 (5, 'Albañileria');
 
---
--- Volcado de datos para la tabla `Demanda`
---
-
-INSERT INTO `Demanda` (`iddemanda`, `email`, `idofertasintercambio`, `idoferta`) VALUES
-(1, 'alioth865@yahoo.com', NULL, 2),
-(2, 'alioth865@yahoo.com', '1', 3),
-(3, 'joshua93.futbol@hotmail.com', '2', 3),
-(4, 'alioth865@yahoo.com', '3', 3),
-(8, 'alioth865@yahoo.com', NULL, 3);
 
 --
--- Volcado de datos para la tabla `DemandaSatisfecha`
+-- Volcado de datos para la tabla `TipoUsuario`
 --
 
-INSERT INTO `DemandaSatisfecha` (`valoracion`, `descripcionvaloracion`, `fecha`, `email`, `idoferta`, `iddemandasatisfecha`) VALUES
-(8, 'muy buena', '2014-07-12', 'alioth865@yahoo.com', 3, 1),
-(8, 'muy buena', '2014-07-12', 'alioth865@yahoo.com', 3, 2),
-(8, 'muy buena', '2014-07-12', 'alioth865@yahoo.com', 3, 3);
+INSERT INTO `TipoUsuario` (`codtipusu`, `nombre`) VALUES
+(1, 'administrador'),
+(2, 'usuario');
+
+--
+-- Volcado de datos para la tabla `Usuario`
+--
+
+INSERT INTO `Usuario` (`email`, `nombre`, `telefono`, `horasdemandadas`, `horasofertadas`, `valoracion`, `codtipusu`, `contraseña`) VALUES
+('alioth865@yahoo.com', 'JUAN PITO', 699699699, '48:00:00', '00:00:00', 0, 1, 'aliothsin865'),
+('joshua93.futbol@hotmail.com', 'Joshua Rodriguez', 963586936, '06:00:00', '00:00:00', 5, 2, 'joshua93.futbol'),
+('rvolobriga@gmail.com', 'Iago Fernandez', 699333457, '06:00:00', '54:00:00', 10, 2, 'rvolobriga');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
 
 --
 -- Volcado de datos para la tabla `Oferta`
