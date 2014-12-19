@@ -4,6 +4,7 @@
 <?php
 	include_once ("./clases/Includephp.php");
 	session_start();
+	$emailUsuario = $_POST['usuario'];
 ?>
 
 <head>
@@ -119,39 +120,13 @@
 					<!--tabla ofertas populares-->
 				
 			<div style="display: block;" id="tab1" class="tab_content">
-			<table class="tablesorter" cellspacing="0"> 
-			<tbody> 
-			<!-- codigo php para crear una tabla-->
 
-			<?php 
-				$listausu=Controlador::listarUsuarios();
-				foreach ($listausu as $temp) {
-			?>
-				 <tr> 
-    				<td>
-    					<?php echo $temp->getNombre(); ?>
-    				</td> 
-					<td>
-    					<?php $nombre = $temp->getNombre(); ?>
-						<form action="eliminarUsuario.php" method="POST">
-							<input type="hidden" name="usuario" value=<?php echo $temp->getEmail(); ?> >
-							<input type="submit" value="eliminar"
-							 onclick="return confirm('¿Esta seguro que desea borrar a este usuario?')" >
-						</form>
-						
-						<!--
-						<input type="button" name="eliminar <?php echo $i+1; ?>" value="eliminar" 
-						 onClick="window.location.href='eliminar.php?usuario='">
-						-->	
-						
-					</td>
-				</tr>
-			<?php ;
-				}
-			?> 
+				<?php echo Controlador::eliminarUsuario($emailUsuario); ?>
 
-			</tbody> 
-			</table>
+				<h1> Usuario eliminado </h1>
+				<!-- <a href="gestion_usuario.php"> Regresar a lista de Usuarios </a> -->
+				<meta http-equiv="refresh" content="10; url=gestion_usuario.php" /> <!-- Espera 10 segundos y regresa solo -->
+
 			</div><!-- fin de la tabla ofertas populares -->
 			
 </article><!-- end of styles article -->
