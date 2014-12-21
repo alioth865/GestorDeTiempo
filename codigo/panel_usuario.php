@@ -63,7 +63,7 @@
 
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="panel_usuario.php?lang=<?php echo $lang; ?>"><?php echo __('User Panel', $lang) ?></a></h1>
+			<h1 class="site_title"><?php echo __('User Panel', $lang) ?></h1>
 			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
@@ -76,8 +76,7 @@
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs">
 
-
-			<a href="panel_usuario.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a> </article>
+			<a href="panel.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a> </article>
 		</div>
 	</section><!-- end of secondary bar -->
 	

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Description of language_es.php
+ * array con todas las palabras y sus
+ * traducciones
+ *
+ * @author Raúl
+ */
 $texts = array(
 	'About us' => 'Sobre nosotros',
 	'What we do?' => '¿Qué hacemos?',

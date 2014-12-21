@@ -65,7 +65,9 @@
 
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="index.php"><?php echo __('Login', $lang) ?></a></h1>
+			<h1 class="site_title">
+			<a href="index.php?lang=<?php echo $lang; ?>"><?php echo __('Login', $lang) ?></a>
+			</h1>
 			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 			
 		</hgroup>
@@ -77,7 +79,7 @@
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="index.php"><?php echo __('Login', $lang) ?></a></article>
+			<article class="breadcrumbs"><a href="index.php?lang=<?php echo $lang; ?>"><?php echo __('Login', $lang) ?></a></article>
 		</div>
 	</section><!-- end of secondary bar -->
 	

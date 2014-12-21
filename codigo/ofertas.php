@@ -73,7 +73,7 @@
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs">
-			<a href="panel_administrador.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
+			<a href="panel.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
 			<div class="breadcrumb_divider"></div>
 			<a class="current"><?php echo __('My Offers', $lang) ?></a>
 			</article>
