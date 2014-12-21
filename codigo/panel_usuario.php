@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
 	<title>Panel de Usuario | Gestor de tiempo</title>
 	
 	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
@@ -52,10 +52,19 @@
 
 <body>
 
+<?php
+	//Idioma
+	require('language.php'); 
+	$lang = $_GET['lang'];
+	if ( isset($_GET['lang']) ){
+		$lang = $_GET['lang'];
+	}
+?>
+
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="panel_usuario.php">Panel Usuario</a></h1>
-			<h2 class="section_title">Banco de Tiempo</h2>
+			<h1 class="site_title"><a href="panel_usuario.php?lang=<?php echo $lang; ?>"><?php echo __('User Panel', $lang) ?></a></h1>
+			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
@@ -66,7 +75,9 @@
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs">
-			<a href="panel_usuario.php">Panel Usuario</a> </article>
+
+
+			<a href="panel_usuario.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a> </article>
 		</div>
 	</section><!-- end of secondary bar -->
 	
@@ -74,12 +85,12 @@
 		<form class="quick_search">
 			<table>
 				<tr>
-					<td><input type="text" value="Búsqueda rápida" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
+					<td><input type="text" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
 					<td><select style="width:60%;">
-								<option>Selecciona una categoría</option>
-<?php for($i =0; $i<50; $i++){ ?>
-									 	<option>Categoría <?php echo $i+1 ?></option>
-									<?php } ?>
+								<option><?php echo __('Selects a category', $lang) ?></option>
+								<?php for($i =0; $i<50; $i++){ ?>
+									 	<option><?php echo __('Category', $lang) ?> <?php echo $i+1 ?></option>
+									<?php } ?> 
 							</select></td>
 				</tr>
 			</table>
@@ -89,42 +100,54 @@
 							
 		</form>
 		<hr/>
-		<h3>Opciones</h3>
-		<ul class="toggle">
-			<li class="icn_tags"><a href ="misofertas.php">Mis Ofertas</a></li>
-			<li class="icn_tags"><a href ="demanda.php">Mis Demandas</a></li>
-			<li class="icn_view_users"><a href ="valorar.php">Valorar</a></li>
-			<li class="icn_folder"><a href ="notificaciones.php">Notificaciones</a></li>
-			<li class="icn_profile"><a href ="perfil.php">Perfil</a></li>
-			<li class="icn_salir"><a href ="index.php">Salir</a></li>
-		</ul>
+		<h3><?php echo __('Options', $lang) ?></h3>
+		<ul class="toggle"><!--Opciones-->
+
+			<li class="icn_tags"><a href ="ofertas.php?lang=<?php echo $lang; ?>"> <?php echo __('My offers', $lang) ?> </a> </li>
+
+			<li class="icn_tags"><a href ="demanda.php?lang=<?php echo $lang; ?>"><?php echo __('My Demands', $lang) ?></a></li>
+
+			<li class="icn_view_users"><a href ="valorar.php?lang=<?php echo $lang; ?>"><?php echo __('Rate', $lang) ?></a></li>
+
+			<li class="icn_folder"><a href ="notificaciones.php?lang=<?php echo $lang; ?>"><?php echo __('Notifications', $lang) ?></a></li>
+
+			<li class="icn_profile"><a href ="perfil.php?lang=<?php echo $lang; ?>"><?php echo __('Profile', $lang) ?></a></li>			
+
+			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
+
+			<li class="icono_gb"><a href="panel_usuario.php?lang=en">  Ingles</a></li>
+			<li class="icono_es"><a href="panel_usuario.php?lang=es">  Castellano</a></li>
+		</ul><!--fin opciones-->
 
 		
 		<footer>
 			<hr />
 			<p><strong>Copyright &copy; 2014 Interfaces de usuario@esei </strong></p>
+
 		</footer>
 	</aside><!-- end of sidebar -->
 	
 	<section id="main" class="column">
 		
 		<article class="module width_full">
-			<header><h3>Ofertas Populares</h3></header>
+			<header><h3><?php echo __('Popular Offers', $lang) ?></h3></header>
 				<div class="module_content">
 					<!--tabla ofertas populares-->
 				
 			<div style="display: block;" id="tab1" class="tab_content">
 			<table class="tablesorter" cellspacing="0"> 
 			<tbody> 
-				<?php 
+			<!-- codigo php para crear una tabla-->
+			<?php 
 				for($i =0; $i<5; $i++){ ?>
 				 <tr> 
-    				<td>Título Oferta<?php echo $i+1;?></td> 
-    				<td>Categoria <?php echo $i+1?></td> 
-    				<td>Algo mas <?php echo $i+1 ?></td> 
+    				<td><?php echo __('Title offer', $lang) ?><?php echo $i+1;?></td> 
+    				<td><?php echo __('Category', $lang) ?> <?php echo $i+1?></td> 
+    				<td><?php echo __('Something more', $lang) ?> <?php echo $i+1 ?></td> 
 				</tr><?php ;
 				}
 			?> 
+				
 			</tbody> 
 			</table>
 			</div><!-- fin de la tabla ofertas populares -->

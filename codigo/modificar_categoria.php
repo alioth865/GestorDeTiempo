@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
 	<title>Panel de Administrador | Gestor de tiempo</title>
 	
 	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
@@ -51,11 +51,18 @@
 
 
 <body>
-
+<?php
+	//Idioma
+	require('language.php'); 
+	$lang = $_GET['lang'];
+	if ( isset($_GET['lang']) ){
+		$lang = $_GET['lang'];
+	}
+?>
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="panel_administrador.php">Panel Administrador</a></h1>
-			<h2 class="section_title">Banco de Tiempo</h2>
+			<h1 class="site_title"><?php echo __('Modify category', $lang) ?></h1>
+			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
@@ -66,11 +73,11 @@
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs">
-				<a href="panel_administrador.php">Inicio</a>
-				<div class="breadcrumb_divider"></div>
-				<a href="gestion_categoria.php">Gestión de Categorías</a>
-				<div class="breadcrumb_divider"></div>
-				<a class="current">Modificar Categoría</a>
+			<a href="panel_administrador.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
+			<div class="breadcrumb_divider"></div>
+			<a class="current"><?php echo __('Management category', $lang) ?></a>
+			<div class="breadcrumb_divider"></div>
+			<a class="current"><?php echo __('Modify category', $lang) ?></a>
 			 </article>
 		</div>
 	</section><!-- end of secondary bar -->
@@ -79,11 +86,11 @@
 		<form class="quick_search">
 			<table>
 				<tr>
-					<td><input type="text" value="Búsqueda rápida" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
+					<td><input type="text" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
 					<td><select style="width:60%;">
-								<option>Selecciona una categoría</option>
+								<option><?php echo __('Selects a category', $lang) ?></option>
 								<?php for($i =0; $i<50; $i++){ ?>
-									 	<option>Categoría <?php echo $i+1 ?></option>
+									 	<option><?php echo __('Category', $lang) ?> <?php echo $i+1 ?></option>
 									<?php } ?> 
 							</select></td>
 				</tr>
@@ -94,14 +101,17 @@
 							
 		</form>
 		<hr/>
-		<h3>Opciones</h3>
+		<h3><?php echo __('Options', $lang) ?></h3>
 		<ul class="toggle"><!--Opciones-->
 			
-			<li class="icn_guardar_cambios"><a href ="#">Guardar</a></li>
+			<li class="icn_guardar_cambios"><a href ="#"><?php echo __('Save', $lang) ?></a></li>
 
-			<li class="icn_jump_back"><a href ="javascript:history.back()">Volver</a></li>
+			<li class="icn_jump_back"><a href ="javascript:history.back()"><?php echo __('Back', $lang) ?></a></li>
 		
-			<li class="icn_salir"><a href ="index.php">Salir</a></li>
+			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
+
+			<li class="icono_gb"><a href="modificar_categoria.php?lang=en">  Ingles</a></li>
+			<li class="icono_es"><a href="modificar_categoria.php?lang=es">  Castellano</a></li>
 
 		</ul><!--fin opciones-->
 
@@ -114,7 +124,7 @@
 	
 	<section id="main" class="column">
 		<article class="module width_full">
-			<header><h3>Gestión de categorías</h3></header>
+			<header><h3><?php echo __('Modify category', $lang) ?></h3></header>
 				<div class="module_content">
 					<!--tabla ofertas populares-->
 				
@@ -125,9 +135,9 @@
 			
 				<tr>
 					<form action="#" method="POST">
-					<td>Nombre</td>
-					<td><input type="text" name="nombre" value="nombre_categoria_modificar" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
-					<td><input type="submit" name="guardar" value="Guardar"></td>
+					<td><?php echo __('Name', $lang) ?></td>
+					<td><input type="text" name="nombre" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
+					<td><input type="submit" name="guardar" value=<?php echo __('Save', $lang) ?>></td>
 				</tr>
 			</tbody> 
 			</table>

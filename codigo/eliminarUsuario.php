@@ -8,7 +8,7 @@
 ?>
 
 <head>
-	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
 	<title>Panel de Administrador | Gestor de Usuario</title>
 	
 	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
@@ -57,11 +57,18 @@
 
 
 <body>
-
+<?php
+	//Idioma
+	require('language.php'); 
+	$lang = $_GET['lang'];
+	if ( isset($_GET['lang']) ){
+		$lang = $_GET['lang'];
+	}
+?>
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="panel_administrador.php">Panel Administrador</a></h1>
-			<h2 class="section_title">Banco de Tiempo</h2>
+			<h1 class="site_title"><?php echo __('Users management', $lang) ?></h1>
+			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
@@ -72,9 +79,9 @@
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs">
-				<a href="panel_administrador.php">Inicio</a>
-				<div class="breadcrumb_divider"></div>
-				<a class="current">Gestión de Categorías</a>
+			<a href="panel_administrador.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
+			<div class="breadcrumb_divider"></div>
+			<a class="current"><?php echo __('Users management', $lang) ?></a>
 			 </article>
 		</div>
 	</section><!-- end of secondary bar -->
@@ -83,11 +90,11 @@
 		<form class="quick_search">
 			<table>
 				<tr>
-					<td><input type="text" value="Búsqueda rápida" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
+					<td><input type="text" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
 					<td><select style="width:60%;">
-								<option>Selecciona una categoría</option>
+								<option><?php echo __('Selects a category', $lang) ?></option>
 								<?php for($i =0; $i<50; $i++){ ?>
-									 	<option>Categoría <?php echo $i+1 ?></option>
+									 	<option><?php echo __('Category', $lang) ?> <?php echo $i+1 ?></option>
 									<?php } ?> 
 							</select></td>
 				</tr>
@@ -95,14 +102,17 @@
 
 		</form>
 		<hr/>
-		<h3>Opciones</h3>
+		<h3><?php echo __('Options', $lang) ?></h3>
 		<ul class="toggle"><!--Opciones-->
 
 			
 
-			<li class="icn_jump_back"><a href ="javascript:history.back()">Volver</a></li>
+			<li class="icn_jump_back"><a href ="javascript:history.back()"><?php echo __('Back', $lang) ?></a></li>
 		
-			<li class="icn_salir"><a href ="index.php">Salir</a></li>
+			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
+
+			<li class="icono_gb"><a href="eliminarUsuario.php?lang=en">  Ingles</a></li>
+			<li class="icono_es"><a href="eliminarUsuario.php?lang=es">  Castellano</a></li>
 
 		</ul><!--fin opciones-->
 
@@ -115,7 +125,7 @@
 	
 	<section id="main" class="column">
 		<article class="module width_full">
-			<header><h3>Gestión de Usuarios</h3></header>
+			<header><h3><?php echo __('Users management', $lang) ?></h3></header>
 				<div class="module_content">
 					<!--tabla ofertas populares-->
 				
@@ -123,9 +133,9 @@
 
 				<?php echo Controlador::eliminarUsuario($emailUsuario); ?>
 
-				<h1> Usuario eliminado </h1>
+				<h1> <?php echo __('User remove', $lang) ?> </h1>
 				<!-- <a href="gestion_usuario.php"> Regresar a lista de Usuarios </a> -->
-				<meta http-equiv="refresh" content="10; url=gestion_usuario.php" /> <!-- Espera 10 segundos y regresa solo -->
+				<meta http-equiv="refresh" content="10; url='gestion_usuario.php?lang=<?php echo $lang; ?>'" /> <!-- Espera 10 segundos y regresa solo -->
 
 			</div><!-- fin de la tabla ofertas populares -->
 			

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
 	<title>Crear Oferta | Gestor de tiempo</title>
 	
 	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
@@ -51,11 +51,18 @@
 
 
 <body>
-
+<?php
+	//Idioma
+	require('language.php'); 
+	$lang = $_GET['lang'];
+	if ( isset($_GET['lang']) ){
+		$lang = $_GET['lang'];
+	}
+?>
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="panel_administrador.php">Crear Oferta</a></h1>
-			<h2 class="section_title">Banco de Tiempo</h2>
+			<h1 class="site_title"><?php echo __('Create offer', $lang) ?></h1>
+			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
@@ -66,11 +73,11 @@
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs">
-			<a href="panel_administrador.php">Inicio</a>
+			<a href="panel_administrador.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
 			<div class="breadcrumb_divider"></div>
-			<a href="ofertas.php">Mis Ofertas</a>
+			<a class="current"><?php echo __('My Offers', $lang) ?></a>
 			<div class="breadcrumb_divider"></div>
-			<a class="current">Crear oferta</a>
+			<a class="current"><?php echo __('Create offer', $lang) ?></a>
 			</article>
 		</div>
 	</section><!-- end of secondary bar -->
@@ -79,11 +86,11 @@
 		<form class="quick_search">
 			<table>
 				<tr>
-					<td><input type="text" value="Búsqueda rápida" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
+					<td><input type="text" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
 					<td><select style="width:60%;">
-								<option>Selecciona una categoría</option>
+								<option><?php echo __('Selects a category', $lang) ?></option>
 								<?php for($i =0; $i<50; $i++){ ?>
-									 	<option>Categoría <?php echo $i+1 ?></option>
+									 	<option><?php echo __('Category', $lang) ?> <?php echo $i+1 ?></option>
 									<?php } ?> 
 							</select></td>
 				</tr>
@@ -94,15 +101,17 @@
 							
 		</form>
 		<hr/>
-		<h3>Opciones</h3>
+		<h3><?php echo __('Options', $lang) ?></h3>
 		<ul class="toggle"><!--Opciones-->
 
-			<li class="icn_anadir"><a href ="#">Añadir Oferta</a></li>
+			<li class="icn_anadir"><a href ="#"><?php echo __('Add offer', $lang) ?></a></li>
 
-			<li class="icn_jump_back"><a href ="javascript:history.back()">Volver</a></li>
+			<li class="icn_jump_back"><a href ="javascript:history.back()"><?php echo __('Back', $lang) ?></a></li>
 		
-			<li class="icn_salir"><a href ="index.php">Salir</a></li>
+			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
 
+			<li class="icono_gb"><a href="crear_oferta.php?lang=en">  Ingles</a></li>
+			<li class="icono_es"><a href="crear_oferta.php?lang=es">  Castellano</a></li>
 		</ul><!--fin opciones-->
 
 		
@@ -114,7 +123,7 @@
 	
 	<section id="main" class="column">
 		<article class="module width_full">
-			<header><h3>Crear Oferta</h3></header>
+			<header><h3><?php echo __('Create offer', $lang) ?></h3></header>
 				<div class="module_content">
 					<!--tabla-->
 					<!--**********AQUI LINK***************-->
@@ -124,29 +133,29 @@
 					<table class="tablesorter" cellspacing="0"> 
 					<tbody> 
 						<tr>
-							<td>Nombre</td>
+							<td><?php echo __('Name', $lang) ?></td>
 							<td><input type="text" name=nombre></td>
 						</tr>
 						<tr>
-							<td>Horario</td>
+							<td><?php echo __('Schedule', $lang) ?></td>
 							<td><input type="text" name=horario></td>
 						</tr>
 						<tr>
-							<td>Descripción</td>
+							<td><?php echo __('Description', $lang) ?></td>
 							<td><textarea name="descripcion" rows="10" cols="40"></textarea> </td>
 						</tr>
 						<tr>
-							<td>Categoría</td>
+							<td><?php echo __('Category', $lang) ?></td>
 							<td><select name="categoria" style="width:100%">
-										<option>Selecciona una categoría</option>
+										<option><?php echo __('Selects a category', $lang) ?></option>
 										<?php for($i =0; $i<50; $i++){ ?>
-											 	<option>Categoría <?php echo $i+1 ?></option>
+											 	<option><?php echo __('Category', $lang) ?> <?php echo $i+1 ?></option>
 											<?php } ?> 
 									</select></td>
 						</tr>
 						<tr>
-							<td><input type="submit" name="crear" value="Crear"></td>
-							<td><input type="reset" value="Borrar campos"></td>
+							<td><input type="submit" name="crear" value=<?php echo __('Create', $lang) ?>></td>
+							<td><input type="reset" value=<?php echo __('Reset', $lang) ?>></td>
 						</tr>
 			
 					</tbody> 

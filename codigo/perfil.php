@@ -6,7 +6,7 @@
 		session_start();
 	?>
 <head>
-	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
 	<title>Perfil | Gestor de tiempo</title>
 	
 	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
@@ -55,11 +55,18 @@
 
 
 <body>
-
+<?php
+	//Idioma
+	require('language.php'); 
+	$lang = $_GET['lang'];
+	if ( isset($_GET['lang']) ){
+		$lang = $_GET['lang'];
+	}
+?>
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="panel_administrador.php">Perfil</a></h1>
-			<h2 class="section_title">Banco de Tiempo</h2>
+			<h1 class="site_title"><?php echo __('Profile', $lang) ?></h1>
+			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
@@ -69,10 +76,10 @@
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs">
-			<a href="panel_administrador.php">Inicio</a>
+				<article class="breadcrumbs">
+			<a href="panel_administrador.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
 			<div class="breadcrumb_divider"></div>
-			<a class="current">Perfil</a>
+			<a class="current"><?php echo __('Profile', $lang) ?></a>
 			</article>
 		</div>
 	</section><!-- end of secondary bar -->
@@ -81,11 +88,11 @@
 		<form class="quick_search">
 			<table>
 				<tr>
-					<td><input type="text" value="Búsqueda rápida" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
+					<td><input type="text" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
 					<td><select style="width:60%;">
-								<option>Selecciona una categoría</option>
+								<option><?php echo __('Selects a category', $lang) ?></option>
 								<?php for($i =0; $i<50; $i++){ ?>
-									 	<option>Categoría <?php echo $i+1 ?></option>
+									 	<option><?php echo __('Category', $lang) ?> <?php echo $i+1 ?></option>
 									<?php } ?> 
 							</select></td>
 				</tr>
@@ -96,13 +103,16 @@
 							
 		</form>
 		<hr/>
-		<h3>Opciones</h3>
+		<h3><?php echo __('Options', $lang) ?></h3>
 		<ul class="toggle"><!--Opciones-->
 
-			<li class="icn_engranaje"><a href ="modificar_perfil.php">Modificar</a></li>
-			<li class="icn_jump_back"><a href ="javascript:history.back()">Volver</a></li>
+
+			<li class="icn_jump_back"><a href ="javascript:history.back()"><?php echo __('Back', $lang) ?></a></li>
 		
-			<li class="icn_salir"><a href ="index.php">Salir</a></li>
+			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
+
+			<li class="icono_gb"><a href="perfil.php?lang=en">  Ingles</a></li>
+			<li class="icono_es"><a href="perfil.php?lang=es">  Castellano</a></li>
 
 		</ul><!--fin opciones-->
 
@@ -115,7 +125,7 @@
 	
 	<section id="main" class="column">
 		<article class="module width_full">
-			<header><h3>Perfil</h3></header>
+			<header><h3><?php echo __('Profile', $lang) ?></h3></header>
 				<div class="module_content">
 					<!--tabla-->
 	
@@ -126,7 +136,7 @@
 						$usuario = Controlador::verPerfil($_SESSION["objUsu"]->getEmail());
 						
 						?>
-							<td>Nombre</td>
+							<td><?php echo __('Name', $lang) ?></td>
 							<td><input type="text" name="nombre"value=<?php
 						echo  $usuario->getNombre() ;
 						?>></td>
@@ -134,7 +144,7 @@
 						</tr>
 						
 						<tr>
-							<td>Telefono</td>
+							<td><?php echo __('Phone', $lang) ?></td>
 							<td><input type="text" name="horario"value=<?php
 						echo  $usuario->getTelefono() ;
 						?>></td>
@@ -142,7 +152,7 @@
 						</tr>
 						
 						<tr>
-							<td>Correo</td>
+							<td><?php echo __('E-mail', $lang) ?></td>
 							<td><input type="text" name="nombre"value=<?php
 						 echo  $usuario->getEmail() ;
 						?>></td>
@@ -150,7 +160,7 @@
 						</tr>
 						
 						<tr>
-							<td>Horas Ofertadas</td>
+							<td><?php echo __('Offered hours', $lang) ?></td>
 							<td><input type="text" name="nombre"value=<?php
 						echo  $usuario->getHorasOfertadas() ;
 						?>></td>
@@ -158,7 +168,7 @@
 						</tr>
 						
 						<tr>
-							<td>Horas demandadas</td>
+							<td><?php echo __('Hours defendants', $lang) ?></td>
 							<td><input type="text" name="nombre"value=<?php
 						echo  $usuario->getHorasDemandadas() ;
 						?>></td>
@@ -166,7 +176,7 @@
 						</tr>
 						
 						<tr>
-							<td>Valoraciones</td>
+							<td><?php echo __('Rating', $lang) ?></td>
 							<td><input type="text" name="nombre"value=<?php
 						 echo  $usuario->getValoracion() ;
 						?>></td>
@@ -175,7 +185,7 @@
 						
 						<tr>
 							<td>
-							<input type="submit" value="Modificar" onclick="window.location.href='modificar_perfil.php'">
+							<input type="submit" value=<?php echo __('Modify', $lang) ?> onclick="window.location.href='modificar_perfil.php?lang=<?php echo $lang; ?>'">
 							
 							</td>
 						</tr>

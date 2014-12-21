@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
 	<title>Bienvenido | Banco de horas</title>
 	
 	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
@@ -49,24 +49,35 @@
 
 </head>
 
-
 <body>
+<!-- Idioma-->
+
+<?php 
+	require('language.php'); 
+ 	/* CARGAMOS LENGUAGE */
+
+	if ( isset($_GET['lang']) ){
+		$lang = $_GET['lang'];
+	}else {$lang="es";}
+
+
+?>
 
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="index.php">Login</a></h1>
-			<h2 class="section_title">Banco de Tiempo</h2>
+			<h1 class="site_title"><a href="index.php"><?php echo __('Login', $lang) ?></a></h1>
+			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
+			
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>Invitado</p>
+			<p><?php echo __('Guest', $lang) ?></p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="index.php">Lo
-gin</a></article>
+			<article class="breadcrumbs"><a href="index.php"><?php echo __('Login', $lang) ?></a></article>
 		</div>
 	</section><!-- end of secondary bar -->
 	
@@ -74,38 +85,39 @@ gin</a></article>
 	
 	<section id="mainl" class="column">
 		<article class="module width_full">
-			<header><h3 style ="margin: .5em .5em .1em .5em">Login</h3></header>
+			<header><h3 style ="margin: .5em .5em .1em .5em"><?php echo __('Login', $lang) ?></h3></header>
 				<div class="module_content">
 						<fieldset>
-							<label>Bienvenido</label>
+							<label><?php echo __('WELCOME', $lang) ?></label>
 							<br/>
 							<br/>
 							<br/>
-
-							<form action="login_controlador.php" method="POST" style ="margin: .5em .5em .1em .5em">
+							<?php $urlPanel ="login_controlador.php?lang=".$lang ?>
+							<form action="<?php echo $urlPanel ?>" method="POST" style ="margin: .5em .5em .1em .5em">
                         	
-                            E-mail:<input type="text" name="user">
+                            <?php echo __('E-mail:', $lang) ?><input type="text" name="user">
                             <br>
                             <br>
 
-                            Contraseña:<input type="text" name="pwd">
+                            <?php echo __('Password:', $lang) ?><input type="password" name="pwd">
                         	<br>
                         	<br>
 
                            <div id="recordar">
-                           		<P ALIGN=right><a href="error_olvidocontrasena.php">He olvidado mi contraseña</a>
+                           		<P ALIGN=right><a href=<?php "error_olvidocontrasena.php?lang=".$lang ?>> <?php echo __('¿You forgot the password?', $lang) ?></a>
                            		</P>
                            </div>
                        		<div id="estilbtn">
-				           <input type="submit" name="login" value="Aceptar">
-                            	<input type="button" name="registro" value="Regístrate" onClick="window.location.href='registro.php'">
+				           <input type="submit" name="login" value=<?php echo __('Accept', $lang) ?>>
+                            	<input type="button" name="registro" value=<?php echo __('Register', $lang) ?> onClick="window.location.href='registro.php'">
                        		</div>
                     	</form>
 						</fieldset>
 						
 				</div>
 			<footer>
-				
+			   <a href="index.php?lang=en">  Ingles</a>
+			   <a href="index.php?lang=es">  Castellano</a>		
 			</footer>
 		</article><!-- end of post new article -->
 		

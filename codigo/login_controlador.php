@@ -1,5 +1,14 @@
 <?php
 
+ 
+require('language.php'); 
+/* CARGAMOS LENGUAGE */
+
+if ( isset($_GET['lang']) ){
+   $lang = $_GET['lang'];
+}else {$lang="es";}
+
+
 include_once("clases/Includephp.php");
 //Almacena las variables del formulario del que ha venido.
 $username = $_REQUEST["user"];
@@ -7,7 +16,7 @@ $password = $_REQUEST["pwd"];
 
 //Verifica que los datos puedan ser correctos a priori
 if (strlen($username) <= 0 || strlen($password) <= 0) {
-    header("Location:index.php");
+    header("Location:index.php?lang=$lang");
     exit(0);
 }
 
@@ -46,16 +55,16 @@ if ($login == 1 || $login == 2) {
         
         //Dependiendo del tipo de usuario, llevarlo a un lugar u otro
         if ($login == 1) {
-            header("Location: panel_administrador.php");
+            header("Location: panel_administrador.php?lang=$lang");
         } else {
-            header("Location: panel_usuario.php");
+            header("Location: panel_usuario.php?lang=$lang");
         }
     } else {
-        header("Location: errora.php");
+        header("Location: errora.php?lang=$lang");
     }
 } else {
     //alguno de los datos son incorrectos. enviar a pagina de error que vuelva al login.
-    header("Location: error_aut.php");
+    header("Location: error_aut.php?lang=$lang");
 }
 
 ?>

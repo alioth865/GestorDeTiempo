@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
 	<title>Valorar | Gestor de tiempo</title>
 	
 	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
@@ -51,11 +51,18 @@
 
 
 <body>
-
+<?php
+	//Idioma
+	require('language.php'); 
+	$lang = $_GET['lang'];
+	if ( isset($_GET['lang']) ){
+		$lang = $_GET['lang'];
+	}
+?>
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="panel_administrador.php">Valorar</a></h1>
-			<h2 class="section_title">Banco de Tiempo</h2>
+			<h1 class="site_title"><?php echo __('Rate', $lang) ?></h1>
+			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
@@ -66,9 +73,9 @@
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs">
-			<a href="panel_administrador.php">Inicio</a>
+			<a href="panel_administrador.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
 			<div class="breadcrumb_divider"></div>
-			<a class="current">Valorar</a>
+			<a class="current"><?php echo __('Rate', $lang) ?></a>
 			</article>
 		</div>
 	</section><!-- end of secondary bar -->
@@ -77,28 +84,30 @@
 		<form class="quick_search">
 			<table>
 				<tr>
-					<td><input type="text" value="Búsqueda rápida" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
+					<td><input type="text" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
 					<td><select style="width:60%;">
-								<option>Selecciona una categoría</option>
+								<option><?php echo __('Selects a category', $lang) ?></option>
 								<?php for($i =0; $i<50; $i++){ ?>
-									 	<option>Categoría <?php echo $i+1 ?></option>
+									 	<option><?php echo __('Category', $lang) ?> <?php echo $i+1 ?></option>
 									<?php } ?> 
 							</select></td>
 				</tr>
 			</table>
 			
-			
 								
 							
 		</form>
 		<hr/>
-		<h3>Opciones</h3>
+		<h3><?php echo __('Options', $lang) ?></h3>
 		<ul class="toggle"><!--Opciones-->
 
 
-			<li class="icn_jump_back"><a href ="javascript:history.back()">Volver</a></li>
+			<li class="icn_jump_back"><a href ="javascript:history.back()"><?php echo __('Back', $lang) ?></a></li>
 		
-			<li class="icn_salir"><a href ="index.php">Salir</a></li>
+			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
+
+			<li class="icono_gb"><a href="valorar.php?lang=en">  Ingles</a></li>
+			<li class="icono_es"><a href="valorar.php?lang=es">  Castellano</a></li>
 
 		</ul><!--fin opciones-->
 
@@ -111,7 +120,7 @@
 	
 	<section id="main" class="column">
 		<article class="module width_full">
-			<header><h3>Historial</h3></header>
+			<header><h3><?php echo __('History', $lang) ?></h3></header>
 				<div class="module_content">
 					<!--tabla ofertas -->
 				
@@ -122,9 +131,9 @@
 			<?php 
 				for($i =0; $i<5; $i++){ ?>
 				 <tr> 
-    				<td>Nombre de la oferta <?php echo $i+1;?></td> 
-    				<td>Persona <?php echo $i+1?></td> 
-    				<td><input type="submit" value="Valorar" onclick="window.location.href='valoracion.php'">
+    				<td><?php echo __('Name of the offer', $lang) ?> <?php echo $i+1;?></td> 
+    				<td><?php echo __('Person', $lang) ?> <?php echo $i+1?></td> 
+    				<td><input type="submit" value=<?php echo __('Rate', $lang) ?> onclick="window.location.href='valoracion.php?lang=<?php echo $lang; ?>'">
 
 				</tr><?php ;
 				}
