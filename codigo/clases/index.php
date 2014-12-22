@@ -142,7 +142,7 @@ and open the template in the editor.
                 <tr>
                     <td><?php echo $temp["valoracion"] ?></td>   
                     <td><?php echo $temp["descripcionvaloracion"] ?></td>   
-    º                <td><?php echo $temp["email"] ?></td>   
+                    <td><?php echo $temp["email"] ?></td>   
                     <td><?php echo $temp["fecha"] ?></td>   
                     <td><?php echo $temp["idoferta"] ?></td>   
                 </tr>
@@ -202,6 +202,7 @@ and open the template in the editor.
         <?php
         echo "Modificar Perfil <br>";
         $c->modificarPerfil("alioth865@yahoo.com", "aliothsin865", "699699699", "JUAN PITO");
+        Controlador::eliminarUsuario("pepito@yahoo.com");
         ?>
 
     </body>
