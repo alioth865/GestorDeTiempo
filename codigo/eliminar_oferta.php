@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
-	<title>Panel de Administrador | Gestor de tiempo</title>
+	<title>Eliminar Oferta | Gestor de tiempo</title>
 	
 	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
 	<!--[if lt IE 9]>
@@ -51,7 +51,7 @@
 
 
 <body>
-<?php
+<?php 
 	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];
@@ -61,7 +61,7 @@
 ?>
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><?php echo __('Remove offer', $lang) ?></h1>
+			<h1 class="site_title"><?php echo __('Delete deals', $lang) ?></h1>
 			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
@@ -75,8 +75,8 @@
 			<article class="breadcrumbs">
 			<a href="panel.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
 			<div class="breadcrumb_divider"></div>
-			<a class="current"><?php echo __('Remove offer', $lang) ?></a>
-			 </article>
+			<a class="current"><?php echo __('Delete deals', $lang) ?></a>
+			</article>
 		</div>
 	</section><!-- end of secondary bar -->
 	
@@ -101,8 +101,8 @@
 		<hr/>
 		<h3><?php echo __('Options', $lang) ?></h3>
 		<ul class="toggle"><!--Opciones-->
-			
-			
+
+
 			<li class="icn_jump_back"><a href ="javascript:history.back()"><?php echo __('Back', $lang) ?></a></li>
 		
 			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
@@ -121,21 +121,20 @@
 	
 	<section id="main" class="column">
 		<article class="module width_full">
-			<header><h3><?php echo __('Remove offer', $lang) ?></h3></header>
+			<header><h3><?php echo __('Delete deals', $lang) ?></h3></header>
 				<div class="module_content">
-					<!--tabla ofertas populares-->
+					<!--tabla ofertas -->
 				
 			<div style="display: block;" id="tab1" class="tab_content">
 			<table class="tablesorter" cellspacing="0"> 
 			<tbody> 
 			<!-- codigo php para crear una tabla-->
-			
-				<tr>
-				    <?php $urlPanel ="eliminar_oferta_encontrada.php?lang=".$lang ?>
-					<form action="<?php echo $urlPanel ?>" method="POST">
-					<td><input type="text" name="nombre" value=<?php echo __('Offerid...', $lang) ?> onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
-					<td><input type="submit" name="buscar" value=<?php echo __('Search', $lang) ?>></td>
-				</tr>
+			<tr><td><?php echo __('Are you sure to remove this offer?', $lang) ?></td></tr>
+			<tr><table>
+				<tr><td><input type ="button" name="si" value="<?php echo __('Yes', $lang) ?>"></td><td><input type ="button" name="no" value="No"></td></tr></table>
+			</tr>
+	
+				
 			</tbody> 
 			</table>
 			</div><!-- fin de la tabla ofertas populares -->

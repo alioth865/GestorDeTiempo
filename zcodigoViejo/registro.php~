@@ -73,11 +73,11 @@
 	
 	<section id="mainl" class="column">
 		<article class="module width_full">
-			<header><h3 style="margin-left: .5em">Registro</h3></header>
+			<header><h3 style="margin-left=.5em">Registro</h3></header>
 				<div class="module_content">
 						<fieldset>
 
-							<form action="registro_controlador.php" method="POST" style ="margin: .5em .5em .1em .5em">
+							<form action="login.php" method="POST" style ="margin: .5em .5em .1em .5em">
     						Nombre:<input type="text" name="user">
                             <br>
                             <br>
@@ -89,10 +89,10 @@
                             <br>
                             <br>
 
-                            Contraseña:<input type="password" name="pwd">
+                            Contraseña:<input type="text" name="pwd">
                         	<br>
                         	<br>
-                        	Repetir contraseña:<input type="password" name="rpwd">
+                        	Repetir contraseña:<input type="text" name="rpwd">
 
 
                        		<div id="estilbtn"><br><input type="submit" name="btn" value="Registrarse">

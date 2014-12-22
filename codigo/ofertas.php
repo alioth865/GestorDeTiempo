@@ -135,7 +135,8 @@
 				 <tr> 
     				<td><?php echo __('My offer', $lang) ?> <?php echo $i+1;?></td> 
     				<td><?php echo __('Category', $lang) ?> <?php echo $i+1?></td> 
-    				<td><?php echo __('Something more', $lang) ?> <?php echo $i+1 ?></td> 
+    				<td><input type = "button" name="modificar <?php echo $i+1; ?>" value = "<?php echo __('View', $lang) ?>" onClick= "window.location.href='ver_oferta.php'"></td> 
+				<td><input type = "button" name="eliminar <?php echo $i+1; ?>" value = "<?php echo __('Remove', $lang) ?>" onClick= "window.location.href='eliminar_oferta.php'"></td>
 				</tr><?php ;
 				}
 			?> 

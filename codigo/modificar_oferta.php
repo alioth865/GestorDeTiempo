@@ -61,7 +61,7 @@
 ?>
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><?php echo __('Offers View', $lang) ?></h1>
+			<h1 class="site_title"><?php echo __('Modify', $lang) ?></h1>
 			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
@@ -75,7 +75,7 @@
 			<article class="breadcrumbs">
 			<a href="panel.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
 			<div class="breadcrumb_divider"></div>
-			<a class="current"><?php echo __('Offers View', $lang) ?></a>
+			<a class="current"><?php echo __('Modify', $lang) ?></a>
 			</article>
 		</div>
 	</section><!-- end of secondary bar -->
@@ -107,8 +107,8 @@
 		
 			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
 
-			<li class="icono_gb"><a href="ver_oferta.php?lang=en">  Ingles</a></li>
-			<li class="icono_es"><a href="ver_oferta.php?lang=es">  Castellano</a></li>
+			<li class="icono_gb"><a href="modificar_oferta.php?lang=en">  Ingles</a></li>
+			<li class="icono_es"><a href="modificar_oferta.php?lang=es">  Castellano</a></li>
 
 		</ul><!--fin opciones-->
 
@@ -121,7 +121,7 @@
 	
 	<section id="main" class="column">
 		<article class="module width_full">
-			<header><h3><?php echo __('Offers View', $lang) ?></h3></header>
+			<header><h3><?php echo __('Modify', $lang) ?></h3></header>
 				<div class="module_content">
 					<!--tabla ofertas -->
 				
@@ -131,25 +131,25 @@
 			<!-- codigo php para crear una tabla-->
 			<tr>
 				<td><?php echo __('Name', $lang) ?>:</td>
-				<td>nombreOferta</td>
+				<td><input type ="text" name="horario" value="lo que hay en BD"></td>
 			</tr>
 	
 			<tr>
 				<td><?php echo __('Schedule', $lang) ?>:</td>
-				<td>horarioOferta</td>
+				<td><input type ="text" name="horario" value="lo que hay en BD"></td>
 			</tr>
 			<tr>
 				<td><?php echo __('Description', $lang) ?>:</td>
-				<td>descripcionOferta</td>
+				<td><input type ="text" name="horario" value="lo que hay en BD"></td>
 			</tr>
 			<tr>
 				<td><?php echo __('Category', $lang) ?>:</td>
-				<td>categoríaOferta</td>
+				<td><input type ="text" name="horario" value="lo que hay en BD"></td>
 			</tr>
 			<tr>
 			</tr>
 			<tr>
-				<td><input type = "button" value="<?php echo __('Modify', $lang) ?>" name="modificar" onClick= "window.location.href='modificar_oferta.php'"></td>
+				<td><input type = "button" value="<?php echo __('Save', $lang) ?>" name="modificar" onClick= "window.location.href='#'"></td>
 			</tr>
 				
 			</tbody> 

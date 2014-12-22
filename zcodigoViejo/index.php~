@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8"/>
-	<title>Dashboard I Admin Panel</title>
+	<title>Bienvenido | Banco de horas</title>
 	
 	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
 	<!--[if lt IE 9]>
@@ -54,7 +54,7 @@
 
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><a href="index.php">Registro</a></h1>
+			<h1 class="site_title"><a href="index.php">Login</a></h1>
 			<h2 class="section_title">Banco de Tiempo</h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
@@ -65,7 +65,8 @@
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
-			<article class="breadcrumbs"><a href="index.php">Registro</a></article>
+			<article class="breadcrumbs"><a href="index.php">Lo
+gin</a></article>
 		</div>
 	</section><!-- end of secondary bar -->
 	
@@ -73,30 +74,31 @@
 	
 	<section id="mainl" class="column">
 		<article class="module width_full">
-			<header><h3 style="margin-left: .5em">Registro</h3></header>
+			<header><h3 style ="margin: .5em .5em .1em .5em">Login</h3></header>
 				<div class="module_content">
 						<fieldset>
+							<label>Bienvenido</label>
+							<br/>
+							<br/>
+							<br/>
 
-							<form action="registro_controlador.php" method="POST" style ="margin: .5em .5em .1em .5em">
-    						Nombre:<input type="text" name="user">
+							<form action="panel_usuario.php" method="POST" style ="margin: .5em .5em .1em .5em">
+                        	
+                            E-mail:<input type="text" name="user">
                             <br>
                             <br>
 
-                            Telefono:<input type="text" name="telefono">
+                            Contraseña:<input type="text" name="pwd">
                         	<br>
                         	<br>
-                            E-mail:<input type="text" name="mail">
-                            <br>
-                            <br>
 
-                            Contraseña:<input type="password" name="pwd">
-                        	<br>
-                        	<br>
-                        	Repetir contraseña:<input type="password" name="rpwd">
-
-
-                       		<div id="estilbtn"><br><input type="submit" name="btn" value="Registrarse">
-                           <input type="button" name="btn2" value="Cancelar" onClick= "window.location.href='index.php'">
+                           <div id="recordar">
+                           		<P ALIGN=right><a href="error_olvidocontrasena.php">He olvidado mi contraseña</a>
+                           		</P>
+                           </div>
+                       		<div id="estilbtn">
+				<input type="submit" name="login" value="Aceptar">
+                            	<input type="button" name="registro" value="Regístrate" onClick="window.location.href='registro.php'">
                        		</div>
                     	</form>
 						</fieldset>
