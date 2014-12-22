@@ -5,11 +5,12 @@ class Controlador {
 //ALIOTH
     function loguear($correo, $contrasena) {
         $c = new GestorBaseDatos();
-        return $c->loguear($correo, $contrasena);
+        $contraseñaencryptada = sha1(md5($contrasena));
+        return $c->loguear($correo, $contraseñaencryptada);
     }
-    
-    function eliminarUsuario($email){
-        $c=new GestorBaseDatos();
+
+    function eliminarUsuario($email) {
+        $c = new GestorBaseDatos();
         return $c->eliminarUsuario($email);
     }
 
@@ -19,10 +20,13 @@ class Controlador {
         return $listUs;
     }
 
+    //MODIFICAR OFERTA
+    //ELIMINAR OFERTA
 //ALBA
     public function registrarUsuario($email, $nombre, $contraseña, $ho, $hd, $valoracion, $telefono) {
         $bd = new GestorBaseDatos();
-        $usuario = new Usuario($email, 2, $nombre, $telefono, $contraseña, $hd, $ho, $valoracion);
+        $contraseñaencryptada = sha1(md5($contraseña));
+        $usuario = new Usuario($email, 2, $nombre, $telefono, $contraseñaencryptada, $hd, $ho, $valoracion);
         return $bd->createUsuario($usuario);
     }
 
@@ -39,9 +43,9 @@ class Controlador {
     }
 
     public function ModificarPerfil($email, $contraseña, $telefono, $nombre) {
-
         $c = new GestorBaseDatos();
-        $modUs = $c->ModificarPerfil($email, $contraseña, $telefono, $nombre); //*devuelve si o no si se a modificado correctamente*/ 
+        $contraseñaencryptada = sha1(md5($contraseña));
+        $modUs = $c->ModificarPerfil($email, $contraseñaencryptada, $telefono, $nombre); //*devuelve si o no si se a modificado correctamente*/ 
         return $modUs;
     }
 
@@ -62,7 +66,8 @@ class Controlador {
     public function IntroducirDatos($email, $contraseña) {
 
         $c = new GestorBaseDatos();
-        return $c->IntroducirDatos($email, $contraseña);
+        $contraseñaencryptada = sha1(md5($contraseña));
+        return $c->IntroducirDatos($email, $contraseñaencryptada);
     }
 
     //Nides
@@ -144,12 +149,11 @@ class Controlador {
         return $bd->listarOferta($email);
     }
 
-    
     //CRISTINA
-   /* public function listarCategoria(){
-        $bd = new GestorBaseDatos();
-        return $bd->listarCategoria();
-    }*/
+    /* public function listarCategoria(){
+      $bd = new GestorBaseDatos();
+      return $bd->listarCategoria();
+      } */
 
     public function modificarCategoriaEspecificada($idcategoria, $nuevonombre) {
         $bd = new GestorBaseDatos();

@@ -333,7 +333,9 @@ class GestorBaseDatos {
             //No existe el usuario, si result es falso es que el correo no existe
             return -2;
         } else {
+            
             $array = mysql_fetch_array($result, MYSQL_ASSOC);
+            //printf($pass."<br>".$array["contraseña"]."<br>");
             if ($pass == $array["contraseña"])
                 return $array["codtipusu"];
             else
@@ -387,7 +389,7 @@ class GestorBaseDatos {
         else
             return true;
     }
-    
+
     public function eliminarUsuario($email) {
         $sql = "DELETE FROM `Usuario` WHERE `email`='$email'";
         $result = mysql_query($sql);
@@ -411,12 +413,10 @@ class GestorBaseDatos {
 
         $sql = "SELECT * FROM Oferta WHERE email!= '$email' ORDER BY valoracion DESC LIMIT 10";
         $result = mysql_query($sql);
-         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+        while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             $toRet[$linea["idoferta"]] = $linea;
         }
         return $toRet;
     }
-    
-    
 
 }
