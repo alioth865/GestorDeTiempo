@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
   `horasofertadas` time NOT NULL,
   `valoracion` int(2) DEFAULT '0',
   `codtipusu` int(10) NOT NULL,
-  `contraseña` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `contraseña` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`email`),
   KEY `codtipusu` (`codtipusu`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
