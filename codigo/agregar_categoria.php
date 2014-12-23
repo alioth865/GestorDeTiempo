@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="en">
 
+<?php
+	include_once ("./clases/Includephp.php");
+	session_start();
+	$emailUsuario = $_POST['usuario'];
+?>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
 	<title>Panel de Administrador | Gestor de tiempo</title>
@@ -142,6 +148,13 @@
 			</tbody> 
 			</table>
 			</div><!-- fin de la tabla ofertas populares -->
+			
+			
+ 			<?php
+                        $nombre = $_REQUEST['nombre'];
+                        $ins = Controlador::crearCategorias($nombre);
+                        ?>
+
 			
 </article><!-- end of styles article -->
 		<div class="spacer"></div>
