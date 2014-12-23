@@ -131,7 +131,7 @@
 				
 			<div style="display: block;" id="tab1" class="tab_content">
 
-				<?php echo Controlador::eliminarUsuario($emailUsuario); ?>
+				<?php Controlador::eliminarUsuario($emailUsuario); ?>
 
 				<h1> <?php echo __('User remove', $lang) ?> </h1>
 				<!-- <a href="gestion_usuario.php"> Regresar a lista de Usuarios </a> -->
