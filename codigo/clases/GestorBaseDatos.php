@@ -306,12 +306,7 @@ class GestorBaseDatos {
         return $usuario->getValoracion();
     }
 
-    public function updateOfertaSeleccionada($idoferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idcategoria) {
-        $this->conect();
-        $sql = "UPDATE `Oferta` SET `nombreoferta`='$nombre', `horarioinicio`='$horarioinicio', `horariofin`='$horariofin', `descripcionoferta`='$descripcion', `idcategoria`='$idcategoria' WHERE `idoferta` ='$idoferta'";
-        //echo $sql;
-        return mysql_query($sql);
-    }
+  
 
     public function modificarPerfil($email, $contraseña, $telefono, $nombre) {
         $this->conect();
@@ -371,9 +366,9 @@ class GestorBaseDatos {
         return $toRet;
     }
 
-    public function nuevaNotificacion($email, $idnotificacion, $iddemanda, $respuesta) {
-        $sql = "INSERT INTO `Notificacion`(`email`, `idnotificacion`, `iddemanda`, `respuesta`) "
-                . "VALUES ('$email','$idnotificacion','$iddemanda','$respuesta')";
+    public function nuevaNotificacion($email, $idnotificacion, $idoferta, $respuesta) {
+        $sql = "INSERT INTO `Notificacion`(`email`, `idnotificacion`, `idoferta`, `respuesta`) "
+                . "VALUES ('$email','$idnotificacion','$idoferta','$respuesta')";
         $result = mysql_query($sql);
         if (!$result)
             return mysql_error();
@@ -400,7 +395,9 @@ class GestorBaseDatos {
     }
 
     public function listarNotificacion($email) {
-        $sql = "SELECT * FROM Notificacion WHERE `email`='$email'";
+        $sql = "SELECT  Usuario.nombre, `Oferta`.`email` AS `emailofertante`, `Oferta`.`nombreoferta`, `respuesta`, `idnotificacion` "
+                . "FROM `Notificacion`, `Oferta`, `Usuario` "
+                . "WHERE `Notificacion`.`email`='$email' AND `Notificacion`.`idoferta`=`Oferta`.`idoferta` AND `Usuario`.`email` =`Oferta`.`email`;";
         $result = mysql_query($sql);
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             $toRet[$linea["idnotificacion"]] = $linea;
@@ -417,6 +414,13 @@ class GestorBaseDatos {
             $toRet[$linea["idoferta"]] = $linea;
         }
         return $toRet;
+    }
+    
+     public function updateOferta($idoferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idcategoria) {
+        $this->conect();
+        $sql = "UPDATE `Oferta` SET `nombreoferta`='$nombre', `horarioinicio`='$horarioinicio', `horariofin`='$horariofin', `descripcionoferta`='$descripcion', `idcategoria`='$idcategoria' WHERE `idoferta` ='$idoferta'";
+        //echo $sql;
+        return mysql_query($sql);
     }
 
 }

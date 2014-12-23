@@ -75,11 +75,11 @@ CREATE TABLE IF NOT EXISTS `DemandaSatisfecha` (
 CREATE TABLE IF NOT EXISTS `Notificacion` (
   `email` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `idnotificacion` int(10) NOT NULL AUTO_INCREMENT,
-  `iddemanda` int(10) NOT NULL,
+  `idoferta` int(10) NOT NULL,
   `respuesta` tinyint(1) NOT NULL,
   PRIMARY KEY (`idnotificacion`),
-  KEY `iddemanda` (`iddemanda`),
-  KEY `email` (`email`)
+  KEY `email` (`email`),
+  KEY `idoferta` (`idoferta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -155,7 +155,7 @@ ALTER TABLE `DemandaSatisfecha`
 -- Filtros para la tabla `Notificacion`
 --
 ALTER TABLE `Notificacion`
-  ADD CONSTRAINT `Notificacion_ibfk_2` FOREIGN KEY (`iddemanda`) REFERENCES `Demanda` (`iddemanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `Notificacion_ibfk_2` FOREIGN KEY (`idoferta`) REFERENCES `Oferta` (`idoferta`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Notificacion_ibfk_1` FOREIGN KEY (`email`) REFERENCES `Usuario` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --

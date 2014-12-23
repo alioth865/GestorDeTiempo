@@ -20,8 +20,17 @@ class Controlador {
         return $listUs;
     }
 
-    //MODIFICAR OFERTA
-    //ELIMINAR OFERTA
+    function eliminarNotificacion($idnotifiacion) {
+        $c = new GestorBaseDatos();
+        return $c->eliminarNotificacion($idnotificacion);
+    }
+
+    public function listarNotificacion($email) {
+        $bd = new GestorBaseDatos();
+        return $bd->listarNotificacion($email);
+    }
+
+
 //ALBA
     public function registrarUsuario($email, $nombre, $contraseña, $ho, $hd, $valoracion, $telefono) {
         $bd = new GestorBaseDatos();
@@ -48,17 +57,17 @@ class Controlador {
         $modUs = $c->ModificarPerfil($email, $contraseñaencryptada, $telefono, $nombre); //*devuelve si o no si se a modificado correctamente*/ 
         return $modUs;
     }
-
+/*
     public function ModificarOferta($email) {
 
         $c = new GestorBaseDatos();
         $om = $c->verPerfil($email);
         return $om;
     }
-
+*/
     public function ModificarOfertaSeleccionada($dOferta, $nombre, $horario, $descripción, $idCategoría) {
         $c = new GestorBaseDatos();
-        $os = updateModificarOfertaSeleccionada($dOferta, $nombre, $horario, $descripción, $idCategoría);
+        $os = updateOferta($idOferta, $nombre, $horario, $descripción, $idCategoría);
         return os;
     }
 
