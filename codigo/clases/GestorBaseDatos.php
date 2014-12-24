@@ -399,7 +399,6 @@ class GestorBaseDatos {
                 . "FROM `Notificacion`, `Oferta`, `Usuario` "
                 . "WHERE `Notificacion`.`email`='$email' AND `Notificacion`.`idoferta`=`Oferta`.`idoferta` AND `Usuario`.`email` =`Oferta`.`email`;";
         $result = mysql_query($sql);
-	$toRet=NULL;
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             $toRet[$linea["idnotificacion"]] = $linea;
         }
