@@ -15,7 +15,7 @@ $texts = array(
 	'WELCOME'=> 'BIENVENIDO',
 	'E-mail:' => 'Correo Electronico:',
 	'Password:' => 'Contraseña',
-	'¿You forgot the password?' => 'Has olvidado la contraseña?',
+	'You forgot the password?' => '¿Has olvidado la contraseña?',
 	'Accept' => 'Aceptar',
 	'Register' => 'Registrar',
 	'Time Bank' => 'Banco de Tiempo',
@@ -86,15 +86,15 @@ $texts = array(
 	'Offers View' => 'Ver Ofertas',
 	'Are you sure to remove this offer?' => '¿Estás seguro de que quieres eliminar esta oferta?',
 	'Yes' => 'Sí',
-	'' => '',
-	'' => '',
-	'' => '',
-	'' => '',
-	'' => '',
-	'' => '',
-	'' => '',
-	'' => '',
-	'' => '',
+	'Search Panel' => 'Panel de Busqueda',
+	'Search result' => 'Resultado de la busqueda',
+	'Offer details' => 'Detalles de la oferta',
+	'Offer name' => 'Nombre de oferta',
+	'Do it' => 'Realizar',
+	'Offers' => 'Ofertas',
+	'Deals offered' => 'Ofertas que ofrecen',
+	'Authentication error, please try again' => 'Error de autentificación, por favor intentelo de nuevo',
+	'Please contact an administrator' => 'Por favor contacte con un administrador',
 	'' => '',
 	'' => '',
 	'' => '',
@@ -117,6 +117,6 @@ $texts = array(
 	'' => '',
 	
 	
-	'Administrator Panel' => 'Panel Administrador'
+	'Admin Panel' => 'Panel Admin'
 );
 ?>

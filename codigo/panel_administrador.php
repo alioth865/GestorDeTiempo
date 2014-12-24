@@ -54,24 +54,26 @@
 <body>
 
 <?php
+    session_start();
 	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];
 	if ( isset($_GET['lang']) ){
 		$lang = $_GET['lang'];
 	}
+	$nom=$_SESSION['email'];
 ?>
 
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><?php echo __('Administrator Panel', $lang) ?></h1>
+			<h1 class="site_title"><?php echo __('Admin Panel', $lang) ?></h1>
 			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>Nombre de Usuario</p>
+			<p><?php echo $nom ?></p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">

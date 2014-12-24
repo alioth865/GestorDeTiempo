@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="en">
 
+<?php
+	include_once ("./clases/Includephp.php");
+	session_start();
+	$emailUsuario = $_POST['usuario'];
+?>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
 	<title>Panel de Administrador | Gestor de tiempo</title>
@@ -52,12 +58,14 @@
 
 <body>
 <?php
+    session_start();
 	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];
 	if ( isset($_GET['lang']) ){
 		$lang = $_GET['lang'];
 	}
+	$nom=$_SESSION['email'];
 ?>
 	<header id="header">
 		<hgroup>
@@ -68,7 +76,7 @@
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>Nombre de Usuario</p>
+			<p><?php echo $nom ?></p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
@@ -142,6 +150,13 @@
 			</tbody> 
 			</table>
 			</div><!-- fin de la tabla ofertas populares -->
+			
+			
+ 			<?php
+                        $nombre = $_REQUEST['nombre'];
+                        $ins = Controlador::crearCategorias($nombre);
+                        ?>
+
 			
 </article><!-- end of styles article -->
 		<div class="spacer"></div>

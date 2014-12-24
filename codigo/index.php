@@ -70,6 +70,9 @@
 			</h1>
 			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 			
+			<li class="icono_gb"><a href="index.php?lang=en">Ingles</a></li>
+
+			<li class="icono_es"><a href="index.php?lang=es">Castellano</a></li>	
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
@@ -106,7 +109,7 @@
                         	<br>
 
                            <div id="recordar">
-                           		<P ALIGN=right><a href=<?php "error_olvidocontrasena.php?lang=".$lang ?>> <?php echo __('¿You forgot the password?', $lang) ?></a>
+                           		<P ALIGN=right><a href="error_olvidocontrasena.php?lang=<?php echo $lang; ?>"> <?php echo __('You forgot the password?', $lang) ?></a>
                            		</P>
                            </div>
                        		<div id="estilbtn">
@@ -118,8 +121,10 @@
 						
 				</div>
 			<footer>
-			   <a href="index.php?lang=en">  Ingles</a>
-			   <a href="index.php?lang=es">  Castellano</a>		
+
+
+
+			</aside>
 			</footer>
 		</article><!-- end of post new article -->
 		

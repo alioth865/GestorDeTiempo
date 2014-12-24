@@ -58,12 +58,14 @@
 
 <body>
 <?php
+    session_start();
 	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];
 	if ( isset($_GET['lang']) ){
 		$lang = $_GET['lang'];
 	}
+	$nom=$_SESSION['email'];
 ?>
 	<header id="header">
 		<hgroup>
@@ -74,7 +76,7 @@
 	
 	<section id="secondary_bar">
 		<div class="user">
-			<p>Nombre de Usuario</p>
+			<p><?php echo $nom ?></p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
 		<div class="breadcrumbs_container">
@@ -131,7 +133,7 @@
 				
 			<div style="display: block;" id="tab1" class="tab_content">
 
-				<?php echo Controlador::eliminarUsuario($emailUsuario); ?>
+				<?php Controlador::eliminarUsuario($emailUsuario); ?>
 
 				<h1> <?php echo __('User remove', $lang) ?> </h1>
 				<!-- <a href="gestion_usuario.php"> Regresar a lista de Usuarios </a> -->

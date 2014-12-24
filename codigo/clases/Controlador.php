@@ -41,7 +41,7 @@ class Controlador {
 
     public function BuscarOferta($idCategoria) {
         $bd = new GestorBaseDatos();
-        return $bd->buscarOferta($idcategoria);
+        return $bd->buscarOferta($idCategoria);
     }
 
     //IAGO
@@ -65,10 +65,10 @@ class Controlador {
         return $om;
     }
 */
-    public function ModificarOfertaSeleccionada($dOferta, $nombre, $horario, $descripción, $idCategoría) {
+    public function ModificarOfertaSeleccionada($idOferta, $nombre, $horario, $descripción, $idCategoría) {
         $c = new GestorBaseDatos();
-        $os = updateOferta($idOferta, $nombre, $horario, $descripción, $idCategoría);
-        return os;
+        $os = $c->updateOferta($idOferta, $nombre, $horario, $descripción, $idCategoría);
+        return $os;
     }
 
     //CREO QUE ESTA FUNCION NO HACE FALTA
@@ -127,7 +127,7 @@ class Controlador {
 
     function SeleccionarOferta($idoferta) {
         $c = new GestorBaseDatos();
-        $os = $c->seleccionarOferta($idOferta);
+        $os = $c->seleccionarOferta($idoferta);
         return $os;
     }
 
@@ -166,7 +166,7 @@ class Controlador {
 
     public function modificarCategoriaEspecificada($idcategoria, $nuevonombre) {
         $bd = new GestorBaseDatos();
-        return $bd->actualizarCategoria($idcategoria, $nombre);
+        return $bd->actualizarCategoria($idcategoria, $nuevonombre);
     }
 
     public function verEstadisticasHorasIntercambiadas($email) {
