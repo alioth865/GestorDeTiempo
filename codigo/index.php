@@ -70,9 +70,9 @@
 			</h1>
 			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 			
-			<li class="icono_gb"><a href="index.php?lang=en">  Ingles</a></li>
+			<li class="icono_gb"><a href="index.php?lang=en">Ingles</a></li>
 
-			<li class="icono_es"><a href="index.php?lang=es">  Castellano</a></li>	
+			<li class="icono_es"><a href="index.php?lang=es">Castellano</a></li>	
 		</hgroup>
 	</header> <!-- end of header bar -->
 	

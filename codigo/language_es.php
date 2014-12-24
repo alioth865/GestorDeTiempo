@@ -117,6 +117,6 @@ $texts = array(
 	'' => '',
 	
 	
-	'Administrator Panel' => 'Panel Administrador'
+	'Admin Panel' => 'Panel Admin'
 );
 ?>

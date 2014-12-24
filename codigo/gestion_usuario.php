@@ -57,7 +57,6 @@
 
 <body>
 <?php
-    session_start();
 	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];

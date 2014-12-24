@@ -56,13 +56,15 @@ text-shadow: 0 -1px 0 #000;
 
 header#header h1.site_title a {
 color: #fff;
+width: 23%;
+text-align: left;
 text-decoration: none;
 }
 
 header#header h2.section_title {
 text-align: center;
 text-indent: 4.5%;
-width: 68%;
+width: 60%;
 background: url(../images/header_shadow.png) no-repeat left top;
 }
 

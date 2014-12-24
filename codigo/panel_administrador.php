@@ -66,7 +66,7 @@
 
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><?php echo __('Administrator Panel', $lang) ?></h1>
+			<h1 class="site_title"><?php echo __('Admin Panel', $lang) ?></h1>
 			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
