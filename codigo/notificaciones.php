@@ -55,8 +55,7 @@
 
 <body>
 <?php
-    session_start();
-	//Idioma
+    	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];
 	if ( isset($_GET['lang']) ){
@@ -141,9 +140,9 @@
 					foreach($notificaciones as $notificacion){ 
 					$status = $notificacion['respuesta'];
 					if( $status == 0 ){
-						$status= "Rechazada";
+						$status= "<font color='red'>Rechazada</font>";
 					}else{
-						$status= "Aceptada";
+						$status= "<font color='green'>Aceptada</font>";
 					}
 					
 					$idnotificacion = $notificacion['idnotificacion'];

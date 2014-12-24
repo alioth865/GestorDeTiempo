@@ -155,7 +155,7 @@
 		    				<td><?php echo $status; ?></td> 
 		    				<td><?php echo $notificacion['nombre'] ?></td> 
 		    				<td><?php echo $notificacion['emailofertante'] ?></td>
-						<td><input type="button"  value="borrar" onClick = "window.location.href='borrar_notificacion_controlador.php?lang=<?php $lang ?>&id=<?php echo $idnotificacion ?>'"/></td>
+						<td><input type="button"  value="borrar" onClick = "window.location.href='borrar_notificacion_controlador.php?lang=<?php echo $lang ?>&id=<?php echo $idnotificacion ?>'"/></td>
 				
 					</tr><?php ;
 					}/*cierre foreach*/
