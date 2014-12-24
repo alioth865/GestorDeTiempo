@@ -135,19 +135,29 @@
 			<tr><h1><td><?php echo __('Offer', $lang) ?></td><td><?php echo __('Status', $lang) ?></td><td><?php echo __('Bidder', $lang) ?></td><td><?php echo __('Contact', $lang) ?></td><td><?php echo __('Remove', $lang) ?></td></h1></tr>
 			<?php 
 				$notificaciones = Controlador::listarNotificacion($_SESSION["objUsu"]->getEmail());
-				$i=0;
-				foreach($notificaciones as $notificacion){ 
-				$status = $notificacion['respuesta'];
-				?>
+				if(count($notificaciones) != 0){
+					foreach($notificaciones as $notificacion){ 
+					$status = $notificacion['respuesta'];
+					if( $status == 0 ){
+						$status= "Rechazada";
+					}else{
+						$status= "Aceptada";
+					}
+					
+					$idnotificacion = $notificacion['idnotificacion'];
+					?>
 	
-				<tr> 
-	    				<td><?php echo $notificacion['nombreoferta'] ?></td> 
-	    				<td><?php echo if($status == 0){echo "Rechazada"}else{echo "Aceptada"} ?></td> 
-	    				<td><?php echo $notificacion['nombre'] ?></td> 
-	    				<td><?php echo $notificacion['emailofertante'] ?></td>
-					<td><input type="button" name="<?php $i++ ?>" value="borrar" onClick = "<?php Controlador::eliminarNotificacion($notificacion['idnotificacion']) ?> window.location.href='notificaciones.php?lang=<?php echo $lang; ?>'"/></td>
-				</tr><?php ;
-				}
+					<tr> 
+						
+		    				<td><?php echo $notificacion['nombreoferta'] ?></td> 
+		    				<td><?php echo $status; ?></td> 
+		    				<td><?php echo $notificacion['nombre'] ?></td> 
+		    				<td><?php echo $notificacion['emailofertante'] ?></td>
+						<td><input type="button"  value="borrar" onClick = "window.location.href='borrar_notificacion_controlador.php?lang=<?php $lang ?>&id=<?php echo $idnotificacion ?>'"/></td>
+				
+					</tr><?php ;
+					}/*cierre foreach*/
+				}/*cierre if*/
 			?> 
 				
 			</tbody> 

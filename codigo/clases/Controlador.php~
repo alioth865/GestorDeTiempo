@@ -20,7 +20,7 @@ class Controlador {
         return $listUs;
     }
 
-    function eliminarNotificacion($idnotificacion) {
+    function eliminarNotificacion($idnotifiacion) {
         $c = new GestorBaseDatos();
         return $c->eliminarNotificacion($idnotificacion);
     }
