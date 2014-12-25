@@ -29,7 +29,32 @@ class Controlador {
         $bd = new GestorBaseDatos();
         return $bd->listarNotificacion($email);
     }
+    
+    public function verDemandaEspecifica($iddemanda){
+        $bd = new GestorBaseDatos();
+                
+        return $bd->verDemandaEspecifica($iddemanda);
+    }
 
+    public function verOfertasIntercambio($idofertasintercambio){
+        $bd = new GestorBaseDatos();
+        return $bd->verOfertasIntercambio($idofertasintercambio);
+    }
+    
+    public function crearDemandaSatisfecha($email, $idoferta, $valoracion, $descripciondevaloracion, $fecha, $iddemandasatisfecha){
+        $bd = new GestorBaseDatos();
+        return $bd->crearDemandaSatisfecha(new Historial($email, $idoferta, $valoracion, $descripciondevaloracion, $fecha, $iddemandasatisfecha));
+    }
+    
+    public function crearNotificacion($email,$idnotidicacion,$idoferta,$respuesta){
+        $bd = new GestorBaseDatos();
+        return $bd->nuevaNotificacion($email,$idnotidicacion,$idoferta,$respuesta);
+    }
+    
+    public function eliminarDemanda($iddemanda){
+        $bd = new GestorBaseDatos();
+        return $bd->eliminarDemandaEspecifica($iddemanda);
+    }
 
 //ALBA
     public function registrarUsuario($email, $nombre, $contraseña, $ho, $hd, $valoracion, $telefono) {
@@ -113,7 +138,7 @@ class Controlador {
         return $bd->verEstadisticasValoracion($email);
     }
 
-    public function valoracion($email) {
+    public function listarHistorial($email) {
         $bd = new GestorBaseDatos();
         return $bd->buscarHistorial($email);
     }
