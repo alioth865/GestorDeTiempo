@@ -1,12 +1,9 @@
 <!doctype html>
 <html lang="en">
-<?php 
-	include_once("./clases/Includephp.php"); 
-	session_start();
-?>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
-	<title>Historial | Gestor de tiempo</title>
+	<title>Valoración | Gestor de tiempo</title>
 	
 	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
 	<!--[if lt IE 9]>
@@ -55,7 +52,9 @@
 
 <body>
 <?php
-    	//Idioma
+	session_start();
+	include_once("./clases/Includephp.php");
+	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];
 	if ( isset($_GET['lang']) ){
@@ -65,7 +64,7 @@
 ?>
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><?php echo __('History', $lang) ?></h1>
+			<h1 class="site_title"><?php echo __('Valuation', $lang) ?></h1>
 			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
@@ -79,7 +78,11 @@
 			<article class="breadcrumbs">
 			<a href="panel.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
 			<div class="breadcrumb_divider"></div>
-			<a class="current"><?php echo __('History', $lang) ?></a>
+			<a class="current"><?php echo __('Rate', $lang) ?></a>
+			<div class="breadcrumb_divider"></div>
+			<a class="current"><?php echo __('Valuation', $lang) ?></a>
+			</article>
+
 			</article>
 		</div>
 	</section><!-- end of secondary bar -->
@@ -111,8 +114,8 @@
 		
 			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
 
-			<li class="icono_gb"><a href="historial.php?lang=en">  Ingles</a></li>
-			<li class="icono_es"><a href="historial.php?lang=es">  Castellano</a></li>
+			<li class="icono_gb"><a href="valoracion.php?lang=en">  Ingles</a></li>
+			<li class="icono_es"><a href="valoracion.php?lang=es">  Castellano</a></li>
 
 		</ul><!--fin opciones-->
 
@@ -125,51 +128,38 @@
 	
 	<section id="main" class="column">
 		<article class="module width_full">
-			<header><h3><?php echo __('History', $lang) ?></h3></header>
+			<header><h3><?php echo __('Valuation', $lang) ?></h3></header>
 				<div class="module_content">
-					<!--tabla ofertas -->
-				
-			<div style="display: block;" id="tab1" class="tab_content">
-			<table class="tablesorter" cellspacing="0"> 
-			<tbody> 
-			<!-- codigo php para crear una tabla-->
-			
-			<tr><h1><td><?php echo __('Offer', $lang) ?></td><td><?php echo __('Rating', $lang) ?></td></h1></tr>	
-			<?php 
-				
-				$historial = Controlador::listarHistorial($_SESSION["objUsu"]->getEmail());
-				
-				if(count($historial) != 0){
-					foreach($historial as $demanda){ 
-					$valorada = $demanda['valoracion'];
-					$oferta = $demanda['idoferta'];
-					$oferta = Controlador::SeleccionarOferta($oferta);
-
-					?>
-	
-					<tr> 
+						<fieldset>
+						<?php 
+						$id = $_GET['id'];
+						$nombre = $_GET['n'];
+						?>
+						<label><h3><?php echo $nombre ?></h3></label>
+						</fieldset>
+						<fieldset>
+							<label><?php echo __('Score', $lang) ?> : </label>
+							<select name="puntuacion">
+							<?php for($i =0; $i<10; $i++){ ?>
+									 	<option><?php echo $i+1 ?></option>
+									<?php } ?> 
+							</select>
+					
+						</fieldset>
+						<fieldset>
+							<label><?php echo __('Opinion', $lang) ?></label>
+							<textarea rows="12" name="opinion"></textarea>
+						</fieldset>
 						
-		    				<td><?php echo $oferta->getnombreoferta();  ?></td> 
-		    				<?php if($valorada == 0){ ?>
-
-						<td> <input type='button' value="<?php echo __('Rate', $lang); ?>" onClick ="window.location.href='valorar.php?lang=<?php echo $lang ?>&id=<?php echo $demanda['iddemandasatisfecha'] ?>&n=<?php echo $oferta->getnombreoferta() ?>'"/> </td>
-
-						<?php }else{ ?>
-						
-						<td><?php echo $valorada." -> ";echo $demanda['descripcionvaloracion'];  ?></td>
-						
-						<?php } //cierreif?>
-					</tr><?php ;
-					}/*cierre foreach*/
-				}/*cierre if*/
-			 ?> 
-				
-			</tbody> 
-			</table>
-			</div><!-- fin de la tabla ofertas populares -->
-			
-</article><!-- end of styles article -->
-
+				</div>
+			<footer>
+				<div class="submit_link">
+					<input type="button" value="<?php echo __('Rate', $lang) ?>" onClick ="window.location.href='valorar.php?lang=<?php echo $lang ?>'"/ >
+					<input type="button" value="<?php echo __('Back', $lang) ?>">
+				</div>
+			</footer>
+		</article><!-- end of post new article -->
+		
 	</section>
 
 

@@ -52,7 +52,8 @@
 
 <body>
 <?php
-    session_start();
+	session_start();
+	include_once("./clases/Includephp.php");
 	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];
@@ -130,8 +131,15 @@
 			<header><h3><?php echo __('Valuation', $lang) ?></h3></header>
 				<div class="module_content">
 						<fieldset>
+						<?php 
+						$id = $_GET['id'];
+						$nombre = $_GET['n'];
+						?>
+						<label><h3><?php echo $nombre ?></h3></label>
+						</fieldset>
+						<fieldset>
 							<label><?php echo __('Score', $lang) ?> : </label>
-							<select>
+							<select name="puntuacion">
 							<?php for($i =0; $i<10; $i++){ ?>
 									 	<option><?php echo $i+1 ?></option>
 									<?php } ?> 
@@ -140,14 +148,14 @@
 						</fieldset>
 						<fieldset>
 							<label><?php echo __('Opinion', $lang) ?></label>
-							<textarea rows="12"></textarea>
+							<textarea rows="12" name="opinion"></textarea>
 						</fieldset>
 						
 				</div>
 			<footer>
 				<div class="submit_link">
-					<input type="submit" value=<?php echo __('Accept', $lang) ?> class="alt_btn">
-					<input type="reset" value=<?php echo __('Reset', $lang) ?>>
+					<input type="button" value="<?php echo __('Rate', $lang) ?>" onClick ="window.location.href='valorar.php?lang=<?php echo $lang ?>&id=<?php echo $id ?>'"/ >
+					<input type="button" value="<?php echo __('Back', $lang) ?>">
 				</div>
 			</footer>
 		</article><!-- end of post new article -->

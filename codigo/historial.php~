@@ -152,7 +152,7 @@
 		    				<td><?php echo $oferta->getnombreoferta();  ?></td> 
 		    				<?php if($valorada == 0){ ?>
 
-						<td> <input type='button' value="<?php echo __('Rate', $lang); ?>" onClick ="window.location.href='valorar.php?lang=<?php echo $lang ?>&id=<?php echo $demanda['iddemandasatisfecha'] ?>&n=<?php echo $oferta->getnombreoferta() ?>'"/> </td>
+						<td> <input type='button' value="<?php echo __('Rate', $lang); ?>" onClick ="window.location.href='valorar.php?lang=<?php echo $lang ?>&id=<?php echo $demanda['iddemandasatisfecha'] ?>&n=<?php echo $oferta->getnombreoferta() ?>&ids=<?php echo $demanda['idoferta'] ?>'"/> </td>
 
 						<?php }else{ ?>
 						
