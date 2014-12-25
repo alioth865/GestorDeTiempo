@@ -1,9 +1,10 @@
+
 <!doctype html>
 <html lang="en">
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
-	<title>Panel de Usuario | Gestor de tiempo</title>
+	<title>Panel de Administrador | Gestor de tiempo</title>
 	
 	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
 	<!--[if lt IE 9]>
@@ -65,7 +66,7 @@
 
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><?php echo __('User Panel', $lang) ?></h1>
+			<h1 class="site_title"><?php echo __('Admin Panel', $lang) ?></h1>
 			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
 		</hgroup>
 	</header> <!-- end of header bar -->
@@ -77,6 +78,7 @@
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs">
+
 
 			<a href="panel.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a> </article>
 		</div>
@@ -108,16 +110,22 @@
 
 			<li class="icn_tags"><a href ="demanda.php?lang=<?php echo $lang; ?>"><?php echo __('My Demands', $lang) ?></a></li>
 
-			<li class="icn_historial"><a href ="historial.php?lang=<?php echo $lang; ?>"><?php echo __('History', $lang) ?></a></li>
+			<li class="icn_historial"><a href ="historial.php?lang=<?php echo $lang; ?>"><?php echo __('Rate', $lang) ?></a></li>
 
 			<li class="icn_folder"><a href ="notificaciones.php?lang=<?php echo $lang; ?>"><?php echo __('Notifications', $lang) ?></a></li>
 
 			<li class="icn_profile"><a href ="perfil.php?lang=<?php echo $lang; ?>"><?php echo __('Profile', $lang) ?></a></li>			
 
+			<li class="icn_gestion_categorias"><a href ="gestion_categoria.php?lang=<?php echo $lang; ?>"><?php echo __('Management category', $lang) ?></a></li>
+
+			<li class="icn_gestion_usuarios"><a href ="gestion_usuario.php?lang=<?php echo $lang; ?>"><?php echo __('User management', $lang) ?></a></li>
+
+			<li class="icn_eliminar_oferta"><a href ="eliminar_oferta.php?lang=<?php echo $lang; ?>"><?php echo __('Delete deals', $lang) ?></a></li>
+
 			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
 
-			<li class="icono_gb"><a href="panel_usuario.php?lang=en">  Ingles</a></li>
-			<li class="icono_es"><a href="panel_usuario.php?lang=es">  Castellano</a></li>
+			<li class="icono_gb"><a href="panel_administrador.php?lang=en">  Ingles</a></li>
+			<li class="icono_es"><a href="panel_administrador.php?lang=es">  Castellano</a></li>
 		</ul><!--fin opciones-->
 
 		

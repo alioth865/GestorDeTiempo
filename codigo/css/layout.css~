@@ -392,9 +392,6 @@ background: url(../images/icn_engranaje.png) no-repeat center left;
 #sidebar li.icn_guardar_cambios a {
 background: url(../images/icn_guardar_cambios.png) no-repeat center left;
 }
-#sidebar li.icn_historial a {
-background: url(../images/historial.png) no-repeat center left;
-}
 
 
 #sidebar p {

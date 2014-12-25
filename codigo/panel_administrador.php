@@ -110,7 +110,7 @@
 
 			<li class="icn_tags"><a href ="demanda.php?lang=<?php echo $lang; ?>"><?php echo __('My Demands', $lang) ?></a></li>
 
-			<li class="icn_view_users"><a href ="valorar.php?lang=<?php echo $lang; ?>"><?php echo __('Rate', $lang) ?></a></li>
+			<li class="icn_historial"><a href ="historial.php?lang=<?php echo $lang; ?>"><?php echo __('History', $lang) ?></a></li>
 
 			<li class="icn_folder"><a href ="notificaciones.php?lang=<?php echo $lang; ?>"><?php echo __('Notifications', $lang) ?></a></li>
 
