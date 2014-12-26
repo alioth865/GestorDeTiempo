@@ -72,6 +72,24 @@ class GestorBaseDatos {
         }
         return $toRet;
     }
+//Busqueda
+    function listarCategoriaId($nombrecategoria) {
+        $this->conect();
+        //Esta funcion devuelve un array asociativo de todas las categorias
+        $sql = "SELECT `idcategoria` FROM `Categoria` WHERE `nombrecategoria`='$nombrecategoria'";
+        $id=mysql_query($sql);
+        $row = mysql_fetch_row($id);
+        return $row[0];
+    }
+
+    function listarCategoriaNo($idcategoria) {
+        $this->conect();
+        //Esta funcion devuelve un array asociativo de todas las categorias
+        $sql = "SELECT `nombrecategoria` FROM `Categoria` WHERE `idcategoria`='$idcategoria'";
+        $id=mysql_query($sql);
+        $row = mysql_fetch_row($id);
+        return $row[0];
+    }
 
     function actualizarCategoria($idcategoria, $nuevonombre) {
         $this->conect();
@@ -116,12 +134,14 @@ class GestorBaseDatos {
         $this->conect();
         $sql = " SELECT * FROM `Oferta` WHERE `idcategoria`='$idcategoria' ";
         //print $sql;
+        $toRet=NULL;
         $result = mysql_query($sql);
-        while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
-            //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
-            $toRet[$linea["idoferta"]] = $linea;
+       	while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+        //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
+        $toRet[$linea["idoferta"]] = $linea;
         }
-        return $toRet;
+       	return $toRet;
+       	
     }
 
     public function crearOferta($o) {
@@ -220,7 +240,7 @@ class GestorBaseDatos {
         $this->conect();
         $sql = "SELECT * FROM `DemandaSatisfecha` WHERE `email`='$email'";
         $result = mysql_query($sql);
-	$toRet=NULL;
+    $toRet=NULL;
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
             $toRet[$linea['iddemandasatisfecha']] = $linea;
