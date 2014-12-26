@@ -53,6 +53,8 @@
 <body>
 <?php
 	session_start();
+	$id = $_GET['id'];
+	$nombre = $_GET['n'];
 	include_once("./clases/Includephp.php");
 	//Idioma
 	require('language.php'); 
@@ -113,9 +115,11 @@
 			<li class="icn_jump_back"><a href ="javascript:history.back()"><?php echo __('Back', $lang) ?></a></li>
 		
 			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
-
-			<li class="icono_gb"><a href="valoracion.php?lang=en">  Ingles</a></li>
-			<li class="icono_es"><a href="valoracion.php?lang=es">  Castellano</a></li>
+			<?php 
+				
+			?>
+			<li class="icono_gb"><a href="valoracion.php?lang=en&id=<?php echo $id ?>&n=<?php echo $nombre ?>">  Ingles</a></li>
+			<li class="icono_es"><a href="valoracion.php?lang=es&id=<?php echo $id ?>&n=<?php echo $nombre ?>">  Castellano</a></li>
 
 		</ul><!--fin opciones-->
 
@@ -131,10 +135,7 @@
 			<header><h3><?php echo __('Valuation', $lang) ?></h3></header>
 				<div class="module_content">
 						<fieldset>
-						<?php 
-						$id = $_GET['id'];
-						$nombre = $_GET['n'];
-						?>
+						
 						<label><h4>Oferta: <?php echo $nombre ?></h4></label>
 						</fieldset>
 		<form name="valoracion" method="POST" action="valoracion_controlador.php?lang=<?php echo $lang ?>&id=<?php echo $id ?>"> 
@@ -156,7 +157,7 @@
 			<footer>
 				<div class="submit_link">
 					<input type="submit" value="<?php echo __('Rate', $lang) ?>" / >
-					<input type="button" value="<?php echo __('Back', $lang) ?>" onClick ="window.location.href='historial.php?lang=<?php echo $lang ?>'"></form>
+					<input type="button" value="<?php echo __('Back', $lang) ?>" onClick ="window.location.href='historial.php?lang='<?php echo $lang ?>'"></form>
 				</div>
 			</footer>
 		</article><!-- end of post new article -->
