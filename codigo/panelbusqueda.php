@@ -151,7 +151,10 @@
 			<tbody> 
 			<!-- codigo php para crear una tabla-->
 		<?php
-		
+
+		if(!$oferta)
+			echo "";
+		else{
         	foreach ($oferta as $lineaoferta) {
         		if($contenido==$lineaoferta["nombreoferta"]){
         		$sentencia=Controlador::ListarCategoriaNo($lineaoferta["idcategoria"]);
@@ -166,7 +169,7 @@
                 <?php
             }
           }
-        
+        }
         ?>
 				
 			</tbody> 

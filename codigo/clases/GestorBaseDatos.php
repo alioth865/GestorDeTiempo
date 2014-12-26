@@ -90,6 +90,7 @@ class GestorBaseDatos {
         $row = mysql_fetch_row($id);
         return $row[0];
     }
+
     function actualizarCategoria($idcategoria, $nuevonombre) {
         $this->conect();
         $sql = "UPDATE `Categoria` SET `nombrecategoria` = '$nuevonombre' WHERE `idcategoria` ='$idcategoria'";
@@ -133,16 +134,14 @@ class GestorBaseDatos {
         $this->conect();
         $sql = " SELECT * FROM `Oferta` WHERE `idcategoria`='$idcategoria' ";
         //print $sql;
+        $toRet=NULL;
         $result = mysql_query($sql);
-        $totalFilas = mysql_num_rows($result);  
-        while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
-            //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
-            $toRet[$linea["idoferta"]] = $linea;
+       	while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+        //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
+        $toRet[$linea["idoferta"]] = $linea;
         }
-        if($totalFilas == 0)
-        	return mysql_error();
-        else
-       		return $toRet;
+       	return $toRet;
+       	
     }
 
     public function crearOferta($o) {

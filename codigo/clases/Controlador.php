@@ -93,6 +93,7 @@ class Controlador {
         $lc = $c->ListarCategoriaNo($idcategoria);
         return $lc;
     }
+
 /*
     public function ModificarOferta($email) {
 
