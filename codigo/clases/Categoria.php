@@ -8,7 +8,7 @@ class Categoria {
         $this->nombrecategoria=$nombrecategoria;
     }
     
-    function setIdCategoria($idCategoria){
+    function setIdCategoria($idcategoria){
         $this->idcategoria=$idcategoria;
     }
     function setNombreCategoria($nombrecategoria){
@@ -19,7 +19,7 @@ class Categoria {
         return $this->idcategoria;
     }
     
-    function getNombreCategoria($nombrecategoria){
+    function getNombreCategoria(){
         return $this->nombrecategoria;
     }
     

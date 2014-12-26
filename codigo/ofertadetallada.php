@@ -54,14 +54,19 @@
 <body>
 
 <?php
+	include_once("./clases/Includephp.php");
     session_start();
 	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];
+
+
 	if ( isset($_GET['lang']) ){
 		$lang = $_GET['lang'];
 	}
 	$nom=$_SESSION['email'];
+	//$email1 = $_GET['email'];
+	//$oferta=Controlador::listarMisOfertas($email1);
 ?>
 
 	<header id="header">
@@ -87,22 +92,27 @@
 	</section><!-- end of secondary bar -->
 	
 	<aside id="sidebar" class="column">
-		<form class="quick_search">
+		<form class="quick_search" method="post" action="panelbusqueda.php?lang=<?php echo $lang; ?>" >
 			<table>
 				<tr>
-					<td><input type="text" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
-					<td><select style="width:60%;">
+					<td><input name="buscatext" type="text" value=""></td>
+					<td><select name="busqueda" style="width:60%;">
 								<option><?php echo __('Selects a category', $lang) ?></option>
-								<?php for($i =0; $i<50; $i++){ ?>
-									 	<option><?php echo __('Category', $lang) ?> <?php echo $i+1 ?></option>
-									<?php } ?> 
-							</select></td>
+					 <?php
+					  		       
+						foreach ($lcat as $lineacat) {
+              		  ?>
+               		
+                    <option><?php echo $lineacat["nombrecategoria"] ?></option>
+
+                <?php
+            		
+       				 }
+       			 ?>
+						</select></td>
+					<td><input type="submit" value="Enviar" name="enviar"> </td>
 				</tr>
-			</table>
-			
-			
-								
-							
+			</table>										
 		</form>
 		<hr/>
 		<h3><?php echo __('Options', $lang) ?></h3>

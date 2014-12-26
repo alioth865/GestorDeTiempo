@@ -54,6 +54,8 @@
 <body>
 
 <?php
+	include_once("./clases/Includephp.php");
+
     session_start();
 	//Idioma
 	require('language.php'); 
@@ -62,6 +64,17 @@
 		$lang = $_GET['lang'];
 	}
 	$nom=$_SESSION['email'];
+
+	$contenido=$_POST['buscatext'];
+	$cat=$_POST['busqueda'];
+
+	//echo $contenido;
+	//echo $cat;
+	$id= Controlador::ListarCategoriaId($cat);
+	//echo $id;
+	$oferta= Controlador::buscarOferta($id);
+
+	$lcat = Controlador::ListarCategoria();
 ?>
 
 	<header id="header">
@@ -85,22 +98,27 @@
 	</section><!-- end of secondary bar -->
 	
 	<aside id="sidebar" class="column">
-		<form class="quick_search">
+		<form class="quick_search" method="post" action="panelbusqueda.php?lang=<?php echo $lang; ?>" >
 			<table>
 				<tr>
-					<td><input type="text" value="" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
-					<td><select style="width:60%;">
+					<td><input name="buscatext" type="text" value=""></td>
+					<td><select name="busqueda" style="width:60%;">
 								<option><?php echo __('Selects a category', $lang) ?></option>
-								<?php for($i =0; $i<50; $i++){ ?>
-									 	<option><?php echo __('Category', $lang) ?> <?php echo $i+1 ?></option>
-									<?php } ?> 
-							</select></td>
+					 <?php
+					  		       
+						foreach ($lcat as $lineacat) {
+              		  ?>
+               		
+                    <option><?php echo $lineacat["nombrecategoria"] ?></option>
+
+                <?php
+            		
+       				 }
+       			 ?>
+						</select></td>
+					<td><input type="submit" value="Enviar" name="enviar"> </td>
 				</tr>
-			</table>
-			
-			
-								
-							
+			</table>										
 		</form>
 		<hr/>
 		<h3><?php echo __('Options', $lang) ?></h3>
@@ -132,16 +150,24 @@
 			<table class="tablesorter" cellspacing="0"> 
 			<tbody> 
 			<!-- codigo php para crear una tabla-->
-			<?php 
-				for($i =0; $i<5; $i++){ ?>
-				 <tr> 
-				    <td><?php echo __('Category', $lang) ?> <?php echo $i+1?></td> 
-    				<td><?php echo __('Title offer', $lang) ?><?php echo $i+1;?></td> 
-    				<td><?php echo __('Rate', $lang) ?> <?php echo $i+1 ?></td> 
-    				<td><input type="submit" name="ver" value=<?php echo __('See', $lang) ?> onclick="window.location.href='ofertadetallada.php?lang=<?php echo $lang; ?>'"></td> 
-				</tr><?php ;
-				}
-			?> 
+		<?php
+		
+        	foreach ($oferta as $lineaoferta) {
+        		if($contenido==$lineaoferta["nombreoferta"]){
+        		$sentencia=Controlador::ListarCategoriaNo($lineaoferta["idcategoria"]);
+        		
+                ?>
+                <tr>
+                	<td><?php echo $sentencia ?></td>
+                    <td><?php echo $lineaoferta["nombreoferta"] ?></td>
+                    <td><?php echo $lineaoferta["valoracion"] ?></td>
+                    <td><a href ="ofertadetallada.php?lang=<?php echo $lang;?>?email=<?php echo $lineaoferta["email"];?>"><?php echo __('View', $lang) ?></a></td>
+                </tr>
+                <?php
+            }
+          }
+        
+        ?>
 				
 			</tbody> 
 			</table>

@@ -72,7 +72,24 @@ class GestorBaseDatos {
         }
         return $toRet;
     }
+//Busqueda
+    function listarCategoriaId($nombrecategoria) {
+        $this->conect();
+        //Esta funcion devuelve un array asociativo de todas las categorias
+        $sql = "SELECT `idcategoria` FROM `Categoria` WHERE `nombrecategoria`='$nombrecategoria'";
+        $id=mysql_query($sql);
+        $row = mysql_fetch_row($id);
+        return $row[0];
+    }
 
+    function listarCategoriaNo($idcategoria) {
+        $this->conect();
+        //Esta funcion devuelve un array asociativo de todas las categorias
+        $sql = "SELECT `nombrecategoria` FROM `Categoria` WHERE `idcategoria`='$idcategoria'";
+        $id=mysql_query($sql);
+        $row = mysql_fetch_row($id);
+        return $row[0];
+    }
     function actualizarCategoria($idcategoria, $nuevonombre) {
         $this->conect();
         $sql = "UPDATE `Categoria` SET `nombrecategoria` = '$nuevonombre' WHERE `idcategoria` ='$idcategoria'";
@@ -117,11 +134,15 @@ class GestorBaseDatos {
         $sql = " SELECT * FROM `Oferta` WHERE `idcategoria`='$idcategoria' ";
         //print $sql;
         $result = mysql_query($sql);
+        $totalFilas = mysql_num_rows($result);  
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
             $toRet[$linea["idoferta"]] = $linea;
         }
-        return $toRet;
+        if($totalFilas == 0)
+        	return mysql_error();
+        else
+       		return $toRet;
     }
 
     public function crearOferta($o) {
@@ -220,7 +241,7 @@ class GestorBaseDatos {
         $this->conect();
         $sql = "SELECT * FROM `DemandaSatisfecha` WHERE `email`='$email'";
         $result = mysql_query($sql);
-	$toRet=NULL;
+    $toRet=NULL;
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
             $toRet[$linea['iddemandasatisfecha']] = $linea;
