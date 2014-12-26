@@ -51,17 +51,13 @@
 
 
 <body>
-<?php
-<<<<<<< HEAD
-	session_start();
-	$id = $_GET['id'];
-	$nombre = $_GET['n'];
-	include_once("./clases/Includephp.php");
-=======
+
+
 <?php
     session_start();
+    $nombre = $_GET['n'];
+    $id =$_GET['id'];
     include_once("./clases/Includephp.php");
->>>>>>> 0637816329fdf92d271ad7e485f4ee63103f788b
 	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];
