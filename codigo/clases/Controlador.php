@@ -82,18 +82,6 @@ class Controlador {
         $modUs = $c->ModificarPerfil($email, $contraseñaencryptada, $telefono, $nombre); //*devuelve si o no si se a modificado correctamente*/ 
         return $modUs;
     }
-    //Busqueda
-    public function ListarCategoriaId($nombrecategoria) {
-        $c = new GestorBaseDatos();
-        $lc = $c->ListarCategoriaId($nombrecategoria);
-        return $lc;
-    }
-    public function ListarCategoriaNo($idcategoria) {
-        $c = new GestorBaseDatos();
-        $lc = $c->ListarCategoriaNo($idcategoria);
-        return $lc;
-    }
-
 /*
     public function ModificarOferta($email) {
 
@@ -102,9 +90,9 @@ class Controlador {
         return $om;
     }
 */
-    public function ModificarOfertaSeleccionada($idOferta, $nombre, $horario, $descripción, $idCategoría) {
+    public function ModificarOfertaSeleccionada($idoferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idcategoria) {
         $c = new GestorBaseDatos();
-        $os = $c->updateOferta($idOferta, $nombre, $horario, $descripción, $idCategoría);
+        $os = $c->updateOferta($idoferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idcategoria);
         return $os;
     }
 
