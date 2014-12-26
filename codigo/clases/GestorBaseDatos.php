@@ -223,7 +223,7 @@ class GestorBaseDatos {
 	$toRet=NULL;
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
-            $toRet[$linea["email"]] = $linea;
+            $toRet[$linea['iddemandasatisfecha']] = $linea;
         }
         return $toRet;
     }
