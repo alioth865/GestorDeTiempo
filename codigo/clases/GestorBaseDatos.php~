@@ -218,8 +218,9 @@ class GestorBaseDatos {
 
     public function buscarHistorial($email) {
         $this->conect();
-        $sql = "SELECT * FROM DemandaSatisfecha WHERE `email`='$email'";
+        $sql = "SELECT * FROM `DemandaSatisfecha` WHERE `email`='$email'";
         $result = mysql_query($sql);
+	$toRet=NULL;
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
             $toRet[$linea["email"]] = $linea;
@@ -306,8 +307,6 @@ class GestorBaseDatos {
         return $usuario->getValoracion();
     }
 
-  
-
     public function modificarPerfil($email, $contraseña, $telefono, $nombre) {
         $this->conect();
         $sql = "UPDATE `Usuario` SET `contraseña`='$contraseña', `telefono`='$telefono', `nombre`='$nombre' WHERE `email`='$email'";
@@ -328,7 +327,7 @@ class GestorBaseDatos {
             //No existe el usuario, si result es falso es que el correo no existe
             return -2;
         } else {
-            
+
             $array = mysql_fetch_array($result, MYSQL_ASSOC);
             //printf($pass."<br>".$array["contraseña"]."<br>");
             if ($pass == $array["contraseña"])
@@ -356,10 +355,12 @@ class GestorBaseDatos {
 
     public function listarDemandas($email) {
         $this->conect();
-        $sql = "SELECT  `iddemanda`, `Demanda`.`email`, `idofertasintercambio`,`Demanda`.`idoferta` "
-                . "FROM  `Demanda`,`Oferta` WHERE `Oferta`. `email` =  '$email' "
-                . "AND `Demanda`.`idoferta`=`Oferta`.`idoferta`";
+        $sql = "SELECT  `iddemanda`, `Demanda`.`email`,`Oferta`.`nombreoferta` , `Usuario`.`nombre` AS `solicitante` , `Demanda`.`idoferta` "
+                . "FROM  `Demanda`,`Oferta`, `Usuario` WHERE `Oferta`. `email` =  '$email' "
+                . "AND `Demanda`.`idoferta`=`Oferta`.`idoferta` AND `Demanda`.`email`=`Usuario`.`email`";
         $result = mysql_query($sql);
+        //echo $sql;
+        $toRet = NULL;
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             $toRet[$linea["iddemanda"]] = $linea;
         }
@@ -369,6 +370,7 @@ class GestorBaseDatos {
     public function nuevaNotificacion($email, $idnotificacion, $idoferta, $respuesta) {
         $sql = "INSERT INTO `Notificacion`(`email`, `idnotificacion`, `idoferta`, `respuesta`) "
                 . "VALUES ('$email','$idnotificacion','$idoferta','$respuesta')";
+        echo $sql;
         $result = mysql_query($sql);
         if (!$result)
             return mysql_error();
@@ -399,6 +401,7 @@ class GestorBaseDatos {
                 . "FROM `Notificacion`, `Oferta`, `Usuario` "
                 . "WHERE `Notificacion`.`email`='$email' AND `Notificacion`.`idoferta`=`Oferta`.`idoferta` AND `Usuario`.`email` =`Oferta`.`email`;";
         $result = mysql_query($sql);
+        $toRet = NULL;
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             $toRet[$linea["idnotificacion"]] = $linea;
         }
@@ -415,12 +418,78 @@ class GestorBaseDatos {
         }
         return $toRet;
     }
-    
-     public function updateOferta($idoferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idcategoria) {
+
+    public function updateOferta($idoferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idcategoria) {
         $this->conect();
         $sql = "UPDATE `Oferta` SET `nombreoferta`='$nombre', `horarioinicio`='$horarioinicio', `horariofin`='$horariofin', `descripcionoferta`='$descripcion', `idcategoria`='$idcategoria' WHERE `idoferta` ='$idoferta'";
         //echo $sql;
         return mysql_query($sql);
+    }
+
+    public function verDemandaEspecifica($iddemanda) {
+        $this->conect();
+        $sql = "SELECT `Usuario`.`nombre`,`idofertasintercambio`,`Oferta`.`nombreoferta`, `iddemanda` FROM `Demanda`, `Usuario`, `Oferta`  "
+                . "WHERE `iddemanda`='$iddemanda' AND `Demanda`.`email`=`Usuario`.`email` AND `Oferta`.`idoferta`= `Demanda`.`idoferta`";
+        //echo $sql;
+        $result = mysql_query($sql);
+
+        while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+            $toRet[$linea["iddemanda"]] = $linea;
+        }
+        return $toRet;
+    }
+
+    public function verOfertasIntercambio($idofertasintercambio) {
+        if ($idofertasintercambio != NULL) {
+            $array;
+            $cadenatemp = $idofertasintercambio;
+            $cont = 0;
+            do {
+                /*
+                 * EJEMPLO DE COMO SE USA LA FUNCION 
+                 * $arreglo=$gbd->verOfertasIntercambio("3|9|11");
+                  foreach ($arreglo as $t)
+                  {
+                  echo $t["nombreoferta"]."   ".$t["descripcionoferta"]."   ".$t["idoferta"]."<br>";
+                  }
+                 */
+                $pos = strpos($cadenatemp, "|");
+                if ("" == $pos) {
+                    $idoferta = $cadenatemp;
+                    $sql = "SELECT `nombreoferta`,`descripcionoferta`, `idoferta` FROM `Oferta` WHERE `idoferta`=$idoferta";
+                    //echo $sql."<br>";
+                    $result = mysql_query($sql);
+                    while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+                        $array[$cont] = $linea;
+                    }
+                    //echo $idoferta."<br>";
+                    $cadenatemp = "";
+                } else {
+                    $idoferta = substr($cadenatemp, 0, $pos);
+                    //echo $idoferta."<br>";
+                    $sql = "SELECT `nombreoferta`,`descripcionoferta`, `idoferta` FROM `Oferta` WHERE `idoferta`=$idoferta";
+                    //echo $sql."<br>";
+                    $result = mysql_query($sql);
+                    while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+                        $array[$cont] = $linea;
+                    }
+                    $cadenatemp = substr($cadenatemp, $pos + 1, strlen($cadenatemp));
+                }
+                $cont ++;
+            } while (strlen($cadenatemp) > 0);
+            return $array;
+        } else {
+            return NULL;
+        }
+    }
+
+    public function eliminarDemandaEspecifica($iddemanda) {
+        $sql = "DELETE FROM `Demanda` WHERE `iddemanda`='$iddemanda'";
+        $result = mysql_query($sql);
+        if (!$result)
+            return mysql_error();
+        else
+            return true;
     }
 
 }

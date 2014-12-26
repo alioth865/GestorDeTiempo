@@ -218,7 +218,7 @@ class GestorBaseDatos {
 
     public function buscarHistorial($email) {
         $this->conect();
-        $sql = "SELECT * FROM DemandaSatisfecha WHERE `email`='$email'";
+        $sql = "SELECT * FROM `DemandaSatisfecha` WHERE `email`='$email'";
         $result = mysql_query($sql);
 	$toRet=NULL;
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {

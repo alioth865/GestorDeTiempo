@@ -144,25 +144,25 @@
 					$valorada = $demanda['valoracion'];
 					$oferta = $demanda['idoferta'];
 					$oferta = Controlador::SeleccionarOferta($oferta);
-
+					
 					?>
 	
 					<tr> 
+		    				<td><?php echo $oferta->getnombreoferta() ?></td> 
 						
-		    				<td><?php echo $oferta->getnombreoferta();  ?></td> 
-
-		    				<?php if($valorada == 0){ ?>
-
+						<?php if($valorada == 0){ /*si no está valorada muestro un boton.*/?>
+						
 						<td><input type='button' value="<?php echo __('Rate', $lang); ?>" onClick ="window.location.href='valoracion.php?lang=<?php echo $lang ?>&id=<?php echo $demanda['iddemandasatisfecha'] ?>&n=<?php echo $oferta->getnombreoferta() ?>'"/> </td>
 
 						<?php }/*cierre if*/
 
-						else{ ?>
+						else{ /*en caso contrario muestro la valoración*/?>
 						
-						<td><?php echo $valorada ?></td>
+						<td><?php echo $demanda['valoracion'] ?></td>
 						
 						<?php } //cierre else?>
-					</tr><?php ;
+
+					</tr><?php
 					}/*cierre foreach*/
 				}/*cierre if*/
 			 ?> 
