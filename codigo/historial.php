@@ -150,15 +150,18 @@
 					<tr> 
 						
 		    				<td><?php echo $oferta->getnombreoferta();  ?></td> 
+
 		    				<?php if($valorada == 0){ ?>
 
-						<td> <input type='button' value="<?php echo __('Rate', $lang); ?>" onClick ="window.location.href='valorar.php?lang=<?php echo $lang ?>&id=<?php echo $demanda['iddemandasatisfecha'] ?>&n=<?php echo $oferta->getnombreoferta() ?>'"/> </td>
+						<td><input type='button' value="<?php echo __('Rate', $lang); ?>" onClick ="window.location.href='valoracion.php?lang=<?php echo $lang ?>&id=<?php echo $demanda['iddemandasatisfecha'] ?>&n=<?php echo $oferta->getnombreoferta() ?>'"/> </td>
 
-						<?php }else{ ?>
+						<?php }/*cierre if*/
+
+						else{ ?>
 						
-						<td><?php echo $valorada." -> ";echo $demanda['descripcionvaloracion'];  ?></td>
+						<td><?php echo $valorada ?></td>
 						
-						<?php } //cierreif?>
+						<?php } //cierre else?>
 					</tr><?php ;
 					}/*cierre foreach*/
 				}/*cierre if*/

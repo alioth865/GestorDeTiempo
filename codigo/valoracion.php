@@ -135,13 +135,14 @@
 						$id = $_GET['id'];
 						$nombre = $_GET['n'];
 						?>
-						<label><h3><?php echo $nombre ?></h3></label>
+						<label><h4>Oferta: <?php echo $nombre ?></h4></label>
 						</fieldset>
+		<form name="valoracion" method="POST" action="valoracion_controlador.php?lang=<?php echo $lang ?>&id=<?php echo $id ?>"> 
 						<fieldset>
 							<label><?php echo __('Score', $lang) ?> : </label>
 							<select name="puntuacion">
 							<?php for($i =0; $i<10; $i++){ ?>
-									 	<option><?php echo $i+1 ?></option>
+									 	<option value="<?php echo $i+1 ?>"><?php echo $i+1 ?></option>
 									<?php } ?> 
 							</select>
 					
@@ -154,8 +155,8 @@
 				</div>
 			<footer>
 				<div class="submit_link">
-					<input type="button" value="<?php echo __('Rate', $lang) ?>" onClick ="window.location.href='valorar.php?lang=<?php echo $lang ?>&id=<?php echo $id ?>'"/ >
-					<input type="button" value="<?php echo __('Back', $lang) ?>">
+					<input type="submit" value="<?php echo __('Rate', $lang) ?>" / >
+					<input type="button" value="<?php echo __('Back', $lang) ?>" onClick ="window.location.href='historial.php?lang=<?php echo $lang ?>'"></form>
 				</div>
 			</footer>
 		</article><!-- end of post new article -->
