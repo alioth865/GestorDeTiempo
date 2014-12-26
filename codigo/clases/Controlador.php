@@ -55,6 +55,17 @@ class Controlador {
         $bd = new GestorBaseDatos();
         return $bd->eliminarDemandaEspecifica($iddemanda);
     }
+    //Busqueda
+    public function ListarCategoriaId($nombrecategoria) {
+        $c = new GestorBaseDatos();
+        $lc = $c->ListarCategoriaId($nombrecategoria);
+        return $lc;
+    }
+    public function ListarCategoriaNo($idcategoria) {
+        $c = new GestorBaseDatos();
+        $lc = $c->ListarCategoriaNo($idcategoria);
+        return $lc;
+    }
 
 //ALBA
     public function registrarUsuario($email, $nombre, $contrase�a, $ho, $hd, $valoracion, $telefono) {
@@ -82,6 +93,8 @@ class Controlador {
         $modUs = $c->ModificarPerfil($email, $contrase�aencryptada, $telefono, $nombre); //*devuelve si o no si se a modificado correctamente*/ 
         return $modUs;
     }
+    }
+    //Busqueda
 /*
     public function ModificarOferta($email) {
 
@@ -90,9 +103,9 @@ class Controlador {
         return $om;
     }
 */
-    public function ModificarOfertaSeleccionada($idoferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idcategoria) {
+    public function ModificarOfertaSeleccionada($idOferta, $nombre, $horario, $descripción, $idCategoría) {
         $c = new GestorBaseDatos();
-        $os = $c->updateOferta($idoferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idcategoria);
+        $os = $c->updateOferta($idOferta, $nombre, $horario, $descripción, $idCategoría);
         return $os;
     }
 
