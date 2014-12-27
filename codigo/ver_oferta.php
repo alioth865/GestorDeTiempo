@@ -54,6 +54,7 @@
 <?php
     session_start();
     include_once("./clases/Includephp.php");
+	$id = $_GET['id']; // Recibimos el id de la Oferta seleccionada
 	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];
@@ -116,8 +117,8 @@
 		
 			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
 
-			<li class="icono_gb"><a href="ver_oferta.php?lang=en">  Ingles</a></li>
-			<li class="icono_es"><a href="ver_oferta.php?lang=es">  Castellano</a></li>
+			<li class="icono_gb"><a href="ver_oferta.php?lang=en&id=<?php echo $id ?>&idc=<?php echo $idcategoria ?>">  Ingles</a></li>
+			<li class="icono_es"><a href="ver_oferta.php?lang=es&id=<?php echo $id ?>&idc=<?php echo $idcategoria ?>">  Castellano</a></li>
 
 		</ul><!--fin opciones-->
 
@@ -138,27 +139,44 @@
 			<table class="tablesorter" cellspacing="0"> 
 			<tbody> 
 			<!-- codigo php para crear una tabla-->
+			<?php 
+				$idoferta = $id;
+				$oferta = Controlador::SeleccionarOferta($id);	
+				?>
 			<tr>
-				<td><?php echo __('Name', $lang) ?>:</td>
-				<td>nombreOferta</td>
+				<td><?php echo __('<b>Offer name</b>', $lang) ?></td>
+				<td><?php echo  $oferta->getnombreoferta() ;?></td>
+			</tr>
+			<tr>
+				<td><?php echo __('<b>Start time</b>', $lang) ?><?php echo " ". $oferta->getHorarioInicio() ;?></td>
+				<td><?php echo __('<b>Finish time</b>', $lang) ?><?php echo " ".  $oferta->getHorarioFin() ;?></td>
+			</tr>
+			<tr>
+				<td><?php echo __('<b>Description</b>', $lang) ?>:</td>
+				<td><?php echo  $oferta->getDescripcion() ;?></td>
+			</tr>
+			<tr>
+				<?php
+					$categorias = Controlador::ListarCategoria();
+					foreach ($categorias as $categoria){
+					
+					if($categoria['idcategoria']==$oferta->getIdCategoria()){
+						$idcategoria = $categoria['idcategoria'];
+					$nombrecategoria = $categoria['nombrecategoria'];
+					break;
+					}	
+					}
+				?>
+				
+				<td><?php echo __('<b>Category</b>', $lang) ?>:</td>
+				<td><?php echo  $nombrecategoria ?></td>
+				
+				
 			</tr>
 	
+			
 			<tr>
-				<td><?php echo __('Schedule', $lang) ?>:</td>
-				<td>horarioOferta</td>
-			</tr>
-			<tr>
-				<td><?php echo __('Description', $lang) ?>:</td>
-				<td>descripcionOferta</td>
-			</tr>
-			<tr>
-				<td><?php echo __('Category', $lang) ?>:</td>
-				<td>categoríaOferta</td>
-			</tr>
-			<tr>
-			</tr>
-			<tr>
-				<td><input type = "button" value="<?php echo __('Modify', $lang) ?>" name="modificar" onClick= "window.location.href='modificar_oferta.php'"></td>
+				<td><input type = "button" name="modificar" value = "<?php echo __('Modify', $lang) ?>"  onClick="window.location.href='modificar_oferta.php?lang=<?php echo $lang; ?>&id=<?php echo $idoferta ?>&n=<?php echo $nombrecategoria ?>&idc=<?php echo $idcategoria ?>'"></td>
 			</tr>
 				
 			</tbody> 

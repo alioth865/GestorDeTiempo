@@ -93,7 +93,6 @@ class Controlador {
         $modUs = $c->ModificarPerfil($email, $contrase�aencryptada, $telefono, $nombre); //*devuelve si o no si se a modificado correctamente*/ 
         return $modUs;
     }
-    }
     //Busqueda
 /*
     public function ModificarOferta($email) {
@@ -102,10 +101,11 @@ class Controlador {
         $om = $c->verPerfil($email);
         return $om;
     }
+
 */
-    public function ModificarOfertaSeleccionada($idOferta, $nombre, $horario, $descripción, $idCategoría) {
+    public function ModificarOfertaSeleccionada($idOferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idCategoria) {
         $c = new GestorBaseDatos();
-        $os = $c->updateOferta($idOferta, $nombre, $horario, $descripción, $idCategoría);
+        $os = $c->updateOferta($idOferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idCategoria);
         return $os;
     }
 

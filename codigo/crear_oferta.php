@@ -136,18 +136,20 @@
 				<div class="module_content">
 					<!--tabla-->
 					<!--**********AQUI LINK***************-->
-					<form action="#" method="POST">
+					<form name="crearoferta" method="POST" action="crear_oferta_controlador.php?lang=<?php echo $lang; ?>&id=<?php echo $id ?>">
 					<!--**********AQUI LINK***************-->
 					<div style="display: block;" id="tab1" class="tab_content">
 					<table class="tablesorter" cellspacing="0"> 
 					<tbody> 
 						<tr>
 							<td><?php echo __('Name', $lang) ?></td>
-							<td><input type="text" name=nombre></td>
+							<td><input type="text" name="nombre"></td>
 						</tr>
 						<tr>
-							<td><?php echo __('Schedule', $lang) ?></td>
-							<td><input type="text" name=horario></td>
+							<td><?php echo __('Start time', $lang) ?></td>
+							<td><input type="text" name="horainicio"></td>
+							<td><?php echo __('Finish time', $lang) ?></td>
+							<td><input type="text" name="horafin"></td>
 						</tr>
 						<tr>
 							<td><?php echo __('Description', $lang) ?></td>
@@ -157,13 +159,21 @@
 							<td><?php echo __('Category', $lang) ?></td>
 							<td><select name="categoria" style="width:100%">
 										<option><?php echo __('Selects a category', $lang) ?></option>
-										<?php for($i =0; $i<50; $i++){ ?>
-											 	<option><?php echo __('Category', $lang) ?> <?php echo $i+1 ?></option>
-											<?php } ?> 
+										<?php
+												$array = $lc = Controlador::listarCategoria();
+											?>
+											<?php foreach($array as $temp){ ?>
+												<option value="<?php echo $temp["idcategoria"]?>"><?php echo $temp["nombrecategoria"] ?></option>
+											<?php
+											}
+											?>
+			
+											</tr>
+			
 									</select></td>
 						</tr>
 						<tr>
-							<td><input type="submit" name="crear" value=<?php echo __('Create', $lang) ?>></td>
+							<td><input type="submit" value=<?php echo __('Create', $lang) ?>></td>
 							<td><input type="reset" value=<?php echo __('Reset', $lang) ?>></td>
 						</tr>
 			

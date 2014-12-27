@@ -54,6 +54,9 @@
 <?php
     session_start();
     include_once("./clases/Includephp.php");
+	$id = $_GET['id'];
+	$n = $_GET['n'];
+	$idc = $_GET['idc'];
 	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];
@@ -116,8 +119,8 @@
 		
 			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
 
-			<li class="icono_gb"><a href="modificar_oferta.php?lang=en">  Ingles</a></li>
-			<li class="icono_es"><a href="modificar_oferta.php?lang=es">  Castellano</a></li>
+			<li class="icono_gb"><a href="modificar_oferta.php?lang=en&id=<?php echo $id ?>&n=<?php echo $n ?>&idc=<?php echo $idc ?>">  Ingles</a></li>
+			<li class="icono_es"><a href="modificar_oferta.php?lang=es&id=<?php echo $id ?>&n=<?php echo $n ?>&idc=<?php echo $idc ?>">  Castellano</a></li>
 
 		</ul><!--fin opciones-->
 
@@ -138,28 +141,59 @@
 			<table class="tablesorter" cellspacing="0"> 
 			<tbody> 
 			<!-- codigo php para crear una tabla-->
+			<form name="modificarOferta" method="POST" action="modificar_oferta_controlador.php?lang=<?php echo $lang; ?>&id=<?php echo $id ?>">
+				<?php 
+					$oferta = Controlador::SeleccionarOferta($id);	
+				?>
+		
 			<tr>
-				<td><?php echo __('Name', $lang) ?>:</td>
-				<td><input type ="text" name="horario" value="lo que hay en BD"></td>
-			</tr>
-	
-			<tr>
-				<td><?php echo __('Schedule', $lang) ?>:</td>
-				<td><input type ="text" name="horario" value="lo que hay en BD"></td>
-			</tr>
-			<tr>
-				<td><?php echo __('Description', $lang) ?>:</td>
-				<td><input type ="text" name="horario" value="lo que hay en BD"></td>
+				<td><?php echo __('<b>Offer name</b>', $lang).":";echo "	" ?></td>
+				<td><input type ="text" name="nombre" value=<?php echo $oferta->getnombreoferta()?>></td>
 			</tr>
 			<tr>
-				<td><?php echo __('Category', $lang) ?>:</td>
-				<td><input type ="text" name="horario" value="lo que hay en BD"></td>
+				<td><?php echo __('<b>Start time</b>', $lang).":";echo "	" ?></td>
+				<td><input type ="text" name="horainicio" value=<?php echo $oferta->getHorarioInicio()?>></td>
+			</tr>
+			<tr>
+				<td><?php echo __('<b>Finish time</b>', $lang).":";echo "	" ?></td>
+				<td><input type ="text" name="horafin" value=<?php echo $oferta->getHorarioFin()?>></td>
+			</tr>
+			<tr>
+				<td><?php echo __('<b>Description</b>', $lang).":";echo "	" ?></td>
+				<td><input type ="text" name="descripcion" value=<?php echo $oferta->getDescripcion()?>></td>
+			</tr>
+			<tr>
+				<td><?php echo __('<b>Category</b>', $lang).":";echo "" ?></td>
+				<td><select name="categoria" style="width:100%">
+										<option value="<?php echo $idc ?>"><?php echo $n ?></option>
+										<?php
+												$array = $lc = Controlador::listarCategoria();
+											?>
+											<?php foreach($array as $temp){ ?>
+											<?php
+												if($idc != $temp['idcategoria']){
+												$categorianueva = $temp['idcategoria'];
+												
+											?>
+											
+												<option value="<?php echo $categorianueva ?>"><?php echo $temp["nombrecategoria"] ?></option>
+										
+											<?php
+												
+												}//Cierre If
+											}// Cierre Foreach
+											?>
+			
+											</tr>
+			
+									</select></td>
 			</tr>
 			<tr>
 			</tr>
 			<tr>
-				<td><input type = "button" value="<?php echo __('Save', $lang) ?>" name="modificar" onClick= "window.location.href='#'"></td>
+				<td><input type = "submit" value="<?php echo __('Save', $lang) ?>"></td>
 			</tr>
+			</form>
 				
 			</tbody> 
 			</table>

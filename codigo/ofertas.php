@@ -139,17 +139,38 @@
 			<table class="tablesorter" cellspacing="0"> 
 			<tbody> 
 			<!-- codigo php para crear una tabla-->
+			<tr>
+							<td><?php echo __('<b>Username</b>', $lang) ?></td>
+							<td><?php echo __('<b>Offer name</b>', $lang) ?></td>
+							<td><?php echo __('<b>Start time</b>', $lang) ?></td>
+							<td><?php echo __('<b>Finish time</b>', $lang) ?></td>
+							<td><?php echo __('<b>Description</b>', $lang) ?></td>
+			</tr>
+			
 			<?php 
-				for($i =0; $i<5; $i++){ ?>
-				 <tr> 
-    				<td><?php echo __('My offer', $lang) ?> <?php echo $i+1;?></td> 
-    				<td><?php echo __('Category', $lang) ?> <?php echo $i+1?></td> 
-    				<td><input type = "button" name="modificar <?php echo $i+1; ?>" value = "<?php echo __('View', $lang) ?>" onClick= "window.location.href='ver_oferta.php?lang=<?php echo $lang; ?>'"></td> 
-				<td><input type = "button" name="eliminar <?php echo $i+1; ?>" value = "<?php echo __('Remove', $lang) ?>" onClick= "window.location.href='eliminar_oferta.php?lang=<?php echo $lang; ?>'"></td>
-				</tr><?php ;
-				}
+				$bd = Controlador::listarMisOfertas($nom);	
+				if(count($bd) != 0){
+				foreach ($bd as $temp) {
 			?> 
+                <tr> 
+                    <td><?php echo $temp["email"] ?></td>   
+                    <td><?php echo $temp["nombreoferta"] ?></td>   
+                    <td><?php echo $temp["horarioinicio"] ?></td>   
+                    <td><?php echo $temp["horariofin"] ?></td>   
+                    <td><?php echo $temp["descripcionoferta"] ?></td>
+					<?php
+					$idoferta = $temp["idoferta"];
+					?>	
+					
+					<td><input type = "button" name="modificar <?php echo $i+1; ?>" value = "<?php echo __('View', $lang);?> " onClick= "window.location.href='ver_oferta.php?lang=<?php echo $lang; ?>&id=<?php echo $idoferta ?>'"></td> 
+					<td><input type = "button" name="eliminar <?php echo $i+1; ?>" value = "<?php echo __('Remove', $lang) ?>" onClick= "window.location.href='eliminar_oferta.php?lang=<?php echo $lang; ?>&id=<?php echo $idoferta ?>'"></td>
+                </tr>
+                <?php
+				}
+			}
+				?>	
 				
+
 			</tbody> 
 			</table>
 			</div><!-- fin de la tabla ofertas populares -->

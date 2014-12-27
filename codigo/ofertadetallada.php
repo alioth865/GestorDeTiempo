@@ -2,6 +2,13 @@
 <!doctype html>
 <html lang="en">
 
+	<?php 
+		include_once("./clases/Includephp.php");
+		$id = $_GET['id'];
+		$oferta = Controlador::SeleccionarOferta($id);
+	?>
+
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
 	<title>Panel de Busqueda | Gestor de tiempo</title>
@@ -54,7 +61,6 @@
 <body>
 
 <?php
-	include_once("./clases/Includephp.php");
     session_start();
 	//Idioma
 	require('language.php'); 
@@ -136,7 +142,7 @@
 	<section id="main" class="column">
 		
 		<article class="module width_full">
-			<header><h3><?php echo __('Search result', $lang) ?></h3></header>
+			<header><h3><?php echo __('Offer Name', $lang).': '; echo $oferta->getnombreoferta() ?></h3></header>
 				<div class="module_content">
 					<!--tabla ofertas populares-->
 				
@@ -144,20 +150,20 @@
 					<table class="tablesorter" cellspacing="0"> 
 					<tbody> 
 						<tr>
-							<td><?php echo __('Offer name', $lang) ?></td>
-							<td><input type="text" name="nombre"></td>
+							<td><?php echo __('<b>Start time</b>', $lang) ?></td>
+							<td><?php echo $oferta->getHorarioInicio() ?></td>
 						</tr>
 						<tr>
-							<td><?php echo __('Schedule', $lang) ?></td>
-							<td><input type="text" name="horario"></td>
+							<td><?php echo __('<b>Finish time</b>', $lang) ?></td>
+							<td><?php echo $oferta->getHorarioFin() ?></td>
 						</tr>
 						<tr>
-							<td><?php echo __('Password', $lang) ?></td>
-							<td><input type="text" name="nombre"></td>
+							<td><?php echo __('<b>Description</b>', $lang) ?></td>
+							<td><?php echo $oferta->getDescripcion() ?></td>
 						</tr>
 						<tr>
 							<td><?php echo __('Rate', $lang) ?></td>
-							<td><input type="text" name="nombre"></td>
+							<td><?php echo $oferta->getValoracion() ?></td>
 						</tr>
 						<tr>
 							<td><input type="submit" name="crear" value=<?php echo __('Offers', $lang) ?> onclick="window.location.href='ofertasqueofrezco.php?lang=<?php echo $lang; ?>'"></td>

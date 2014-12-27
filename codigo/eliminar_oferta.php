@@ -54,6 +54,7 @@
 <?php
     session_start();
     include_once("./clases/Includephp.php");
+	$id = $_GET['id'];
 	//Idioma
 	require('language.php'); 
 	$lang = $_GET['lang'];
@@ -116,8 +117,8 @@
 		
 			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
 
-			<li class="icono_gb"><a href="eliminar_oferta.php?lang=en">  Ingles</a></li>
-			<li class="icono_es"><a href="eliminar_oferta.php?lang=es">  Castellano</a></li>
+			<li class="icono_gb"><a href="eliminar_oferta.php?lang=en&id=<?php echo $id ?>">  Ingles</a></li>
+			<li class="icono_es"><a href="eliminar_oferta.php?lang=es&id=<?php echo $id ?>">  Castellano</a></li>
 
 		</ul><!--fin opciones-->
 
@@ -139,8 +140,13 @@
 			<tbody> 
 			<!-- codigo php para crear una tabla-->
 			<tr><td><?php echo __('Are you sure to remove this offer?', $lang) ?></td></tr>
+			<?php
+			$idoferta2 = $id;
+			?>
 			<tr><table>
-				<tr><td><input type ="button" name="si" value="<?php echo __('Yes', $lang) ?>"></td><td><input type ="button" name="no" value="No"></td></tr></table>
+				<tr><td><input type ="button" name="si" value="<?php echo __('Yes', $lang) ?>" onClick = "window.location.href='eliminar_oferta_controlador.php?lang=<?php echo $lang ?>&id=<?php echo $idoferta2 ?>'"></td>
+				<td><input type ="button" name="no" value="No" onClick = "window.location.href='ofertas.php?lang=<?php echo $lang ?>'"></td></tr></table>
+			
 			</tr>
 	
 				

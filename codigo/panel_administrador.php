@@ -1,7 +1,9 @@
 
 <!doctype html>
 <html lang="en">
-
+		<?php
+			session_start();
+		?>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
 	<title>Panel de Administrador | Gestor de tiempo</title>
@@ -54,7 +56,6 @@
 <body>
 
 <?php
-    session_start();
     include_once("./clases/Includephp.php");
 	//Idioma
 	require('language.php'); 
@@ -154,15 +155,28 @@
 			<table class="tablesorter" cellspacing="0"> 
 			<tbody> 
 			<!-- codigo php para crear una tabla-->
+			<tr>
+				<td><?php echo __('<b>Username</b>', $lang) ?></td>
+				<td><?php echo __('<b>Offer name</b>', $lang) ?></td>
+				<td><?php echo __('<b>Start time</b>', $lang) ?></td>
+				<td><?php echo __('<b>Finish time</b>', $lang) ?></td>
+				<td><?php echo __('<b>Description</b>', $lang) ?></td>
+			</tr>
+			
 			<?php 
-				for($i =0; $i<5; $i++){ ?>
-				 <tr> 
-    				<td><?php echo __('Title offer', $lang) ?><?php echo $i+1;?></td> 
-    				<td><?php echo __('Category', $lang) ?> <?php echo $i+1?></td> 
-    				<td><?php echo __('Something more', $lang) ?> <?php echo $i+1 ?></td> 
-				</tr><?php ;
-				}
-			?> 
+				$oferta = Controlador::listarOfertaPopulares($nom);
+				foreach ($oferta as $temp) {
+			?>
+                <tr>   
+                    <td><?php echo $temp["email"] ?></td>   
+                    <td><?php echo $temp["nombreoferta"] ?></td>   
+                    <td><?php echo $temp["horarioinicio"] ?></td>   
+                    <td><?php echo $temp["horariofin"] ?></td>   
+                    <td><?php echo $temp["descripcionoferta"] ?></td>					
+                </tr>
+            <?php
+            }
+			?>
 				
 			</tbody> 
 			</table>
