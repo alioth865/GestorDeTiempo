@@ -54,6 +54,15 @@
         <?php
         session_start();
         include_once("./clases/Includephp.php");
+	if(isset($_GET['ismail'])){
+		$ismail = $_GET['ismail'];
+	}else{
+		$ismail = 3;
+	}
+	
+	if(isset($_GET['valor'])){
+		$valor = $_GET['valor'];
+	}
         //Idioma
         require('language.php');
         $lang = $_GET['lang'];
@@ -139,16 +148,42 @@
                                 <!-- codigo php para crear una tabla-->
 
                                 <tr>
-<?php $urlPanel = "eliminar_oferta_encontrada.php?lang=" . $lang ?>
-                            <form action="<?php echo $urlPanel ?>" method="POST">
-                                <td><input type="text" name="nombre" value=<?php echo __('Offerid...', $lang) ?> onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
-                                <td><input type="submit" name="buscar" value=<?php echo __('Search', $lang) ?>></td></form>
+
+                            <form action="filtro.php?lang=<?php echo $lang ?>" method="POST">
+                                <td><input type="text" name="filtro" value="<?php echo __('Offerid', $lang).' '.__('or', $lang).' '.__('email', $lang) ?>" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
+                                <td><input type="submit" value="<?php echo __('Filter', $lang) ?>" ></td></form>
 
                             </tr>
-                            <tr>
-                                <td><?php echo "nombre de oferta encontrada" ?></td>
-                                <td><input type="button" name="eliminar" value=<?php echo __('Remove', $lang) ?> onClick="window.location.href='#'"></td>
-                            </tr>
+				<!-- aqui se empezara a comprobar segun lo que haya... -->
+			<?php
+				if($ismail != 3){
+					if($ismail == 1 ){
+						$ofertas = Controlador::listarMisOfertas($valor);
+						if(count($ofertas) != 0 ){
+							foreach($ofertas as $oferta){
+					?>
+						<tr>
+				                <td><?php echo $oferta['nombreoferta'] ?></td>
+<td><input type="button" name="eliminar" value="<?php echo __('Remove', $lang) ?>" onClick="window.location.href='borrar_oferta_encontrada_controlador.php?lang=<?php echo $lang ?>&id=<?php echo $oferta['idoferta']  ?>&valor=<?php $valor ?>&ismail=<?php echo $ismail?>'"></td>
+                            			</tr>
+					<?php
+							}//cierre foreach
+						}//cierre ifcount
+					}else{
+						/*recibimos el id de una oferta*/
+						$oferta = Controlador::SeleccionarOferta($valor); ?>
+						<?php if($oferta != NULL){ ?>
+						<tr>
+				                <td><?php echo $oferta->getnombreoferta() ?></td>
+				                <td><input type="button" name="eliminar" value="<?php echo __('Remove', $lang) ?>" onClick="window.location.href='borrar_oferta_encontrada_controlador.php?lang=<?php echo $lang ?>&id=<?php echo $oferta->getIdOferta() ?>&valor=<?php $valor ?>&ismail=<?php echo $ismail?>'"></td>
+                            			</tr>
+					<?php }//cierre if($oferta != 0)
+					else{ ?> <tr><td><h4>No hay ofertas con el id: <?php echo $valor ?></h4></td><td></td></tr><?php }
+					}
+			?>
+
+			<?php }//cierre if ?>
+			<!-- fIN DE COMPROBACIONES. -->
                             </tbody> 
                         </table>
                     </div><!-- fin de la tabla ofertas populares -->
