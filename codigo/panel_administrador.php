@@ -126,7 +126,7 @@
 
                 <li class="icn_gestion_usuarios"><a href ="gestion_usuario.php?lang=<?php echo $lang; ?>"><?php echo __('User management', $lang) ?></a></li>
 
-                <li class="icn_eliminar_oferta"><a href ="eliminar_oferta.php?lang=<?php echo $lang; ?>"><?php echo __('Delete deals', $lang) ?></a></li>
+                <li class="icn_eliminar_oferta"><a href ="eliminar_oferta_encontrada.php?lang=<?php echo $lang; ?>"><?php echo __('Delete deals', $lang) ?></a></li>
 
                 <li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
 
