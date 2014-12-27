@@ -103,6 +103,7 @@ class GestorBaseDatos {
         $this->conect();
         $sql = "SELECT * FROM `Oferta` WHERE `email`='$email'";
         $result = mysql_query($sql);
+	$toRet = NULL;
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
             $toRet[$linea["idoferta"]] = $linea;
