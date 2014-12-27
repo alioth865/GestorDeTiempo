@@ -1,178 +1,175 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
-	<title>Valoración | Gestor de tiempo</title>
-	
-	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
-	<!--[if lt IE 9]>
-	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	<script src="js/jquery-1.5.2.min.js" type="text/javascript"></script>
-	<script src="js/hideshow.js" type="text/javascript"></script>
-	<script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/jquery.equalHeight.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function() 
-    	{ 
-      	  $(".tablesorter").tablesorter(); 
-   	 } 
-	);
-	$(document).ready(function() {
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
+        <title>Valoración | Gestor de tiempo</title>
 
-	//When page loads...
-	$(".tab_content").hide(); //Hide all content
-	$("ul.tabs li:first").addClass("active").show(); //Activate first tab
-	$(".tab_content:first").show(); //Show first tab content
+        <link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
+        <!--[if lt IE 9]>
+        <link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <script src="js/jquery-1.5.2.min.js" type="text/javascript"></script>
+        <script src="js/hideshow.js" type="text/javascript"></script>
+        <script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/jquery.equalHeight.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function ()
+            {
+                $(".tablesorter").tablesorter();
+            }
+            );
+            $(document).ready(function () {
 
-	//On Click Event
-	$("ul.tabs li").click(function() {
+                //When page loads...
+                $(".tab_content").hide(); //Hide all content
+                $("ul.tabs li:first").addClass("active").show(); //Activate first tab
+                $(".tab_content:first").show(); //Show first tab content
 
-		$("ul.tabs li").removeClass("active"); //Remove any "active" class
-		$(this).addClass("active"); //Add "active" class to selected tab
-		$(".tab_content").hide(); //Hide all tab content
+                //On Click Event
+                $("ul.tabs li").click(function () {
 
-		var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
-		$(activeTab).fadeIn(); //Fade in the active ID content
-		return false;
-	});
+                    $("ul.tabs li").removeClass("active"); //Remove any "active" class
+                    $(this).addClass("active"); //Add "active" class to selected tab
+                    $(".tab_content").hide(); //Hide all tab content
 
-});
-    </script>
-    <script type="text/javascript">
-    $(function(){
-        $('.column').equalHeight();
-    });
-</script>
+                    var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
+                    $(activeTab).fadeIn(); //Fade in the active ID content
+                    return false;
+                });
 
-</head>
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('.column').equalHeight();
+            });
+        </script>
 
-
-<body>
+    </head>
 
 
+    <body>
+
+
+        <?php
+        session_start();
+        $nombre = $_GET['n'];
+        $id = $_GET['id'];
+        include_once("./clases/Includephp.php");
+        //Idioma
+        require('language.php');
+        $lang = $_GET['lang'];
+        if (isset($_GET['lang'])) {
+            $lang = $_GET['lang'];
+        }
+        $nom = $_SESSION['email'];
+        $lcat = Controlador::ListarCategoria();
+        ?>
+        <header id="header">
+            <hgroup>
+                <h1 class="site_title"><?php echo __('Valuation', $lang) ?></h1>
+                <h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
+            </hgroup>
+        </header> <!-- end of header bar -->
+
+        <section id="secondary_bar">
+            <div class="user">
+                <p><?php echo $nom ?></p>
+                <!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+            </div>
+            <div class="breadcrumbs_container">
+                <article class="breadcrumbs">
+                    <a href="panel.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
+                    <div class="breadcrumb_divider"></div>
+                    <a class="current"><?php echo __('Rate', $lang) ?></a>
+                    <div class="breadcrumb_divider"></div>
+                    <a class="current"><?php echo __('Valuation', $lang) ?></a>
+                </article>
+
+                </article>
+            </div>
+        </section><!-- end of secondary bar -->
+
+        <aside id="sidebar" class="column">
+            <form class="quick_search" method="POST" action="panelbusqueda.php?lang=<?php echo $lang; ?>" >
+                <table>
+                    <tr>
+                        <td><input name="buscatext" type="text" value=""></td>
+                        <td><select name="busqueda" style="width:60%;">
+                                <option value="NULL"><?php echo __('Selects a category', $lang) ?></option>
+                                <?php
+                                foreach ($lcat as $lineacat) {
+                                    ?>
+
+                                    <option value="<?php echo $lineacat["idcategoria"] ?>"><?php echo $lineacat["nombrecategoria"] ?></option>
+
+                                    <?php
+                                }
+                                ?>
+                            </select></td>
+                        <td><input type="submit" value="Enviar" name="enviar"> </td>
+                    </tr>
+                </table>										
+            </form>
+            <hr/>
+            <h3><?php echo __('Options', $lang) ?></h3>
+            <ul class="toggle"><!--Opciones-->
+
+
+                <li class="icn_jump_back"><a href ="javascript:history.back()"><?php echo __('Back', $lang) ?></a></li>
+
+                <li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
 <?php
-    session_start();
-    $nombre = $_GET['n'];
-    $id =$_GET['id'];
-    include_once("./clases/Includephp.php");
-	//Idioma
-	require('language.php'); 
-	$lang = $_GET['lang'];
-	if ( isset($_GET['lang']) ){
-		$lang = $_GET['lang'];
-	}
-	$nom=$_SESSION['email'];
-	$lcat = Controlador::ListarCategoria();
 ?>
-	<header id="header">
-		<hgroup>
-			<h1 class="site_title"><?php echo __('Valuation', $lang) ?></h1>
-			<h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
-		</hgroup>
-	</header> <!-- end of header bar -->
-	
-	<section id="secondary_bar">
-		<div class="user">
-			<p><?php echo $nom ?></p>
-			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
-		</div>
-		<div class="breadcrumbs_container">
-			<article class="breadcrumbs">
-			<a href="panel.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
-			<div class="breadcrumb_divider"></div>
-			<a class="current"><?php echo __('Rate', $lang) ?></a>
-			<div class="breadcrumb_divider"></div>
-			<a class="current"><?php echo __('Valuation', $lang) ?></a>
-			</article>
+                <li class="icono_gb"><a href="valoracion.php?lang=en&id=<?php echo $id ?>&n=<?php echo $nombre ?>">  Ingles</a></li>
+                <li class="icono_es"><a href="valoracion.php?lang=es&id=<?php echo $id ?>&n=<?php echo $nombre ?>">  Castellano</a></li>
 
-			</article>
-		</div>
-	</section><!-- end of secondary bar -->
-	
-	<aside id="sidebar" class="column">
-		<form class="quick_search" method="post" action="panelbusqueda.php?lang=<?php echo $lang; ?>" >
-			<table>
-				<tr>
-					<td><input name="buscatext" type="text" value=""></td>
-					<td><select name="busqueda" style="width:60%;">
-								<option><?php echo __('Selects a category', $lang) ?></option>
-					 <?php
-					  		       
-						foreach ($lcat as $lineacat) {
-              		  ?>
-               		
-                    <option><?php echo $lineacat["nombrecategoria"] ?></option>
-
-                <?php
-            		
-       				 }
-       			 ?>
-						</select></td>
-					<td><input type="submit" value="Enviar" name="enviar"> </td>
-				</tr>
-			</table>										
-		</form>
-		<hr/>
-		<h3><?php echo __('Options', $lang) ?></h3>
-		<ul class="toggle"><!--Opciones-->
+            </ul><!--fin opciones-->
 
 
-			<li class="icn_jump_back"><a href ="javascript:history.back()"><?php echo __('Back', $lang) ?></a></li>
-		
-			<li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
-			<?php 
-				
-			?>
-			<li class="icono_gb"><a href="valoracion.php?lang=en&id=<?php echo $id ?>&n=<?php echo $nombre ?>">  Ingles</a></li>
-			<li class="icono_es"><a href="valoracion.php?lang=es&id=<?php echo $id ?>&n=<?php echo $nombre ?>">  Castellano</a></li>
+            <footer>
+                <hr />
+                <p><strong>Copyright &copy; 2014 Interfaces de usuario@esei </strong></p>
+            </footer>
+        </aside><!-- end of sidebar -->
 
-		</ul><!--fin opciones-->
+        <section id="main" class="column">
+            <article class="module width_full">
+                <header><h3><?php echo __('Valuation', $lang) ?></h3></header>
+                <div class="module_content">
+                    <fieldset>
 
-		
-		<footer>
-			<hr />
-			<p><strong>Copyright &copy; 2014 Interfaces de usuario@esei </strong></p>
-		</footer>
-	</aside><!-- end of sidebar -->
-	
-	<section id="main" class="column">
-		<article class="module width_full">
-			<header><h3><?php echo __('Valuation', $lang) ?></h3></header>
-				<div class="module_content">
-						<fieldset>
-						
-						<label><h4>Oferta: <?php echo $nombre ?></h4></label>
-						</fieldset>
-		<form name="valoracion" method="POST" action="valoracion_controlador.php?lang=<?php echo $lang ?>&id=<?php echo $id ?>"> 
-						<fieldset>
-							<label><?php echo __('Score', $lang) ?> : </label>
-							<select name="puntuacion">
-							<?php for($i =0; $i<10; $i++){ ?>
-									 	<option value="<?php echo $i+1 ?>"><?php echo $i+1 ?></option>
-									<?php } ?> 
-							</select>
-					
-						</fieldset>
-						<fieldset>
-							<label><?php echo __('Opinion', $lang) ?></label>
-							<textarea rows="12" name="opinion"></textarea>
-						</fieldset>
-						
-				</div>
-			<footer>
-				<div class="submit_link">
-					<input type="submit" value="<?php echo __('Rate', $lang) ?>" / >
-					<input type="button" value="<?php echo __('Back', $lang) ?>" onClick ="window.location.href='historial.php?lang='<?php echo $lang ?>'"></form>
-				</div>
-			</footer>
-		</article><!-- end of post new article -->
-		
-	</section>
+                        <label><h4>Oferta: <?php echo $nombre ?></h4></label>
+                    </fieldset>
+                    <form name="valoracion" method="POST" action="valoracion_controlador.php?lang=<?php echo $lang ?>&id=<?php echo $id ?>"> 
+                        <fieldset>
+                            <label><?php echo __('Score', $lang) ?> : </label>
+                            <select name="puntuacion">
+<?php for ($i = 0; $i < 10; $i++) { ?>
+                                    <option value="<?php echo $i + 1 ?>"><?php echo $i + 1 ?></option>
+                                <?php } ?> 
+                            </select>
+
+                        </fieldset>
+                        <fieldset>
+                            <label><?php echo __('Opinion', $lang) ?></label>
+                            <textarea rows="12" name="opinion"></textarea>
+                        </fieldset>
+
+                </div>
+                <footer>
+                    <div class="submit_link">
+                        <input type="submit" value="<?php echo __('Rate', $lang) ?>" / >
+                               <input type="button" value="<?php echo __('Back', $lang) ?>" onClick ="window.location.href = 'historial.php?lang='<?php echo $lang ?>'"></form>
+                    </div>
+                </footer>
+            </article><!-- end of post new article -->
+
+        </section>
 
 
-</body>
+    </body>
 
 </html>

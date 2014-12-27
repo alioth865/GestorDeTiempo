@@ -55,6 +55,12 @@ class Controlador {
         $bd = new GestorBaseDatos();
         return $bd->eliminarDemandaEspecifica($iddemanda);
     }
+    
+    public function crearDemanda($email,$idofertasintercambio, $idoferta){
+        $d=new Demanda(NULL, $idoferta, $email, $idofertasintercambio);
+        $bd = new GestorBaseDatos();
+        return $bd->crearDemanda($d);
+    }
 
     //Busqueda
     public function ListarCategoriaId($nombrecategoria) {

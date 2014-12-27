@@ -1,12 +1,19 @@
+
+
 <!doctype html>
 <html lang="en">
+
     <?php
-    include_once("./clases/Includephp.php");
+    include_once ("./clases/Includephp.php");
     session_start();
+    if (!isset($_SESSION["objUsu"])) {
+        header('Location: index.php?lang=' . $_POST["lang"]);
+    }
     ?>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8_spanish_ci" />
-        <title>Perfil | Gestor de tiempo</title>
+        <title>Panel de Administrador | Gestor de Usuario</title>
 
         <link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
         <!--[if lt IE 9]>
@@ -66,7 +73,7 @@
         ?>
         <header id="header">
             <hgroup>
-                <h1 class="site_title"><?php echo __('Profile', $lang) ?></h1>
+                <h1 class="site_title"><?php echo __('Users management', $lang) ?></h1>
                 <h2 class="section_title"><?php echo __('Time Bank', $lang) ?></h2>
             </hgroup>
         </header> <!-- end of header bar -->
@@ -80,7 +87,7 @@
                 <article class="breadcrumbs">
                     <a href="panel.php?lang=<?php echo $lang; ?>"><?php echo __('Index', $lang) ?></a>
                     <div class="breadcrumb_divider"></div>
-                    <a class="current"><?php echo __('Profile', $lang) ?></a>
+                    <a class="current"><?php echo __('Users management', $lang) ?></a>
                 </article>
             </div>
         </section><!-- end of secondary bar -->
@@ -111,12 +118,12 @@
             <ul class="toggle"><!--Opciones-->
 
 
+
                 <li class="icn_jump_back"><a href ="javascript:history.back()"><?php echo __('Back', $lang) ?></a></li>
 
                 <li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
 
-                <li class="icono_gb"><a href="perfil.php?lang=en">  Ingles</a></li>
-                <li class="icono_es"><a href="perfil.php?lang=es">  Castellano</a></li>
+
 
             </ul><!--fin opciones-->
 
@@ -129,81 +136,43 @@
 
         <section id="main" class="column">
             <article class="module width_full">
-                <header><h3><?php echo __('Profile', $lang) ?></h3></header>
+                <header><h3><?php echo __('Demand', $lang) ?></h3></header>
                 <div class="module_content">
-                    <!--tabla-->
+                    <!--tabla ofertas populares-->
 
                     <div style="display: block;" id="tab1" class="tab_content">
-                        <table class="tablesorter" cellspacing="0"> 
-                            <tbody> 
-                                <tr><?php
-                                    $usuario = Controlador::verPerfil($_SESSION["objUsu"]->getEmail());
-                                    ?>
-                                    <td><?php echo __('Name', $lang) ?></td>
-                                    <td><input type="text" name="nombre" value="<?php echo $usuario->getNombre(); ?>"></td>
 
-                                </tr>
+                        <?php
+                        $idofertasintercambio = $_GET['ofertassel'];
+//echo $_SESSION["objUsu"]->getEmail();
+//echo $idofertasintercambio;
+//echo $_GET['idoferta'];
 
-                                <tr>
-                                    <td><?php echo __('Phone', $lang) ?></td>
-                                    <td><input type="text" name="horario"value=<?php
-                                        echo $usuario->getTelefono();
-                                        ?>></td>
-
-                                </tr>
-
-                                <tr>
-                                    <td><?php echo __('E-mail', $lang) ?></td>
-                                    <td><input type="text" name="nombre"value=<?php
-                                        echo $usuario->getEmail();
-                                        ?>></td>
-
-                                </tr>
-
-                                <tr>
-                                    <td><?php echo __('Offered hours', $lang) ?></td>
-                                    <td><input type="text" name="nombre"value=<?php
-                                        echo $usuario->getHorasOfertadas();
-                                        ?>></td>
-
-                                </tr>
-
-                                <tr>
-                                    <td><?php echo __('Hours defendants', $lang) ?></td>
-                                    <td><input type="text" name="nombre"value=<?php
-                                        echo $usuario->getHorasDemandadas();
-                                        ?>></td>
-
-                                </tr>
-
-                                <tr>
-                                    <td><?php echo __('Rating', $lang) ?></td>
-                                    <td><input type="text" name="nombre"value=<?php
-                                        echo $usuario->getValoracion();
-                                        ?>></td>
-
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <input type="submit" value=<?php echo __('Modify', $lang) ?> onclick="window.location.href='modificar_perfil.php?lang=<?php echo $lang; ?>'">
-
-                                    </td>
-                                </tr>
+                        Controlador::crearDemanda($_SESSION["objUsu"]->getEmail(), $idofertasintercambio, $_GET['idoferta']);
+                        ?>   
+                        <h1> <?php echo __('Demand made!', $lang) ?> </h1><?php
+                        if ($_SESSION["objUsu"]->getTipoUsuario() == 1) {
+                            ?>                            
+                            <meta http-equiv="refresh" content="5; url='panel_administrador.php?lang=<?php echo $lang; ?>'" /> <!-- Espera 10 segundos y regresa solo -->
+                            <?php
+                        } else {
+                            ?>                            
+                            <meta http-equiv="refresh" content="5; url='panel_usuario.php?lang=<?php echo $lang; ?>'" /> <!-- Espera 10 segundos y regresa solo -->
+                            <?php
+                        }
+                        ?>
 
 
-                            </tbody> 
-                        </table>
-
-                        <!-- fin de la tabla  -->
-
-                        </article><!-- end of styles article -->
+                        <!-- <a href="gestion_usuario.php"> Regresar a lista de Usuarios </a> -->
 
 
-                        </section>
+                    </div><!-- fin de la tabla ofertas populares -->
+
+            </article><!-- end of styles article -->
+            <div class="spacer"></div>
+        </section>
 
 
-                        </body>
+    </body>
 
-                        </html>
-
+</html>

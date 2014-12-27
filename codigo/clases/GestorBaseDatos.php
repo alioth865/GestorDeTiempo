@@ -522,7 +522,7 @@ class GestorBaseDatos {
             }
             return $toRet;
         } else {
-            $sql = "SELECT * FROM  `Oferta` WHERE  `nombreoferta` LIKE  '%" . $patrondebusqueda . "%' AND  `idcategoria` =" . $idcategoria;
+            $sql = "SELECT * FROM  `Oferta` WHERE  `nombreoferta` LIKE  '%" . $patrondebusqueda . "%' AND  `idcategoria` ='" . $idcategoria."'";
             //print("<br>" . $sql . "<br>");
             $toRet = NULL;
             $result = mysql_query($sql);
@@ -532,5 +532,6 @@ class GestorBaseDatos {
             return $toRet;
         }
     }
+    
 
 }

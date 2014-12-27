@@ -59,17 +59,16 @@
 
     <body>
 
-<?php
-    
-    //Idioma
-    require('language.php'); 
-    $lang = $_GET['lang'];
-    if ( isset($_GET['lang']) ){
+        <?php
+        //Idioma
+        require('language.php');
         $lang = $_GET['lang'];
-    }
-    $nom=$_SESSION['email'];
-    $lcat = Controlador::ListarCategoria();
-?>
+        if (isset($_GET['lang'])) {
+            $lang = $_GET['lang'];
+        }
+        $nom = $_SESSION['email'];
+        $lcat = Controlador::ListarCategoria();
+        ?>
         <header id="header">
             <hgroup>
                 <h1 class="site_title"><?php echo __('My Demands', $lang) ?></h1>
@@ -92,28 +91,26 @@
         </section><!-- end of secondary bar -->
 
         <aside id="sidebar" class="column">
-            <form class="quick_search" method="post" action="panelbusqueda.php?lang=<?php echo $lang; ?>" >
-            <table>
-                <tr>
-                    <td><input name="buscatext" type="text" value=""></td>
-                    <td><select name="busqueda" style="width:60%;">
-                                <option><?php echo __('Selects a category', $lang) ?></option>
-                     <?php
-                                   
-                        foreach ($lcat as $lineacat) {
-                      ?>
-                    
-                    <option><?php echo $lineacat["nombrecategoria"] ?></option>
+            <form class="quick_search" method="POST" action="panelbusqueda.php?lang=<?php echo $lang; ?>" >
+                <table>
+                    <tr>
+                        <td><input name="buscatext" type="text" value=""></td>
+                        <td><select name="busqueda" style="width:60%;">
+                                <option value="NULL"><?php echo __('Selects a category', $lang) ?></option>
+                                <?php
+                                foreach ($lcat as $lineacat) {
+                                    ?>
 
-                <?php
-                    
-                     }
-                 ?>
-                        </select></td>
-                    <td><input type="submit" value="Enviar" name="enviar"> </td>
-                </tr>
-            </table>                                        
-        </form>
+                                    <option value="<?php echo $lineacat["idcategoria"] ?>"><?php echo $lineacat["nombrecategoria"] ?></option>
+
+                                    <?php
+                                }
+                                ?>
+                            </select></td>
+                        <td><input type="submit" value="Enviar" name="enviar"> </td>
+                    </tr>
+                </table>										
+            </form>
             <hr/>
             <h3><?php echo __('Options', $lang) ?></h3>
             <ul class="toggle"><!--Opciones-->
@@ -146,11 +143,11 @@
                         <table class="tablesorter" cellspacing="0"> 
                             <tbody> 
                                 <!-- codigo php para crear una tabla-->
-                                <?php
-                                $demandas = Controlador::listarDemandas($_SESSION["objUsu"]->getEmail());
-                                if ($demandas != NULL) {
-                                    foreach ($demandas as $dem) {
-                                        ?>
+<?php
+$demandas = Controlador::listarDemandas($_SESSION["objUsu"]->getEmail());
+if ($demandas != NULL) {
+    foreach ($demandas as $dem) {
+        ?>
                                         <tr> 
 
                                             <td><?php echo $dem["nombreoferta"]; ?></td> 
@@ -158,9 +155,9 @@
                                             <td><input type="button" name="ver" value="<?php echo __('See', $lang) ?>" onClick="window.location.href = 'ver_demanda.php?lang=<?php echo $lang; ?>&iddemanda=<?php echo $dem["iddemanda"]; ?>&idoferta=<?php echo $dem["idoferta"]; ?>&emaildemandante=<?php echo $dem["email"]; ?>&idoferta=<?php echo $dem["idoferta"]; ?>'"></td> 
 
                                         </tr><?php
-                                    }
-                                }
-                                ?> 
+                            }
+                        }
+?> 
 
                             </tbody> 
                         </table>
