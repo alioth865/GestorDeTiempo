@@ -29,43 +29,56 @@ class Controlador {
         $bd = new GestorBaseDatos();
         return $bd->listarNotificacion($email);
     }
-    
-    public function verDemandaEspecifica($iddemanda){
+
+    public function verDemandaEspecifica($iddemanda) {
         $bd = new GestorBaseDatos();
-                
+
         return $bd->verDemandaEspecifica($iddemanda);
     }
 
-    public function verOfertasIntercambio($idofertasintercambio){
+    public function verOfertasIntercambio($idofertasintercambio) {
         $bd = new GestorBaseDatos();
         return $bd->verOfertasIntercambio($idofertasintercambio);
     }
-    
-    public function crearDemandaSatisfecha($email, $idoferta, $valoracion, $descripciondevaloracion, $fecha, $iddemandasatisfecha){
+
+    public function crearDemandaSatisfecha($email, $idoferta, $valoracion, $descripciondevaloracion, $fecha, $iddemandasatisfecha) {
         $bd = new GestorBaseDatos();
         return $bd->crearDemandaSatisfecha(new Historial($email, $idoferta, $valoracion, $descripciondevaloracion, $fecha, $iddemandasatisfecha));
     }
-    
-    public function crearNotificacion($email,$idnotidicacion,$idoferta,$respuesta){
+
+    public function crearNotificacion($email, $idnotidicacion, $idoferta, $respuesta) {
         $bd = new GestorBaseDatos();
-        return $bd->nuevaNotificacion($email,$idnotidicacion,$idoferta,$respuesta);
+        return $bd->nuevaNotificacion($email, $idnotidicacion, $idoferta, $respuesta);
     }
-    
-    public function eliminarDemanda($iddemanda){
+
+    public function eliminarDemanda($iddemanda) {
         $bd = new GestorBaseDatos();
         return $bd->eliminarDemandaEspecifica($iddemanda);
     }
+
     //Busqueda
     public function ListarCategoriaId($nombrecategoria) {
         $c = new GestorBaseDatos();
         $lc = $c->ListarCategoriaId($nombrecategoria);
         return $lc;
     }
+
     public function ListarCategoriaNo($idcategoria) {
         $c = new GestorBaseDatos();
         $lc = $c->ListarCategoriaNo($idcategoria);
         return $lc;
     }
+    
+    public function buscarOfertaSegunPatron($idcategoria,$patrondebusqueda){
+        //ESTA FUNCION FUNCIONA PASANDOLE UN IDCATEGORIA SI QUIERES BUSCAR SEGUN UNA CATEGORIA O PASANDOLE NULL SI QUIERES BUSCAR SIN NINGUN FILTRO DE CATEGORIA
+        
+        $c = new GestorBaseDatos();
+        $lo=$c->buscarOfertaSegunPatron($idcategoria,$patrondebusqueda);
+        return $lo;
+    }
+
+
+    //Busqueda
 
 //ALBA
     public function registrarUsuario($email, $nombre, $contraseña, $ho, $hd, $valoracion, $telefono) {
@@ -93,16 +106,17 @@ class Controlador {
         $modUs = $c->ModificarPerfil($email, $contraseñaencryptada, $telefono, $nombre); //*devuelve si o no si se a modificado correctamente*/ 
         return $modUs;
     }
-    //Busqueda
-/*
-    public function ModificarOferta($email) {
 
-        $c = new GestorBaseDatos();
-        $om = $c->verPerfil($email);
-        return $om;
-    }
+    /*
+      public function ModificarOferta($email) {
 
-*/
+      $c = new GestorBaseDatos();
+      $om = $c->verPerfil($email);
+      return $om;
+      }
+
+     */
+
     public function ModificarOfertaSeleccionada($idOferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idCategoria) {
         $c = new GestorBaseDatos();
         $os = $c->updateOferta($idOferta, $nombre, $horarioinicio, $horariofin, $descripcion, $idCategoria);

@@ -72,12 +72,13 @@ class GestorBaseDatos {
         }
         return $toRet;
     }
+
 //Busqueda
     function listarCategoriaId($nombrecategoria) {
         $this->conect();
         //Esta funcion devuelve un array asociativo de todas las categorias
         $sql = "SELECT `idcategoria` FROM `Categoria` WHERE `nombrecategoria`='$nombrecategoria'";
-        $id=mysql_query($sql);
+        $id = mysql_query($sql);
         $row = mysql_fetch_row($id);
         return $row[0];
     }
@@ -86,7 +87,7 @@ class GestorBaseDatos {
         $this->conect();
         //Esta funcion devuelve un array asociativo de todas las categorias
         $sql = "SELECT `nombrecategoria` FROM `Categoria` WHERE `idcategoria`='$idcategoria'";
-        $id=mysql_query($sql);
+        $id = mysql_query($sql);
         $row = mysql_fetch_row($id);
         return $row[0];
     }
@@ -134,14 +135,13 @@ class GestorBaseDatos {
         $this->conect();
         $sql = " SELECT * FROM `Oferta` WHERE `idcategoria`='$idcategoria' ";
         //print $sql;
-        $toRet=NULL;
+        $toRet = NULL;
         $result = mysql_query($sql);
-       	while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
-        //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
-        $toRet[$linea["idoferta"]] = $linea;
+        while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+            //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
+            $toRet[$linea["idoferta"]] = $linea;
         }
-       	return $toRet;
-       	
+        return $toRet;
     }
 
     public function crearOferta($o) {
@@ -240,7 +240,7 @@ class GestorBaseDatos {
         $this->conect();
         $sql = "SELECT * FROM `DemandaSatisfecha` WHERE `email`='$email'";
         $result = mysql_query($sql);
-    $toRet=NULL;
+        $toRet = NULL;
         while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
             //$toRet[$linea["idcategoria"]] = new Categoria($linea["idcategoria"], $linea["nombrecategoria"]);
             $toRet[$linea['iddemandasatisfecha']] = $linea;
@@ -369,7 +369,6 @@ class GestorBaseDatos {
             $u = new Usuario($linea["email"], $linea["codtipusu"], $linea["nombre"], $linea["telefono"], $linea["contraseña"], $linea["horasdemandadas"], $linea["horasofertadas"], $linea["valoracion"]);
             $toRet[$linea["email"]] = $u;
         }
-
         return $toRet;
     }
 
@@ -510,6 +509,28 @@ class GestorBaseDatos {
             return mysql_error();
         else
             return true;
+    }
+
+    public function buscarOfertaSegunPatron($idcategoria, $patrondebusqueda) {
+        if ($idcategoria == NULL) {
+            $sql = "SELECT * 	FROM  `Oferta` WHERE  `nombreoferta` LIKE  '%" . $patrondebusqueda . "%'";
+            //print("<br>" . $sql . "<br>");
+            $toRet = NULL;
+            $result = mysql_query($sql);
+            while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+                $toRet[$linea["idoferta"]] = $linea;
+            }
+            return $toRet;
+        } else {
+            $sql = "SELECT * FROM  `Oferta` WHERE  `nombreoferta` LIKE  '%" . $patrondebusqueda . "%' AND  `idcategoria` =" . $idcategoria;
+            //print("<br>" . $sql . "<br>");
+            $toRet = NULL;
+            $result = mysql_query($sql);
+            while ($linea = mysql_fetch_array($result, MYSQL_ASSOC)) {
+                $toRet[$linea["idoferta"]] = $linea;
+            }
+            return $toRet;
+        }
     }
 
 }

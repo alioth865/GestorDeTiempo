@@ -177,7 +177,7 @@ and open the template in the editor.
         ?>
         <hr style="color: #0056b2;" />
         <?php
-        echo "SELECCIONAR OFERTA <br>";
+  /*      echo "SELECCIONAR OFERTA <br>";
         $oferta = $c->seleccionarOferta(1);
         echo "idoferta " . $oferta->getIdOferta() . "<br>";
         echo "idcategoria " . $oferta->getIdCategoria() . "<br>";
@@ -187,7 +187,7 @@ and open the template in the editor.
         echo "Hora F " . $oferta->getHorarioFin() . "<br>";
         echo "Descripcion " . $oferta->getDescripcion() . "<br>";
         echo "Valoracion " . $oferta->getValoracion() . "<br>";
-        ?>
+      */  ?>
         <hr style="color: #0056b2;" />
         <?php
         echo "VER ESTADISTICA DE VALORACION <br>";
@@ -196,7 +196,7 @@ and open the template in the editor.
         <hr style="color: #0056b2;" />
         <?php
         echo "Actualizar Oferta <br>";
-        $c->updateOfertaSeleccionada(89, "A", "A", "A", "A", "A");
+      //  $c->updateOfertaSeleccionada(89, "A", "A", "A", "A", "A");
         ?>
         <hr style="color: #0056b2;" />
         <?php
@@ -204,6 +204,70 @@ and open the template in the editor.
         $c->modificarPerfil("alioth865@yahoo.com", "aliothsin865", "699699699", "JUAN PITO");
         Controlador::eliminarUsuario("pepito@yahoo.com");
         ?>
+        
+        <hr style="color: #0056b2;" />
+        <?php
+        echo 'BUSCAR UN OFERTA SIN ESPECIFICAR CATEGORIA';
+        $ofertas = Controlador::buscarOfertaSegunPatron(NULL,"lim");
+        ?>
+        <table width="745"  border=1>
+            <tr>
+                <th >ID OFERTA</th>
+                <th >ID CATEGORIA</th>  
+                <th>Email</th>
+                <th>Nombre oferta</th>
+                <th>Horario inicio</th>
+                <th>Horario fin</th>
+                <th>Descripcion Oferta</th>
+            </tr>
+            <?php
+            foreach ($ofertas as $temp) {
+                ?>  
+                <tr>
+                    <td><?php echo $temp["idcategoria"] ?></td>   
+                    <td><?php echo $temp["idoferta"] ?></td>   
+                    <td><?php echo $temp["email"] ?></td>   
+                    <td><?php echo $temp["nombreoferta"] ?></td>   
+                    <td><?php echo $temp["horarioinicio"] ?></td>   
+                    <td><?php echo $temp["horariofin"] ?></td>   
+                    <td><?php echo $temp["descripcionoferta"] ?></td>   
+                </tr>
+                <?php
+            }
+            ?>
+        </table>
+        <hr style="color: #0056b2;" />
+        <?php
+        echo 'BUSCAR UN OFERTA ESPECIFICANDO CATEGORIA';
+        $ofertas = Controlador::buscarOfertaSegunPatron("5","lim");
+        ?>
+        <table width="745"  border=1>
+            <tr>
+                <th >ID OFERTA</th>
+                <th >ID CATEGORIA</th>  
+                <th>Email</th>
+                <th>Nombre oferta</th>
+                <th>Horario inicio</th>
+                <th>Horario fin</th>
+                <th>Descripcion Oferta</th>
+            </tr>
+            <?php
+            foreach ($ofertas as $temp) {
+                ?>  
+                <tr>
+                    <td><?php echo $temp["idcategoria"] ?></td>   
+                    <td><?php echo $temp["idoferta"] ?></td>   
+                    <td><?php echo $temp["email"] ?></td>   
+                    <td><?php echo $temp["nombreoferta"] ?></td>   
+                    <td><?php echo $temp["horarioinicio"] ?></td>   
+                    <td><?php echo $temp["horariofin"] ?></td>   
+                    <td><?php echo $temp["descripcionoferta"] ?></td>   
+                </tr>
+                <?php
+            }
+            ?>
+        </table>
+        <hr style="color: #0056b2;" />
 
     </body>
 </html>

@@ -160,7 +160,7 @@
 			</tr>
 			<tr>
 				<td><?php echo __('<b>Description</b>', $lang).":";echo "	" ?></td>
-				<td><input type ="text" name="descripcion" value=<?php echo $oferta->getDescripcion()?>></td>
+				<td><input type ="text" name="descripcion" value="<?php echo $oferta->getDescripcion();?>"></td>
 			</tr>
 			<tr>
 				<td><?php echo __('<b>Category</b>', $lang).":";echo "" ?></td>
