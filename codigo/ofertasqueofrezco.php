@@ -150,7 +150,8 @@
                                 <tbody> 
                                     <?php
                                     $misofertas = Controlador::listarMisOfertas($_SESSION["objUsu"]->getEmail());
-                                    foreach ($misofertas as $temp) {
+                                    if(count($misofertas)>0){
+									foreach ($misofertas as $temp) {
                                         ?>
                                         <tr> 
                                             <td><?php echo $temp["nombreoferta"]; ?> </td> 
@@ -158,6 +159,7 @@
                                         </tr><?php
                                         ;
                                     }
+									}
                                     ?> 
 
                                 </tbody> 
