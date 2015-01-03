@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generaciÃ³n: 15-12-2014 a las 18:53:48
--- VersiÃ³n del servidor: 5.5.38
--- VersiÃ³n de PHP: 5.4.4-14+deb7u4
+-- Tiempo de generación: 27-12-2014 a las 06:25:43
+-- Versión del servidor: 5.5.38
+-- Versión de PHP: 5.4.4-14+deb7u4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,11 +14,13 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES latin1 */;
 
 --
 -- Base de datos: `bancodetiempo`
 --
+CREATE DATABASE IF NOT EXISTS `bancodetiempo` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `bancodetiempo`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `Categoria` (
   `idcategoria` int(10) NOT NULL AUTO_INCREMENT,
   `nombrecategoria` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`idcategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
@@ -46,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `Demanda` (
   PRIMARY KEY (`iddemanda`),
   KEY `email` (`email`),
   KEY `idoferta` (`idoferta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=27 ;
 
 -- --------------------------------------------------------
 
@@ -64,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `DemandaSatisfecha` (
   PRIMARY KEY (`iddemandasatisfecha`),
   KEY `email` (`email`),
   KEY `idoferta` (`idoferta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=44 ;
 
 -- --------------------------------------------------------
 
@@ -75,12 +77,12 @@ CREATE TABLE IF NOT EXISTS `DemandaSatisfecha` (
 CREATE TABLE IF NOT EXISTS `Notificacion` (
   `email` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `idnotificacion` int(10) NOT NULL AUTO_INCREMENT,
-  `iddemanda` int(10) NOT NULL,
+  `idoferta` int(10) NOT NULL,
   `respuesta` tinyint(1) NOT NULL,
   PRIMARY KEY (`idnotificacion`),
-  KEY `iddemanda` (`iddemanda`),
-  KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+  KEY `email` (`email`),
+  KEY `idoferta` (`idoferta`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=21 ;
 
 -- --------------------------------------------------------
 
@@ -100,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `Oferta` (
   PRIMARY KEY (`idoferta`),
   KEY `email` (`email`),
   KEY `idcategoria` (`idcategoria`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
@@ -128,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
   `horasofertadas` time NOT NULL,
   `valoracion` int(2) DEFAULT '0',
   `codtipusu` int(10) NOT NULL,
-  `contraseÃ±a` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `contraseña` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`email`),
   KEY `codtipusu` (`codtipusu`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -141,8 +143,8 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
 -- Filtros para la tabla `Demanda`
 --
 ALTER TABLE `Demanda`
-  ADD CONSTRAINT `Demanda_ibfk_1` FOREIGN KEY (`email`) REFERENCES `Usuario` (`email`),
-  ADD CONSTRAINT `Demanda_ibfk_2` FOREIGN KEY (`idoferta`) REFERENCES `Oferta` (`idoferta`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Demanda_ibfk_2` FOREIGN KEY (`idoferta`) REFERENCES `Oferta` (`idoferta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Demanda_ibfk_4` FOREIGN KEY (`email`) REFERENCES `Usuario` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `DemandaSatisfecha`
@@ -155,8 +157,8 @@ ALTER TABLE `DemandaSatisfecha`
 -- Filtros para la tabla `Notificacion`
 --
 ALTER TABLE `Notificacion`
-  ADD CONSTRAINT `Notificacion_ibfk_2` FOREIGN KEY (`iddemanda`) REFERENCES `Demanda` (`iddemanda`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `Notificacion_ibfk_1` FOREIGN KEY (`email`) REFERENCES `Usuario` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Notificacion_ibfk_1` FOREIGN KEY (`email`) REFERENCES `Usuario` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Notificacion_ibfk_2` FOREIGN KEY (`idoferta`) REFERENCES `Oferta` (`idoferta`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `Oferta`
@@ -174,3 +176,13 @@ ALTER TABLE `Usuario`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- Creacion de Administrador de la BBDD(necesario para conectarse a ella)
+
+GRANT USAGE ON *.* TO 'usuario'@'localhost' IDENTIFIED BY 'usuario' 
+WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0; 
+GRANT ALL PRIVILEGES ON `bancodetiempo`.* TO 'usuario'@'localhost'WITH GRANT OPTION; 
+
+
+
+

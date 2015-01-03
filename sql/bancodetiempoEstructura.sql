@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bancodetiempo`
 --
+CREATE DATABASE IF NOT EXISTS `bancodetiempo` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `bancodetiempo`;
 
 -- --------------------------------------------------------
 
@@ -174,3 +176,13 @@ ALTER TABLE `Usuario`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- Creacion de Administrador de la BBDD(necesario para conectarse a ella)
+
+GRANT USAGE ON *.* TO 'usuario'@'localhost' IDENTIFIED BY 'usuario' 
+WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0; 
+GRANT ALL PRIVILEGES ON `bancodetiempo`.* TO 'usuario'@'localhost'WITH GRANT OPTION; 
+
+
+
+
