@@ -190,7 +190,7 @@
                                     }
                                     ?>
                                     <td><input type="button" name="Realizar" value="<?php echo __('Do it', $lang) ?>" onclick="window.location.href = 'PHPrealizarDemanda.php?idoferta=<?php echo $_GET['idoferta']; ?>&ofertassel=<?php echo $idofertasintercambio; ?>&lang=<?php echo $lang; ?>'"></td>
-                                    <td><input type="button" name="Volver" value="<?php echo __('Back', $lang) ?>" onclick="#"></td>
+                                    <td><input type="button" name="Volver" value="<?php echo __('Back', $lang) ?>" onclick=""></td>
                                 </tr>
 
                             </tbody> 

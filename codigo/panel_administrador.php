@@ -165,13 +165,13 @@
                                 $oferta = Controlador::listarOfertaPopulares($nom);
                                 foreach ($oferta as $temp) {
                                     ?>
-                                    <tr>   
+                                    <p style="width:90%;" ><tr>   
                                         <td><?php echo $temp["email"] ?></td>   
                                         <td><?php echo $temp["nombreoferta"] ?></td>   
                                         <td><?php echo $temp["horarioinicio"] ?></td>   
                                         <td><?php echo $temp["horariofin"] ?></td>   
                                         <td><?php echo $temp["descripcionoferta"] ?></td>					
-                                    </tr>
+                                    </tr></p>
                                     <?php
                                 }
                                 ?>

@@ -212,7 +212,56 @@ display: block;
 width: 100%;
 height: 2px;}
 
+input[type=text] {
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+border: 1px solid #bbb;
+height: 20px;
+width: 70%;
+color: #666666;
+-webkit-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+-moz-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+text-indent: 10px;
+background-position: 10px 6px;
+float: rig;
+margin: 0 3.5%;
+}
 
+input[type=text]:focus {
+outline: none;
+border: 1px solid #77BACE;
+-webkit-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+-moz-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+color: #666666;
+}
+input[type=password] {
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+border: 1px solid #bbb;
+height: 20px;
+width: 70%;
+color: #666666;
+-webkit-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+-moz-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
+text-indent: 10px;
+background-position: 10px 6px;
+float: rig;
+margin: 0 3.5%;
+}
+
+input[type=password]:focus {
+outline: none;
+border: 1px solid #77BACE;
+-webkit-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+-moz-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
+color: #666666;
+}
 /* Search */
 
 .quick_search {
@@ -400,8 +449,10 @@ background: url(../images/historial.png) no-repeat center left;
 #sidebar p {
 color: #666666;
 padding-left: 6%;
+width: 85%;
 text-shadow: 0 1px 0 #fff;
 margin: 10px 0 0 0;}
+
 
 #sidebar a {
 color: #666666;
@@ -534,6 +585,7 @@ float: left;}
 .stats_overview p {
 margin: 0; padding: 0;
 text-align: center;
+width: 85%;
 text-transform: uppercase;
 text-shadow: 0 1px 0 #fff;
 }
@@ -895,7 +947,7 @@ border: 1px solid #77BACE;
 box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
 }
 
-fieldset select {
+select {
 width: 96%;
 margin: 0 10px;
 border: 1px solid #bbb;
@@ -903,7 +955,7 @@ height: 20px;
 color: #666666;
 }
 
-fieldset textarea {
+textarea {
 -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
 border-radius: 5px;
@@ -921,7 +973,7 @@ width: 96%;
 margin: 0 10px;
 }
 
-fieldset textarea:focus {
+textarea:focus {
 outline: none;
 border: 1px solid #77BACE;
 -webkit-box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
@@ -948,6 +1000,7 @@ text-transform: none;
 text-shadow: 0 1px 0 #fff;
 font-size: 22px;
 margin: 8px 0px;
+width: 23%;
 }
 
 #main .module_content h2 {

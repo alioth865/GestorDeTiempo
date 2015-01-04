@@ -51,9 +51,11 @@
 
 
     <body>
+
         <?php
         session_start();
         include_once("./clases/Includephp.php");
+
 	if(isset($_GET['ismail'])){
 		$ismail = $_GET['ismail'];
 	}else{
@@ -72,6 +74,7 @@
         $nom = $_SESSION['email'];
         $lcat = Controlador::ListarCategoria();
         ?>
+
         <header id="header">
             <hgroup>
                 <h1 class="site_title"><?php echo __('Remove offer', $lang) ?></h1>
@@ -118,14 +121,15 @@
             <h3><?php echo __('Options', $lang) ?></h3>
             <ul class="toggle"><!--Opciones-->
 
-                <li class="icn_eliminar_oferta"><a href ="#"><?php echo __('Remove', $lang) ?></a></li>			
+              <!--  <li class="icn_eliminar_oferta"><a href ="#"><?php echo __('Remove', $lang) ?></a></li>		-fin opciones-->	
 
                 <li class="icn_jump_back"><a href ="javascript:history.back()"><?php echo __('Back', $lang) ?></a></li>
 
                 <li class="icn_salir"><a href ="salir.php?lang=<?php echo $lang; ?>"><?php echo __('Exit', $lang) ?></a></li>
 
-                <li class="icono_gb"><a href="eliminar_oferta_encontrada.php?lang=en">  Ingles</a></li>
-                <li class="icono_es"><a href="eliminar_oferta_encontrada.php?lang=es">  Castellano</a></li>
+             <!--   <li class="icono_gb"><a href="filtro.php?lang=en?filtro=<?php echo $valor; ?>">  Ingles</a></li>
+
+                <li class="icono_es"><a href="filtro.php?lang=es">  Castellano</a></li>-->
 
             </ul><!--fin opciones-->
 
@@ -151,7 +155,8 @@
 
                             <form action="filtro.php?lang=<?php echo $lang ?>" method="POST">
                                 <td><input type="text" name="filtro" value="<?php echo __('Offerid', $lang).' '.__('or', $lang).' '.__('email', $lang) ?>" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;"></td>
-                                <td><input type="submit" value="<?php echo __('Filter', $lang) ?>" ></td></form>
+                                <td><input type="submit" value="<?php echo __('Filter', $lang) ?>" ></td>
+                            </form>
 
                             </tr>
 				<!-- aqui se empezara a comprobar segun lo que haya... -->
@@ -164,7 +169,7 @@
 					?>
 						<tr>
 				                <td><?php echo $oferta['nombreoferta'] ?></td>
-<td><input type="button" name="eliminar" value="<?php echo __('Remove', $lang) ?>" onClick="window.location.href='borrar_oferta_encontrada_controlador.php?lang=<?php echo $lang ?>&id=<?php echo $oferta['idoferta']  ?>&valor=<?php $valor ?>&ismail=<?php echo $ismail?>'"></td>
+                                <td><input type="button" name="eliminar" value="<?php echo __('Remove', $lang) ?>" onClick="window.location.href='borrar_oferta_encontrada_controlador.php?lang=<?php echo $lang ?>&id=<?php echo $oferta['idoferta']  ?>&valor=<?php $valor ?>&ismail=<?php echo $ismail?>'"></td>
                             			</tr>
 					<?php
 							}//cierre foreach

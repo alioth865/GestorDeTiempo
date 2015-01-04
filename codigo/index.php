@@ -100,11 +100,11 @@
                         <?php $urlPanel = "login_controlador.php?lang=" . $lang ?>
                         <form action="<?php echo $urlPanel ?>" method="POST" style ="margin: .5em .5em .1em .5em">
 
-                            <?php echo __('E-mail:', $lang) ?><input type="text" name="user">
+                            <?php echo __('E-mail:', $lang) ?><input type="text" name="user" required>
                             <br>
                             <br>
 
-                            <?php echo __('Password:', $lang) ?><input type="password" name="pwd">
+                            <?php echo __('Password:', $lang) ?><input type="password" name="pwd" required>
                             <br>
                             <br>
 
